@@ -46,15 +46,25 @@ def filter_target_fires():
     gdf = gpd.read_file(shp)
     print(f"MTBS perimeters loaded: {len(gdf)} fires")
 
+    name_col = next((c for c in gdf.columns if c.lower() == "incid_name"), None)
+    date_col = next((c for c in gdf.columns if c.lower() == "ig_date"), None)
+    acres_col = next((c for c in gdf.columns if c.lower() == "burnbndac"), None)
+    if not (name_col and date_col):
+        raise KeyError(f"Expected incid_name/ig_date columns, got {list(gdf.columns)}")
+
+    name_u = gdf[name_col].astype(str).str.upper()
+    date_s = gdf[date_col].astype(str)
+
     targets = gdf[
-        ((gdf.get("Incid_Name", "").str.upper().str.contains("PALISADES")) & (gdf["Ig_Date"].str.startswith("2025"))) |
-        ((gdf.get("Incid_Name", "").str.upper().str.contains("PARK")) & (gdf["Ig_Date"].str.startswith("2024"))) |
-        ((gdf.get("Incid_Name", "").str.upper().str.contains("BRIDGE")) & (gdf["Ig_Date"].str.startswith("2024"))) |
-        ((gdf.get("Incid_Name", "").str.upper().str.contains("DAVIS")) & (gdf["Ig_Date"].str.startswith("2024")))
+        (name_u.str.contains("PALISADES") & date_s.str.startswith("2025")) |
+        (name_u.str.contains("PARK") & date_s.str.startswith("2024")) |
+        (name_u.str.contains("BRIDGE") & date_s.str.startswith("2024")) |
+        (name_u.str.contains("DAVIS") & date_s.str.startswith("2024"))
     ]
 
+    cols = [c for c in (name_col, date_col, acres_col) if c]
     print(f"Filtered targets: {len(targets)}")
-    print(targets[["Incid_Name", "Ig_Date", "BurnBndAc"]].to_string())
+    print(targets[cols].to_string())
 
     targets.to_file(OUT_DIR / "pinesentry_us_targets.gpkg", driver="GPKG")
     print(f"Saved → {OUT_DIR / 'pinesentry_us_targets.gpkg'}")

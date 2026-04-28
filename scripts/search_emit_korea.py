@@ -52,6 +52,10 @@ def search_pre_fire(name: str, info: dict, cloud_threshold: float = 0.50):
     pre_end = info["fire_date"]
     print(f"\n[{name}] window {pre_start} ~ {pre_end}, bbox={info['bbox']}")
 
+    if pre_end <= pre_start:
+        print(f"  SKIP: fire date predates EMIT first-light ({EMIT_FIRST_LIGHT})")
+        return 0, []
+
     results = earthaccess.search_data(
         short_name="EMITL2ARFL",
         bounding_box=info["bbox"],
@@ -59,21 +63,35 @@ def search_pre_fire(name: str, info: dict, cloud_threshold: float = 0.50):
     )
     total = len(results)
 
-    clear = []
+    # CloudCover may live under DataGranule, AdditionalAttributes, or be
+    # absent entirely for EMIT. Treat unknown cloud as "candidate" rather
+    # than rejecting it; a separate downstream pass should QA actual scenes.
+    candidates = []
     for r in results:
-        cc = r.get("umm", {}).get("DataGranule", {}).get("CloudCover")
-        if cc is not None and cc / 100.0 < cloud_threshold:
-            clear.append(r)
+        umm = r.get("umm", {})
+        cc = umm.get("DataGranule", {}).get("CloudCover")
+        if cc is None:
+            for attr in umm.get("AdditionalAttributes", []) or []:
+                if attr.get("Name", "").lower().startswith("cloud"):
+                    vals = attr.get("Values", [])
+                    if vals:
+                        try:
+                            cc = float(vals[0])
+                        except (ValueError, TypeError):
+                            pass
+                        break
+        if cc is None or cc / 100.0 < cloud_threshold:
+            candidates.append((r, cc))
 
-    print(f"  total: {total} / clear (cc < {cloud_threshold*100:.0f}%): {len(clear)}")
-    print(f"  expected clear: {info['expected_clear']} — {'PASS' if len(clear) >= info['expected_clear'] else 'CHECK'}")
+    print(f"  total: {total} / candidates (cc<{cloud_threshold*100:.0f}% or unknown): {len(candidates)}")
+    print(f"  expected clear: {info['expected_clear']}")
 
-    for r in clear[:5]:
+    for r, cc in candidates[:8]:
         gid = r.get("umm", {}).get("GranuleUR", "?")
-        cc = r.get("umm", {}).get("DataGranule", {}).get("CloudCover", "?")
-        print(f"    {gid}  (cc={cc}%)")
+        cc_str = f"{cc}%" if cc is not None else "cc=?"
+        print(f"    {gid}  ({cc_str})")
 
-    return total, clear
+    return total, candidates
 
 
 def hero_decision(results: dict[str, tuple[int, list]]) -> str:

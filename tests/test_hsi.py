@@ -15,8 +15,10 @@ from pinesentry_fire.hsi import (
 )
 
 
-def make_da(values, dims=("y", "x")):
+def make_da(values, dims=None):
     arr = np.asarray(values, dtype=np.float32)
+    if dims is None:
+        dims = tuple(f"d{i}" for i in range(arr.ndim))
     return xr.DataArray(arr, dims=dims)
 
 
@@ -70,12 +72,17 @@ def test_hsi_in_unit_interval():
 
 
 def test_hsi_higher_for_drier_leaves():
-    ewt_dry = make_da([[0.05]])
-    ewt_wet = make_da([[0.25]])
-    lma = make_da([[120.0]])
-    hsi_dry = hydraulic_stress_index(lma, ewt_dry)
-    hsi_wet = hydraulic_stress_index(lma, ewt_wet)
-    assert float(hsi_dry) >= float(hsi_wet)
+    """Within a multi-pixel scene, the driest pixels get higher HSI than the wettest."""
+    rng = np.random.default_rng(0)
+    ewt = make_da(rng.uniform(0.05, 0.30, size=(20, 20)))
+    lma = make_da(rng.uniform(80, 200, size=(20, 20)))
+    hsi = hydraulic_stress_index(lma, ewt)
+    flat_ewt = ewt.values.ravel()
+    flat_hsi = hsi.values.ravel()
+    p5, p95 = np.percentile(flat_ewt, [5, 95])
+    dry_mask = flat_ewt <= p5
+    wet_mask = flat_ewt >= p95
+    assert flat_hsi[dry_mask].mean() > flat_hsi[wet_mask].mean()
 
 
 def test_percentile_normalize_robust():

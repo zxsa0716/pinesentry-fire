@@ -9,7 +9,10 @@ Design decision (locked 2026-04-26):
         + w_water  · (1 − EWT_norm)
         + w_starch · LMA_norm
 
-    HSM = P_50 - Ψ_min     [hydraulic safety margin]
+    HSM = Ψ_min - P_50     [hydraulic safety margin, Martin-StPaul 2017]
+                           Both terms are negative MPa values; positive HSM
+                           means the operating point sits ABOVE the embolism
+                           threshold (safe). Negative HSM = embolizing.
 
     P_50:  species-specific leaf-water-potential at 50% conductivity loss
            (from TRY DB; for Pinus densiflora ≈ -3.0 MPa)
@@ -46,8 +49,15 @@ P50_DB: dict[str, float] = {
 
 
 def percentile_normalize(arr: xr.DataArray, lo: float = 5, hi: float = 95) -> xr.DataArray:
-    """Robust [0, 1] normalization via percentile clipping."""
+    """Robust [0, 1] normalization via percentile clipping.
+
+    Degenerate inputs (single value, all-NaN, or p_lo == p_hi) return
+    a zero array of the same shape rather than NaN, so downstream
+    operations remain well-defined on small/uniform tiles.
+    """
     p_lo, p_hi = np.nanpercentile(arr.values, [lo, hi])
+    if not np.isfinite(p_hi) or p_hi <= p_lo:
+        return xr.zeros_like(arr)
     return ((arr - p_lo) / (p_hi - p_lo)).clip(0, 1)
 
 
@@ -95,7 +105,7 @@ def hydraulic_safety_margin(
             dask="parallelized",
         )
 
-    return p50 - psi_min
+    return psi_min - p50
 
 
 def hydraulic_stress_index(

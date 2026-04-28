@@ -35,8 +35,15 @@ import xarray as xr
 warnings.filterwarnings("ignore")
 
 
-EMIT_NC = Path("data/emit/uiseong/EMIT_L2A_RFL_001_20240216T044207_2404703_007.nc")  # memory-verified, T-13mo, cc=21%, covers fire
-IMSANGDO = Path("data/imsangdo/uiseong.gpkg")
+# Argv-based site selection. Memory-verified Uiseong baseline is the default.
+SITE = sys.argv[1] if len(sys.argv) > 1 else "uiseong"
+SITE_BASELINES = {
+    "uiseong":   "EMIT_L2A_RFL_001_20240216T044207_2404703_007.nc",
+    "sancheong": "EMIT_L2A_RFL_001_20241219T032003_2435402_004.nc",
+}
+EMIT_FNAME = sys.argv[2] if len(sys.argv) > 2 else SITE_BASELINES.get(SITE)
+EMIT_NC = Path(f"data/emit/{SITE}/{EMIT_FNAME}") if EMIT_FNAME else Path("")
+IMSANGDO = Path(f"data/imsangdo/{SITE}.gpkg")
 OUT_DIR = Path("data/hsi/v0")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -385,13 +392,13 @@ def main():
     da2 = xr.DataArray(hsi, dims=("y", "x"), coords={"y": lats_1d, "x": lons_1d}, name="hsi_v0")
     da2.attrs = da.attrs
     da2.rio.write_crs("EPSG:4326", inplace=True)
-    out_tif = OUT_DIR / "uiseong_hsi_v0.tif"
+    out_tif = OUT_DIR / f"{SITE}_hsi_v0.tif"
     da2.rio.to_raster(out_tif, compress="LZW", tiled=True)
     print(f"  GeoTIFF -> {out_tif} ({out_tif.stat().st_size/1e6:.1f} MB)")
 
     # Hero PNG
-    out_png = OUT_DIR / "uiseong_hero_v0.png"
-    perimeter = Path("data/fire_perimeter/synth_uiseong_dnbr.gpkg")
+    out_png = OUT_DIR / f"{SITE}_hero_v0.png"
+    perimeter = Path(f"data/fire_perimeter/synth_{SITE}_dnbr.gpkg")
     render_hero_png(out_png, hsi, lat_o, lon_o, perimeter)
 
 

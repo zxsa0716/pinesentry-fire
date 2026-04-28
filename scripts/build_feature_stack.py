@@ -29,7 +29,7 @@ import numpy as np
 import rioxarray as rxr
 import xarray as xr
 
-ROI = "uiseong"
+ROI = sys.argv[1] if len(sys.argv) > 1 else "uiseong"
 HSI_TIF = Path(f"data/hsi/v0/{ROI}_hsi_v0.tif")
 FIRERISK_TIF = Path(f"data/hsi/v0/{ROI}_firerisk_v0.tif")
 DEM_TIF = Path(f"data/dem/copdem30_{ROI}.tif")
@@ -177,18 +177,30 @@ def main():
     pine_terrain = pyro_arr * south_facing
 
     # ---- Stack all bands ----
-    stack = np.stack([
-        hsi.values.astype("float32"),                                 # 1 hsi v0
-        fr.values.astype("float32"),                                  # 2 firerisk v0
-        dem_arr,                                                      # 3 elev m
-        slope,                                                        # 4 slope deg
-        aspect,                                                       # 5 aspect deg
-        south_facing.astype("float32"),                               # 6 south facing 0..1
-        pyro_arr.astype("float32"),                                   # 7 pyrophilic 0..1
-        pine_arr.astype("float32"),                                   # 8 pine fraction
-        wc_arr.astype("float32"),                                     # 9 worldcover class
-        pine_terrain.astype("float32"),                               # 10 pine_terrain combined
-    ], axis=0)
+    target_shape = hsi.values.shape
+    print(f"  target shape: {target_shape}")
+    arrs = {
+        "hsi_v0": hsi.values.astype("float32"),
+        "firerisk_v0": fr.values.astype("float32"),
+        "elev_m": dem_arr,
+        "slope_deg": slope,
+        "aspect_deg": aspect,
+        "south_facing": south_facing.astype("float32"),
+        "pyrophilic": pyro_arr.astype("float32"),
+        "pine_fraction": pine_arr.astype("float32"),
+        "worldcover": wc_arr.astype("float32"),
+        "pine_terrain": pine_terrain.astype("float32"),
+    }
+    for k, v in arrs.items():
+        if v.shape != target_shape:
+            print(f"  shape mismatch {k}: {v.shape} -> resize to {target_shape}")
+            # Crop or pad to match — simple strategy: take overlapping region
+            sy = min(v.shape[0], target_shape[0])
+            sx = min(v.shape[1], target_shape[1])
+            new = np.zeros(target_shape, dtype=v.dtype)
+            new[:sy, :sx] = v[:sy, :sx]
+            arrs[k] = new
+    stack = np.stack(list(arrs.values()), axis=0)
     band_names = ["hsi_v0", "firerisk_v0", "elev_m", "slope_deg", "aspect_deg",
                   "south_facing", "pyrophilic", "pine_fraction", "worldcover", "pine_terrain"]
 

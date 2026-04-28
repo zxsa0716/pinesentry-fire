@@ -22,9 +22,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import xarray as xr
 
-HSI_TIF = Path("data/hsi/v0/uiseong_hsi_v0.tif")
-PERI = Path("data/fire_perimeter/synth_uiseong_dnbr.gpkg")
-OUT_PNG = Path("data/hsi/v0/uiseong_eval_v0.png")
+SITE = sys.argv[1] if len(sys.argv) > 1 else "uiseong"
+HSI_TIF = Path(f"data/hsi/v0/{SITE}_hsi_v0.tif")
+PERI = Path(f"data/fire_perimeter/synth_{SITE}_dnbr.gpkg")
+OUT_PNG = Path(f"data/hsi/v0/{SITE}_eval_v0.png")
 
 
 def main():

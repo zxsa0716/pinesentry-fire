@@ -24,7 +24,7 @@ import numpy as np
 import rioxarray as rxr
 import xarray as xr
 
-ROI = "uiseong"
+ROI = sys.argv[1] if len(sys.argv) > 1 else "uiseong"
 STACK = Path(f"data/features/{ROI}_stack.tif")
 PERI = Path(f"data/fire_perimeter/synth_{ROI}_dnbr.gpkg")
 OUT_DIR = Path("data/hsi/v1")
@@ -166,7 +166,7 @@ def main():
         ax.set_title(f"Cumulative lift v1 (top decile = {lift:.2f}x)")
         ax.set_xticks(deciles)
 
-        fig.suptitle(f"PineSentry-Fire v1 — Uiseong  |  multi-layer fire-risk vs 2025-03-22 dNBR", fontsize=12, y=1.02)
+        fig.suptitle(f"PineSentry-Fire v1 — {ROI.title()}  |  multi-layer fire-risk vs dNBR perimeter", fontsize=12, y=1.02)
         fig.tight_layout()
         eval_png = OUT_DIR / f"{ROI}_eval_v1.png"
         fig.savefig(eval_png, dpi=150, bbox_inches="tight")

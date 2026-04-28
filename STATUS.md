@@ -12,8 +12,8 @@
 | 4 | **Sentinel-2 L2A 검색** | AWS Open Data | 무인증 | ✅ 인벤토리 완료 | 한국 285 + 해외 99 scenes catalogued (실제 다운은 분석 시 lazy) |
 | 5 | GEDI L4A AGB | NASA EarthData | URS ✅ | ⏳ 대기 | EMIT 끝난 후 실행 |
 | 6 | NEON CFC + LMA + AOP | NEON | 무인증 | ⏳ 대기 | neonutilities 설치 완료, 다운로드 대기 (~10 GB) |
-| 7 | TRY DB 15-trait, 6-species | TRY | MOU | 🟢 신청 완료 | 4-6주 회신 대기 (사용자 2026-04-28 제출) |
-| 8 | KoFlux GDK 18-mo EC | NCAM/AsiaFlux | 회원가입 | 🟢 신청 완료 | AsiaFlux 통해 신청 (사용자 2026-04-28 제출). 1-7일 회신 |
+| 7 | TRY DB 15-trait, 6-species | TRY | MOU | 🟡 부분 — public-only 즉시 받음 | `data/try/TRY_49341.tsv` (1167 rows / 4 종 / 9 trait, 한국 6종 0건). 전체 deliver 4-6주 |
+| 8 | KoFlux GDK | AsiaFlux | 회원가입 | 🟡 부분 — 2004-2008 historical 받음 | `data/koflux_gdk/FxMt_GDK_2004-2008_*.zip` (5 zip). Tanager-era (2024-26) 별도 요청 필요 |
 | 9 | 산림청 임상도 1:25,000 | data.go.kr | 인증 로그인 | 🔴 BLOCKED | WFS 엔드포인트 404. data.go.kr 직접 ZIP 다운 필요 |
 | 10 | 산불 perimeter (의성/산청 2025) | data.go.kr | 로그인 | 🟡 부분 | 산림청_산불통계_20250911.csv ✅ 확보. perimeter shapefile 별도 |
 | 11 | **MTBS US burn** | USGS | 무인증 | ✅ 다운로드 완료 | Park Fire 2024 (430k ac) + Bridge 2024 (54k ac). Palisades 2025 별도 필요 (NIFC) |

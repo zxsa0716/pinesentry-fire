@@ -40,20 +40,81 @@ IMSANGDO = Path("data/imsangdo/uiseong.gpkg")
 OUT_DIR = Path("data/hsi/v0")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-# Species P50 (MPa) from TRY DB / lit consensus
-P50_BY_KOFTR = {
-    "11": -3.0,  # 소나무 Pinus densiflora
-    "12": -2.8,  # 잣나무 Pinus koraiensis
-    "13": -2.4,  # 낙엽송 Larix kaempferi
+# Species P50 (MPa) from TRY DB / lit consensus, keyed by both KOFTR code and Korean name.
+# Imsangdo clip currently exposes KOFTR_NM (한글명) only — code column dropped.
+P50_BY_KOFTR_CODE = {
+    "11": -3.0,  # 소나무
+    "12": -2.8,  # 잣나무
+    "13": -2.4,  # 낙엽송
     "14": -3.5,  # 리기다소나무
     "15": -3.0,  # 곰솔
-    "31": -2.5,  # 상수리나무 Quercus acutissima
-    "32": -2.5,  # 신갈나무 Quercus mongolica
-    "33": -2.4,  # 굴참나무 Quercus variabilis
+    "16": -3.0,  # 잔나무
+    "17": -3.2,  # 편백나무
+    "18": -2.8,  # 삼나무
+    "31": -2.5,  # 상수리
+    "32": -2.5,  # 신갈
+    "33": -2.4,  # 굴참
     "34": -2.5,  # 기타참나무
-    "49": -2.0,  # 아까시나무 Robinia
-    "DEFAULT": -2.7,
+    "35": -1.5,  # 오리나무 (riparian)
+    "37": -1.8,  # 자작나무
+    "39": -2.2,  # 밤나무
+    "44": -2.0,  # 백합
+    "47": -2.0,  # 느티
+    "49": -2.0,  # 아까시
+    "10": -2.7,  # 기타침엽수
+    "30": -2.3,  # 기타활엽수
 }
+P50_BY_KOFTR_NM = {
+    # Coniferous
+    "소나무": -3.0,
+    "잣나무": -2.8,
+    "낙엽송": -2.4,
+    "리기다소나무": -3.5,
+    "곰솔": -3.0,
+    "잔나무": -3.0,
+    "전나무": -3.0,
+    "편백나무": -3.2,
+    "삼나무": -2.8,
+    "비자나무": -2.5,
+    "은행나무": -2.0,
+    "기타침엽수": -2.7,
+    # Broadleaf — Quercus group (drought-resistant)
+    "신갈나무": -2.5,
+    "굴참나무": -2.4,
+    "상수리나무": -2.5,
+    "갈참나무": -2.5,
+    "졸참나무": -2.5,
+    "기타 참나무류": -2.5,
+    "기타참나무류": -2.5,
+    # Other broadleaf
+    "오리나무": -1.5,
+    "자작나무": -1.8,
+    "박달나무": -2.0,
+    "밤나무": -2.2,
+    "물푸레나무": -2.0,
+    "서어나무": -2.0,
+    "느티나무": -2.0,
+    "벚나무": -1.8,
+    "포플러": -1.5,
+    "백합나무": -2.0,
+    "아까시나무": -2.0,
+    "고로쇠나무": -1.8,
+    "기타활엽수": -2.3,
+    # Mixed / bamboo
+    "침활혼효림": -2.5,
+    "죽림": -2.0,
+    # Non-forest (excluded)
+    "비산림": float("nan"),
+    "미립목지": float("nan"),
+    "관목덤불": float("nan"),
+    "주거지": float("nan"),
+    "초지": float("nan"),
+    "경작지": float("nan"),
+    "수체": float("nan"),
+    "과수원": float("nan"),
+    "기타": float("nan"),
+}
+P50_DEFAULT = -2.7
 
 
 def open_emit(path: Path):
@@ -148,91 +209,113 @@ def rasterize_p50(imsangdo_path: Path, lat: np.ndarray, lon: np.ndarray) -> np.n
     """Build a P50 raster aligned to the EMIT ortho grid by per-pixel point-in-polygon
     lookup of imsangdo KOFTR_GROU_CD."""
     import geopandas as gpd
-    from shapely.geometry import Point
 
     print(f"Loading imsangdo polygons {imsangdo_path.name} ...")
     gdf = gpd.read_file(imsangdo_path)
-    if "KOFTR_GROU" in gdf.columns:
-        species_col = "KOFTR_GROU"
-    elif "KOFTR_GROU_CD" in gdf.columns:
-        species_col = "KOFTR_GROU_CD"
+
+    # Pre-pick the lookup column. Imsangdo SHP/GPKG variants:
+    #   - KOFTR_GROU (10-char short, code in source FGDB)
+    #   - KOFTR_GROU_CD (full standard)
+    #   - KOFTR_NM (Korean name) — what our current 8-ROI clip exposes
+    code_col = next((c for c in ("KOFTR_GROU_CD", "KOFTR_GROU") if c in gdf.columns), None)
+    name_col = next((c for c in ("KOFTR_NM",) if c in gdf.columns), None)
+    print(f"  available columns: {[c for c in gdf.columns if 'KOFTR' in c.upper()]}")
+
+    if code_col is not None:
+        gdf["_p50"] = gdf[code_col].astype(str).map(P50_BY_KOFTR_CODE).fillna(P50_DEFAULT)
+        print(f"  P50 lookup via code column '{code_col}'")
+    elif name_col is not None:
+        gdf["_p50"] = gdf[name_col].astype(str).str.strip().map(P50_BY_KOFTR_NM).fillna(P50_DEFAULT)
+        names = gdf[name_col].astype(str).str.strip().value_counts()
+        unmatched = [n for n in names.index if n not in P50_BY_KOFTR_NM]
+        if unmatched:
+            print(f"  unmatched species names (default P50 applied): {unmatched[:10]}")
+        print(f"  P50 lookup via name column '{name_col}'")
     else:
-        species_col = next((c for c in gdf.columns if "KOFTR" in c.upper()), None)
-        if species_col is None:
-            print(f"  KOFTR_GROU column missing — using DEFAULT P50")
-            return np.full(lat.shape, P50_BY_KOFTR["DEFAULT"], dtype="float32")
-    print(f"  species column: {species_col}")
-    print(f"  unique species codes: {sorted(gdf[species_col].dropna().astype(str).unique())[:20]}")
+        print(f"  no KOFTR column — DEFAULT P50 everywhere")
+        return np.full(lat.shape, P50_DEFAULT, dtype="float32")
 
-    # Reproject imsangdo to WGS84 and intersect via spatial index
-    gdf = gdf.to_crs("EPSG:4326")
-    sindex = gdf.sindex
+    print(f"  P50 polygon distribution: " + " ".join(f"p{p}={np.percentile(gdf['_p50'].dropna(), p):.2f}" for p in [5, 50, 95]))
 
-    p50 = np.full(lat.shape, P50_BY_KOFTR["DEFAULT"], dtype="float32")
+    # Rasterize the polygons onto the EMIT ortho grid using the bbox grid affine.
+    # Build a regular ortho grid CRS=EPSG:4326 from the lat/lon arrays.
     valid = np.isfinite(lat) & np.isfinite(lon)
-    yy, xx = np.where(valid)
-    print(f"  valid ortho pixels: {len(yy)}")
+    if valid.sum() < 100:
+        print(f"  not enough valid ortho pixels — DEFAULT")
+        return np.full(lat.shape, P50_DEFAULT, dtype="float32")
 
-    # Sample a stride to keep this tractable on first pass — use full grid otherwise
-    stride = max(1, int(np.sqrt(len(yy)) / 200))
-    print(f"  stride (point-in-poly): {stride}")
-    for i in range(0, len(yy), stride):
-        y, x = yy[i], xx[i]
-        pt = Point(lon[y, x], lat[y, x])
-        cands = list(sindex.intersection(pt.bounds))
-        if not cands:
-            continue
-        # pick the first containing polygon
-        for ci in cands:
-            poly = gdf.geometry.iloc[ci]
-            if poly.contains(pt):
-                code = str(gdf[species_col].iloc[ci])
-                p50[y, x] = P50_BY_KOFTR.get(code, P50_BY_KOFTR["DEFAULT"])
-                break
+    lons_1d = np.nanmean(lon, axis=0)
+    lats_1d = np.nanmean(lat, axis=1)
+    H, W = lat.shape
+    res_x = abs(np.nanmedian(np.diff(lons_1d)))
+    res_y = abs(np.nanmedian(np.diff(lats_1d)))
+    x_min = np.nanmin(lons_1d)
+    y_max = np.nanmax(lats_1d)
 
-    # Fill: every assigned cell broadcasts to its stride neighborhood
-    if stride > 1:
-        from scipy.ndimage import generic_filter
-        try:
-            mask = np.isnan(p50)
-            # Skip generic_filter (slow for big grids); use simple nan-fill via uniform_filter
-            from scipy.ndimage import uniform_filter
-            filled = uniform_filter(np.where(np.isnan(p50), 0, p50), size=2*stride+1)
-            cnt = uniform_filter(np.where(np.isnan(p50), 0, 1.0), size=2*stride+1)
-            p50_filled = np.where(cnt > 0, filled / np.maximum(cnt, 1e-6), P50_BY_KOFTR["DEFAULT"])
-            p50 = p50_filled.astype("float32")
-        except Exception:
-            pass
+    from rasterio.transform import from_origin
+    from rasterio.features import rasterize
+
+    transform = from_origin(x_min, y_max, res_x, res_y)
+    gdf_wgs = gdf.to_crs("EPSG:4326")
+    shapes = ((geom, val) for geom, val in zip(gdf_wgs.geometry, gdf_wgs["_p50"]) if geom and not np.isnan(val))
+    p50 = rasterize(
+        shapes=shapes,
+        out_shape=(H, W),
+        transform=transform,
+        fill=P50_DEFAULT,
+        dtype="float32",
+    )
     return p50
 
 
 def render_hero_png(out_png: Path, hsi: np.ndarray, lat: np.ndarray, lon: np.ndarray, perimeter_path: Path | None):
-    """v0 Hero figure: HSI map + dNBR overlay + colorbar."""
+    """v0 Hero figure: 1x2 panel — full-scene HSI + zoomed-in HSI w/ perimeter overlay."""
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     from matplotlib.colors import LinearSegmentedColormap
 
     cmap = LinearSegmentedColormap.from_list("hsi", ["#1a9850", "#fee08b", "#f46d43", "#a50026"])
-    fig, ax = plt.subplots(figsize=(10, 8))
     extent = [np.nanmin(lon), np.nanmax(lon), np.nanmin(lat), np.nanmax(lat)]
-    im = ax.imshow(hsi, origin="upper", cmap=cmap, extent=extent, vmin=0, vmax=1)
 
+    peri = None
+    peri_bounds = None
     if perimeter_path and perimeter_path.exists():
         try:
             import geopandas as gpd
-            peri = gpd.read_file(perimeter_path)
-            peri = peri.to_crs("EPSG:4326")
-            peri.boundary.plot(ax=ax, edgecolor="black", linewidth=1.5)
+            peri = gpd.read_file(perimeter_path).to_crs("EPSG:4326")
+            peri_bounds = peri.total_bounds  # (minx, miny, maxx, maxy)
             print(f"  overlay: {perimeter_path.name} ({len(peri)} perimeters)")
+            print(f"  perimeter bounds: {peri_bounds}")
         except Exception as e:
-            print(f"  overlay failed: {e}")
+            print(f"  overlay load failed: {e}")
 
-    cb = plt.colorbar(im, ax=ax, fraction=0.04, pad=0.02)
-    cb.set_label("Hydraulic Stress Index (v0, [0=safe, 1=stressed])")
-    ax.set_title("PineSentry-Fire v0 — Uiseong EMIT 2025-01-31\nHSI (winter pre-fire) + 2025-03-22 dNBR perimeter")
+    fig, axes = plt.subplots(1, 2, figsize=(16, 7))
+
+    # Left: full scene
+    ax = axes[0]
+    im = ax.imshow(hsi, origin="upper", cmap=cmap, extent=extent, vmin=0, vmax=1)
+    if peri is not None:
+        peri.plot(ax=ax, facecolor="none", edgecolor="red", linewidth=1.5)
+    ax.set_title("Full EMIT scene (2025-01-31, T-50 days)")
     ax.set_xlabel("Longitude (°E)")
     ax.set_ylabel("Latitude (°N)")
+
+    # Right: zoom on fire area (perimeter ± 0.05°)
+    ax = axes[1]
+    im2 = ax.imshow(hsi, origin="upper", cmap=cmap, extent=extent, vmin=0, vmax=1)
+    if peri is not None:
+        peri.plot(ax=ax, facecolor="red", edgecolor="darkred", linewidth=0.5, alpha=0.4)
+        peri.boundary.plot(ax=ax, edgecolor="darkred", linewidth=2.0)
+        pad = 0.05
+        ax.set_xlim(peri_bounds[0] - pad, peri_bounds[2] + pad)
+        ax.set_ylim(peri_bounds[1] - pad, peri_bounds[3] + pad)
+    ax.set_title("Zoom: dNBR-derived 2025-03-22 burn perimeter (red)")
+    ax.set_xlabel("Longitude (°E)")
+
+    cb = fig.colorbar(im, ax=axes, fraction=0.025, pad=0.02)
+    cb.set_label("Hydraulic Stress Index v0  (0 = safe, 1 = stressed)")
+    fig.suptitle("PineSentry-Fire v0 — Uiseong  |  Tanager-aligned EMIT trait HSI vs actual burn", fontsize=13, y=1.02)
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"  Hero PNG -> {out_png}")
@@ -244,7 +327,7 @@ def main():
         sys.exit(1)
 
     rfl_ds, bp_ds, loc_ds = open_emit(EMIT_NC)
-    print(f"  reflectance dims: {dict(rfl_ds.reflectance.dims)} shape: {rfl_ds.reflectance.shape}")
+    print(f"  reflectance dims: {rfl_ds.reflectance.dims} shape: {rfl_ds.reflectance.shape}")
     print(f"  ortho_y x ortho_x: {loc_ds.glt_x.shape}")
 
     wls = bp_ds.wavelengths.values

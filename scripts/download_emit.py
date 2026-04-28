@@ -54,13 +54,36 @@ def parse_emit_datetime(granule_ur: str) -> datetime:
     raise ValueError(f"cannot parse datetime from {granule_ur}")
 
 
-def closest_pre_fire(results, fire_date: str, prefer_winter: bool = True):
+def closest_pre_fire(results, fire_date: str, prefer_winter: bool = True,
+                      site_bbox: tuple | None = None):
     """Pick the granule closest to (but before) the fire date.
 
-    If prefer_winter=True, restrict to Dec-Mar months (matches Korean spring
-    fire season prep).
+    With site_bbox supplied, prefer scenes whose footprint actually contains
+    the bbox center (EMIT swaths are oblique and the search bbox-intersect
+    can return granules that only tip the corner).
     """
     fire_dt = datetime.strptime(fire_date, "%Y-%m-%d")
+    cx = (site_bbox[0] + site_bbox[2]) / 2 if site_bbox else None
+    cy = (site_bbox[1] + site_bbox[3]) / 2 if site_bbox else None
+
+    def _contains_center(r) -> bool:
+        if cx is None:
+            return True
+        try:
+            spatial = r.get("umm", {}).get("SpatialExtent", {}).get("HorizontalSpatialDomain", {}).get("Geometry", {})
+            polys = spatial.get("GPolygons", [])
+            for poly in polys:
+                pts = poly.get("Boundary", {}).get("Points", [])
+                if not pts:
+                    continue
+                xs = [p["Longitude"] for p in pts]
+                ys = [p["Latitude"] for p in pts]
+                if min(xs) <= cx <= max(xs) and min(ys) <= cy <= max(ys):
+                    return True
+        except Exception:
+            return True
+        return False
+
     parsed = []
     for r in results:
         gid = r.get("umm", {}).get("GranuleUR", "")
@@ -70,17 +93,20 @@ def closest_pre_fire(results, fire_date: str, prefer_winter: bool = True):
             continue
         if dt >= fire_dt:
             continue
-        parsed.append((dt, r, gid))
+        parsed.append((dt, r, gid, _contains_center(r)))
 
-    parsed.sort(key=lambda x: x[0], reverse=True)  # most recent first
+    parsed.sort(key=lambda x: x[0], reverse=True)
 
-    if prefer_winter:
-        winter = [t for t in parsed if t[0].month in (12, 1, 2, 3)]
+    # Prefer: (covers center) AND winter
+    covered = [t for t in parsed if t[3]]
+    if prefer_winter and covered:
+        winter = [t for t in covered if t[0].month in (12, 1, 2, 3)]
         if winter:
-            return winter[0]
-
+            return winter[0][:3]
+    if covered:
+        return covered[0][:3]
     if parsed:
-        return parsed[0]
+        return parsed[0][:3]
     return None
 
 
@@ -110,7 +136,7 @@ def main():
         if args.all:
             to_dl = results
         else:
-            picked = closest_pre_fire(results, info["fire_date"])
+            picked = closest_pre_fire(results, info["fire_date"], site_bbox=info["bbox"])
             if picked is None:
                 print(f"  no pre-fire scene available — SKIP")
                 continue

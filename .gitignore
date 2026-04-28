@@ -1,0 +1,46 @@
+# Data (large, downloaded by scripts)
+data/
+*.h5
+*.hdf
+*.nc
+*.tif
+*.tiff
+!notebooks/figures/*.tif
+
+# ML artifacts
+checkpoints/
+runs/
+wandb/
+*.pt
+*.ckpt
+mlruns/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Notebooks
+.ipynb_checkpoints/
+*-checkpoint.ipynb
+
+# Env
+.env
+.envrc
+.venv/
+env-local/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store

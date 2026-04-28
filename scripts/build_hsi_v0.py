@@ -35,7 +35,7 @@ import xarray as xr
 warnings.filterwarnings("ignore")
 
 
-EMIT_NC = Path("data/emit/uiseong/EMIT_L2A_RFL_001_20250131T024458_2503102_020.nc")
+EMIT_NC = Path("data/emit/uiseong/EMIT_L2A_RFL_001_20240216T044207_2404703_007.nc")  # memory-verified, T-13mo, cc=21%, covers fire
 IMSANGDO = Path("data/imsangdo/uiseong.gpkg")
 OUT_DIR = Path("data/hsi/v0")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -297,7 +297,7 @@ def render_hero_png(out_png: Path, hsi: np.ndarray, lat: np.ndarray, lon: np.nda
     im = ax.imshow(hsi, origin="upper", cmap=cmap, extent=extent, vmin=0, vmax=1)
     if peri is not None:
         peri.plot(ax=ax, facecolor="none", edgecolor="red", linewidth=1.5)
-    ax.set_title("Full EMIT scene (2025-01-31, T-50 days)")
+    ax.set_title(f"Full EMIT scene ({EMIT_NC.name.split('_')[4][:8]} pre-fire baseline)")
     ax.set_xlabel("Longitude (°E)")
     ax.set_ylabel("Latitude (°N)")
 
@@ -315,7 +315,7 @@ def render_hero_png(out_png: Path, hsi: np.ndarray, lat: np.ndarray, lon: np.nda
 
     cb = fig.colorbar(im, ax=axes, fraction=0.025, pad=0.02)
     cb.set_label("Hydraulic Stress Index v0  (0 = safe, 1 = stressed)")
-    fig.suptitle("PineSentry-Fire v0 — Uiseong  |  Tanager-aligned EMIT trait HSI vs actual burn", fontsize=13, y=1.02)
+    fig.suptitle("PineSentry-Fire v0 — Uiseong  |  EMIT pre-fire HSI (5 nm SWIR) vs S2 dNBR burn perimeter", fontsize=13, y=1.02)
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"  Hero PNG -> {out_png}")

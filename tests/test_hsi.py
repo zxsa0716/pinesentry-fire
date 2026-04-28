@@ -49,7 +49,8 @@ def test_psi_min_decreases_as_water_decreases():
     ewt_low = make_da([0.05])
     psi_high = psi_min_from_ewt(ewt_high)
     psi_low = psi_min_from_ewt(ewt_low)
-    assert float(psi_low) < float(psi_high)
+    # Use .item() — float() needs 0-D, but make_da([scalar]) returns 1-D.
+    assert psi_low.values.item() < psi_high.values.item()
 
 
 def test_hsm_safer_when_more_water():

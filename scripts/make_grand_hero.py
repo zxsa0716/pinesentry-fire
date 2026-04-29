@@ -18,7 +18,7 @@ import rioxarray as rxr
 
 OUT = Path("data/hsi/v1/HERO_GRAND.png")
 SITES_EMIT = ("uiseong", "sancheong")
-SITES_S2 = ("gangneung", "uljin")
+SITES_S2 = ("gangneung", "uljin", "palisades")
 ATLAS_ROIS = ["uiseong", "sancheong", "gangneung", "uljin", "gwangneung", "jirisan", "seorak", "jeju"]
 
 
@@ -60,7 +60,7 @@ def main():
     ax = fig.add_subplot(gs[0, 2])
     from rasterio.features import rasterize
     from sklearn.metrics import roc_auc_score, roc_curve
-    colors = {"uiseong": "#a50026", "sancheong": "#313695", "gangneung": "#1a9850", "uljin": "#984ea3"}
+    colors = {"uiseong": "#a50026", "sancheong": "#313695", "gangneung": "#1a9850", "uljin": "#984ea3", "palisades": "#fdb863"}
     aucs = {}
     for site in list(SITES_EMIT) + list(SITES_S2):
         h = load_v1(site)
@@ -69,7 +69,10 @@ def main():
             continue
         try:
             import geopandas as gpd
-            peri = gpd.read_file(f"data/fire_perimeter/synth_{site}_dnbr.gpkg").to_crs(h.rio.crs)
+            if site == "palisades":
+                peri = gpd.read_file("data/fire_perimeter/nifc_palisades_2025.geojson").to_crs(h.rio.crs)
+            else:
+                peri = gpd.read_file(f"data/fire_perimeter/synth_{site}_dnbr.gpkg").to_crs(h.rio.crs)
         except Exception as e:
             print(f"  {site}: peri load fail {e}")
             continue
@@ -94,7 +97,7 @@ def main():
                 label=f"{site.title()} ({sensor}b)  AUC={auc:.3f}")
     ax.plot([0, 1], [0, 1], "--", color="grey", linewidth=1)
     ax.set_xlabel("False Positive Rate"); ax.set_ylabel("True Positive Rate")
-    ax.set_title("v1 ROC — 4 Korean fire sites, identical weights", fontsize=12)
+    ax.set_title("v1 ROC — 4 Korean + 1 US fire site, identical weights", fontsize=12)
     ax.legend(loc="lower right", fontsize=9)
 
     # Row 2 col 1: AUC bar chart vs baselines (Uiseong + Sancheong only — others have no baseline file)

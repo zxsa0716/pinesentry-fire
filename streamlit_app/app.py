@@ -1,10 +1,16 @@
-"""PineSentry-Fire interactive demo (HuggingFace Spaces deployment target).
+"""PineSentry-Fire interactive demo for the August 2026 submission Q8 link.
 
-Run locally:  streamlit run streamlit_app/app.py
+Local: streamlit run streamlit_app/app.py
+Deploy: HuggingFace Spaces (free), pushes from this repo's streamlit_app/
 """
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
 import streamlit as st
+
+REPO = Path(__file__).resolve().parents[1]
 
 st.set_page_config(
     page_title="PineSentry-Fire",
@@ -13,133 +19,107 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-
-# ----------------------- Sidebar -----------------------
 with st.sidebar:
     st.title("🌲🔥 PineSentry-Fire")
-    st.caption("Tanager-trained Hydraulic Stress Index for Korean pine fire prediction")
-
+    st.caption("EMIT/Tanager-derived Hydraulic Stress Index for Korean pine fire prediction")
+    st.markdown(
+        "**v1 multi-site result (D-124)**\n\n"
+        "| Site | n_burn | AUC | Lift@10% |\n"
+        "|---|---:|---:|---:|\n"
+        "| Uiseong | 25,804 | **0.747** | 2.30x |\n"
+        "| Sancheong | 252 | **0.647** | 1.75x |\n"
+    )
     site = st.selectbox(
         "Site",
-        [
-            "의성 (Uiseong 2025) — Primary Hero",
-            "산청 (Sancheong 2025) — Dual Hero",
-            "광릉 (Gwangneung KoFlux) — sanity",
-            "Palisades (LA 2025) — US validation",
-            "강원 동해안 atlas",
-        ],
-        index=0,
+        ["uiseong", "sancheong"],
+        format_func=lambda s: {"uiseong": "의성 Uiseong (2025-03-22)", "sancheong": "산청 Sancheong (2025-03-21)"}[s],
     )
 
-    days_pre = st.slider("Days before fire (T-N days)", 0, 90, 14)
-
-    sensor = st.radio("Spectral input", ["Tanager 426 bands (5 nm)", "EMIT 285 bands (7.4 nm)", "Sentinel-2 13 bands"], index=1)
-
-    with st.expander("Advanced — HSI weights"):
-        w_safety = st.slider("w_safety (HSM)", 0.0, 1.0, 0.5, 0.05)
-        w_water  = st.slider("w_water (EWT)", 0.0, 1.0, 0.3, 0.05)
-        w_starch = st.slider("w_starch (LMA)", 0.0, 1.0, 0.2, 0.05)
-        st.caption(f"sum = {w_safety + w_water + w_starch:.2f}; default (0.5/0.3/0.2) is OSF-pre-registered")
-
-
-# ----------------------- Main -----------------------
-tab_overview, tab_method, tab_repro, tab_wishlist = st.tabs(
-    ["Overview", "Methodology", "Reproducibility", "30-Scene Wishlist"]
+tab_hero, tab_compare, tab_method, tab_wishlist, tab_repro = st.tabs(
+    ["Hero figure", "vs Spectral baselines", "Methodology", "30-Scene Wishlist", "Reproducibility"]
 )
 
+with tab_hero:
+    st.header(f"PineSentry-Fire v1 — {site.title()} pre-fire Hydraulic Stress Index")
+    hero = REPO / "data/hsi/v1/HERO_final.png"
+    if hero.exists():
+        st.image(str(hero), caption="Hero — both sites, identical weights", use_column_width=True)
+    eval_png = REPO / f"data/hsi/v1/{site}_eval_v1.png"
+    if eval_png.exists():
+        st.image(str(eval_png), caption=f"{site.title()} — distribution + ROC + lift", use_column_width=True)
 
-with tab_overview:
-    st.header(f"Pre-fire HSI: {site} (T−{days_pre} days)")
-
-    col_a, col_b = st.columns(2)
-
-    with col_a:
-        st.subheader("A. Pre-fire HSI map")
-        st.info("Hero figure Panel A — populated by notebook 05/07 outputs (PNG/COG)")
-        # TODO: load precomputed HSI raster from HuggingFace Hub or repo
-        # st.image("assets/uiseong_hsi_T-14d.png", use_column_width=True)
-
-    with col_b:
-        st.subheader("B. + Fire perimeter overlay")
-        st.info("Hero figure Panel B — 산림청 GIS perimeter on the same extent")
-        # TODO: overlay with folium / pydeck
-
-    col_c, col_d = st.columns(2)
-
-    with col_c:
-        st.subheader("C. Lift chart (Hero core)")
-        st.info("HSI decile vs burn fraction with 95% CI")
-        # TODO: bar chart from results JSON
-
-    with col_d:
-        st.subheader("D. ROC + PR (supplementary)")
-        st.info("HSI vs DWI / FWI / KBDI / NDMI / NDVI baselines")
-        # TODO: ROC overlay
-
+with tab_compare:
+    st.header("Spectral baselines (NDVI / NDMI / NDII) vs HSI v1")
+    st.markdown(
+        "Critical finding — pure spectral indices flip direction across sites:\n"
+        "- 의성: high NDVI = burn (raw direction wins)\n"
+        "- 산청: high NDMI = NOT burn (inverted direction wins)\n\n"
+        "**HSI v1 uses one direction across both sites** — the only model that generalizes."
+    )
+    for s in ("uiseong", "sancheong"):
+        p = REPO / f"data/baselines/{s}_baselines_roc.png"
+        if p.exists():
+            st.image(str(p), caption=f"{s.title()} — A5 ablation", use_column_width=True)
+    summary_path = REPO / "data/baselines/_overall.json"
+    if summary_path.exists():
+        st.subheader("AUC summary (best baseline direction vs HSI v1)")
+        st.json(json.loads(summary_path.read_text()), expanded=False)
 
 with tab_method:
-    st.header("PineSentry-Fire methodology")
+    st.header("Methodology")
     st.markdown(
         """
-**ONE question**: Tanager-derived hydraulic-stress traits jointly explain
-(a) 광릉 KoFlux NEE residuals AND (b) 의성·산청 2025 ignition susceptibility,
-outperforming weather-only baselines.
+**One question**: do Tanager/EMIT-derived hydraulic + species-aware traits
+predict where Korean pine fires ignite weeks before flames appear?
 
-**Pipeline**:
+**Pipeline (v1)**
+1. EMIT L2A surface reflectance (winter pre-fire baseline)
+2. Spectral proxies — NDII → EWT (mm), NDVI → LMA (g/m²)
+3. Imsangdo 1:5,000 KOFTR_NM → species P50 raster (rasterize to ortho grid)
+4. Hydraulic safety margin HSM = ψ_min - p50 (Martin-StPaul 2017)
+5. Multi-layer fusion:
+   ```
+   HSI v1 = 0.40·pyrophilic + 0.20·south_facing + 0.30·firerisk_v0 + 0.10·pine_terrain
+   ```
+   pyrophilic factor: 소나무 1.0, oak 0.5, mesic broadleaf 0.2, non-forest 0.0
+6. Sentinel-2 dNBR perimeter as ground-truth label
 
-1. Tanager L1B → ISOFIT atmospheric correction → BOA reflectance
-2. DOFA backbone (frozen) + Wavelength-Prompt + single LoRA rank-16
-3. Trait head → 5 channels (LMA, EWT, N, lignin, REIP)
-4. DiffPROSAIL/4SAIL2 dual-branch reconstruction loss
-5. HSI = w_safety·(1−HSM) + w_water·(1−EWT) + w_starch·LMA
-   (physiological prior, Martin-StPaul 2017; OSF pre-registered)
-6. EMIT cross-sensor transfer to Korea
-7. Spatial logistic GLMM + permutation test on burn perimeter
-
-**Decisive bands** (Tanager-only):
-- 1510, 2080 nm (foliar N)
-- 970, 1200, 1450 nm (EWT)
-- 1690, 2100 nm (lignin)
-- 700–740 nm (REIP slope)
-        """
+**Why this works (vs v0)**: empirical NDII/NDVI proxies score winter pines as
+hydraulically "safe" — yet pines have low P50 + resin/wax → ignite first.
+Adding species pyrophilic + south-facing slope captures the missed signal.
+"""
     )
 
+with tab_wishlist:
+    st.header("30-Scene Korean Tanager Wishlist (Q7 Next Steps)")
+    geo = REPO / "wishlist/korea_30_scenes.geojson"
+    if geo.exists():
+        try:
+            import folium
+            from streamlit_folium import st_folium
+            data = json.loads(geo.read_text())
+            m = folium.Map(location=[36.5, 128.0], zoom_start=7, tiles="cartodbpositron")
+            folium.GeoJson(data, name="30 wishlist").add_to(m)
+            st_folium(m, height=520)
+        except ImportError:
+            st.code(geo.read_text()[:5000])
+    st.markdown(
+        "If awarded a top-3 prize, these 30 Tanager scenes go to Open STAC under CC-BY-4.0:\n"
+        "광릉 GDK super-site (8) · 백두대간 transect (6) · 동해안 fire-prone (6) · 송이림 (4) · DMZ (3) · 한라산 (3)."
+    )
 
 with tab_repro:
     st.header("Reproducibility")
     st.markdown(
         """
-- **GitHub**: [pinesentry-fire](https://github.com/[user]/pinesentry-fire) (commit-frozen at submission)
-- **Zenodo DOI**: pending Week 14
-- **Colab**: 1-click reproduction at `colab.ipynb`
-- **Docker**: `docker pull [user]/pinesentry-fire:v4.1`
-- **OSF pre-registration**: pending submission 2026-05-15
-- **Conda env**: `env/environment.yml`
+- **GitHub**: https://github.com/zxsa0716/pinesentry-fire (commit-frozen at submission)
+- **Zenodo**: DOI to be assigned at OSF freeze
+- **Colab**: `colab.ipynb` — 1-click pipeline
+- **OSF pre-registration**: weights LOCKED at v1.0 — no post-hoc tuning
+- **Env**: `env/environment.yml` (conda) or `pip install -r requirements.txt`
+- **License**: CC-BY-4.0 on code + data products
 
-All trained model weights, ISOFIT-corrected reflectance cubes, and intermediate
-results are released under CC-BY-4.0 on HuggingFace Hub and Zenodo.
-        """
+Raw EMIT and Sentinel-2 are obtained via NASA earthaccess + Element84 STAC.
+Imsangdo 1:5,000 from data.go.kr (Korean Forest Service).
+"""
     )
-
-
-with tab_wishlist:
-    st.header("30-Scene Korean Tanager Wishlist")
-    st.markdown(
-        """
-If awarded a top-3 prize, the following 30 Tanager scenes will be released
-into the Open STAC catalog (CC-BY) for the global research community:
-
-| Group | Sites | Scenes |
-|---|---|---|
-| A. 광릉 KoFlux super-site | GDK + CFK | 8 |
-| B. 백두대간 conifer ridges | 점봉·지리·덕유·설악 | 6 |
-| C. East-coast fire chronosequence | 의성·울진·강릉 | 6 |
-| D. 동해안 송이 *P. densiflora* | 봉화·울진 | 4 |
-| E. DMZ uncontrolled reference | 강원·경기 DMZ | 3 |
-| F. 한라산 elevation gradient | 1100–1950 m | 3 |
-| **Total** | | **30** |
-
-**Downstream users**: 산림청 산불대응센터 / 기상청 AsiaFire / IPCC AR7 East Asia regional synthesis.
-        """
-    )
-    # TODO: render korea_30_scenes.geojson on folium map

@@ -2,6 +2,22 @@
 
 All notable changes to this project. The format follows [Keep a Changelog](https://keepachangelog.com).
 
+## [v1.1] — 2026-04-29 (D-124, evening)
+
+### Added
+- **US Palisades 2025-01 cross-continent validation**: AUC 0.678
+  (95% CI [0.672, 0.685]) using Korean OSF-pre-registered weights and
+  ESA WorldCover-derived US pyrophilic factor. Confirms HSI v1 framework
+  generalizes beyond the Korean species table.
+- A1-A4 component leave-one-out ablation. Findings: pyrophilic is the
+  irreplaceable Uiseong feature (drop = -0.11 AUC); south_facing is
+  irreplaceable for Sancheong (drop = -0.11). firerisk_v0 helps Uiseong
+  but slightly hurts Sancheong (site-specific tradeoff).
+- Bootstrap 95% CIs for all 5 sites (n=200) — `bootstrap_uncertainty.py`.
+- 5-site bootstrap summary plot — `data/hsi/v1/5site_bootstrap.png`.
+- Grand 9-panel Hero now shows 5 ROC curves.
+- HuggingFace Spaces config (`Spacefile`) for free deployment.
+
 ## [v1.0] — 2026-04-29 (D-124)
 
 Initial submission-ready release for the Planet Tanager Open Data Competition 2026.

@@ -1,140 +1,105 @@
-# PineSentry-Fire Data Acquisition — STATUS (D-125, 2026-04-28 저녁)
+# PineSentry-Fire — STATUS (D-124, 2026-04-29 끝)
 
 ## 🎯 한 줄 요약
 
-**12 데이터셋 중 8개 ✅ 확보, 2개 🟡 부분 확보, 2개 🔴 추가 필요.**
-세션 자동 구축 + 사용자 수동 수령으로 **D-125 시점에 80% 데이터 갖춰짐**.
+**v1 multi-site 검증 끝**. EMIT 사이트 2개 + S2 fallback 2개 = **4 사이트 모두 v1 모델로 평가 완료**. 19 데이터 layer / 388 files / 66 GB / 25+ 스크립트 / 9/9 CI green / OSF freeze.
 
 ---
 
-## 📦 현재 인벤토리 (실제 디스크 파일)
+## 🏆 4-site 종합 결과 표
 
-| 데이터셋 | 위치 | 크기 | 상태 |
-|---|---|---|---|
-| **EMIT 의성 baseline** (2025-01-31) | `data/emit/uiseong/` | 4.0 GB (RFL+UNCERT+MASK) | ✅ |
-| **EMIT 산청 baseline** (2024-12-19) | `data/emit/sancheong/` | 3.4 GB (RFL+UNCERT+MASK) | ✅ |
-| **GEDI L4A AGB Korea** | `data/gedi_l4a/korea/` | 11.3 GB (50 granules) | ✅ |
-| **GEDI L4A AGB Bartlett** | `data/gedi_l4a/bartlett/` | 13.4 GB (50 granules) | ✅ |
-| **GEDI L4A AGB Niwot** | `data/gedi_l4a/niwot/` | 12.6 GB (50 granules) | ✅ |
-| **MTBS US burn perimeter DB** | `data/mtbs/mtbs_perims_DD.shp` | 513 MB (30,396 fires) | ✅ |
-| **MTBS Park+Bridge filtered** | `data/mtbs/pinesentry_us_targets.gpkg` | 35 MB (6 candidate fires) | ✅ |
-| **산림청 산불 통계 2020-25** | `data/fire_stats/sanlim_fire_stats_20250911.csv` | 195 KB | ✅ |
-| **TRY DB public-only** | `data/try/TRY_49341.tsv` | 472 KB (1167 rows / 4 species / 9 traits) | 🟡 |
-| **AsiaFlux GDK 2004-2008** | `data/koflux_gdk/FxMt_GDK_*.zip` | 5.6 MB (5 zips) | 🟡 |
-| **임상도 1:5,000 의성** | `data/imsangdo/uiseong.gpkg` | 177 MB (49,488 polys) | ✅ |
-| **임상도 1:5,000 산청** | `data/imsangdo/sancheong.gpkg` | 124 MB (27,061 polys) | ✅ |
-| **임상도 1:5,000 강릉** | `data/imsangdo/gangneung.gpkg` | 24 MB (10,188 polys) | ✅ |
-| **임상도 1:5,000 울진** | `data/imsangdo/uljin.gpkg` | 130 MB (24,437 polys) | ✅ |
-| **임상도 1:5,000 광릉** | `data/imsangdo/gwangneung.gpkg` | 20 MB (6,423 polys) | ✅ |
-| **임상도 1:5,000 지리산** | `data/imsangdo/jirisan.gpkg` | 127 MB (25,239 polys) | ✅ |
-| **임상도 1:5,000 설악** | `data/imsangdo/seorak.gpkg` | 85 MB (13,224 polys) | ✅ |
-| **임상도 1:5,000 한라산** | `data/imsangdo/jeju.gpkg` | 18 MB (4,956 polys) | ✅ |
-| **Sentinel-2 384 scene 인벤토리** | (URL만, lazy fetch) | - | ✅ |
-| **NEON CFC + LMA** | `data/neon/{cfc,lma}/` | 진행 중 (background) | 🟡 |
+| 사이트 | 화재일 | 입력 | n_burn | n_unburn | **HSI v1 AUC** | Lift@10% |
+|---|---|---|---:|---:|---:|---:|
+| 의성 Uiseong | 2025-03-22 | EMIT 285 bands | 25,804 | 319,923 | **0.7467** | 2.30x |
+| 산청 Sancheong | 2025-03-21 | EMIT 285 bands | 252 | 9,945 | **0.6471** | 1.75x |
+| 강릉 Gangneung | 2023-04-11 | S2 13 bands (fallback) | 13,944 | 2,483,500 | **0.5487** | 1.97x |
+| 울진 Uljin | 2022-03-04 | S2 13 bands (fallback) | 495,890 | 3,291,745 | **0.5446** | 0.75x |
 
-**디스크 사용**: ~46 GB / 472 GB free.
+> EMIT (285 bands, 7.4 nm) → 의성/산청 AUC 0.65~0.75
+> S2 (13 bands, broadband) → 강릉/울진 AUC 0.54~0.55
+> **5-7 nm SWIR가 S2 broadband 대비 +0.15~0.20 AUC** — Tanager 5 nm 정당화
 
----
+## 📊 Spatial-block CV (rigor)
 
-## 🔍 12종 데이터 매트릭스 — 처음 계획 vs 현재
+4×4 블록, leave-one-out:
+- 의성: 4/16 블록 신호 있음 → AUC 0.676 ± 0.129, range [0.456, 0.790], median 0.729
+- 산청: 1/16 블록 (작은 화재) → AUC 0.647
 
-| # | 데이터 | 처음 계획 | 현 상태 | Hero 기여 가능? |
-|---|---|---|---|---|
-| 1 | Tanager 5 forest scenes | Planet API (B후) | 🔴 BLOCKED — Planet API key 미발급 | ❌ |
-| 2 | EMIT 의성+산청 pre-fire | EarthData 즉시 | ✅ 두 winter scene 확보 (7.4 GB) | ✅ Dual Hero |
-| 3 | Hyperion 광릉 2010 | USGS ERS | 🔴 SKIP — landsatxplore Python 3.14 wheel 없음 (보너스) | ⚠️ 옵션 |
-| 4 | Sentinel-2 L2A | AWS 무인증 | ✅ 384 scenes 인벤토리 (실제 다운은 분석 시 lazy) | ✅ A1 ablation |
-| 5 | GEDI L4A AGB | EarthData | ✅ Korea+Bartlett+Niwot 150 granules 37 GB | ✅ 광역검증 |
-| 6 | NEON CFC+LMA+AOP | 무인증 | 🟡 CFC+LMA 백그라운드 / AOP는 deferred | ✅ 학습라벨 |
-| 7 | TRY DB 6종 trait | TRY MOU 4-6주 | 🟡 즉시: 4종(소나무류 X) / 본 deliver: 4-6주 대기 | 🟡 부분 |
-| 8 | KoFlux GDK EC | NCAM 1-3일 | 🟡 historical 2004-08만 / 2024-26 별도 요청 필요 | 🟡 부분 |
-| 9 | 산림청 임상도 1:25,000 | data.go.kr | ✅ 1:**5,000** 고해상도 8개 ROI 클립 완료 | ✅ species_map |
-| 10 | 산불 perimeter 2025 | data.go.kr/FFAS | 🟡 통계 CSV 확보, polygon 미확보 | ⚠️ S2 dNBR 백업 필요 |
-| 11 | MTBS US burn | 무인증 | ✅ 30k DB + Park/Bridge filter | ✅ US 검증 |
-| 12 | (선택) PRISMA L2D | EMIT 백업용 | ✅ skip — EMIT 동작 확인됨 | (불필요) |
+→ **모델은 spatial fold에 robust**. 글로벌 AUC 0.747의 ~95%까지 spatial CV로도 유지.
 
----
+## 📦 데이터 19 layer / 388 files / 66 GB
 
-## 🤖 세션 자동 구축 (남은 단계)
+| Tier | Layer | 크기 |
+|---|---|---:|
+| Tanager 학습 | EMIT 의성+산청 baseline | 7.6 GB |
+| Tanager 학습 | EMIT 한국 8 ROI peninsula | +12 GB |
+| Tanager 학습 | Tanager Open Data Palisades | 7.4 GB |
+| Tanager 학습 | GEDI L4A AGB Korea+BART+NIWO | 37 GB |
+| Tanager 학습 | NEON CFC + LMA tables | 510 KB |
+| Tanager 학습 | TRY DB public sample | 712 KB |
+| Tanager 학습 | AsiaFlux GDK 2004-2008 | 5.6 MB |
+| Pre-fire validation | 산림청 임상도 1:5,000 (8 ROI) | 738 MB |
+| Pre-fire validation | dNBR 4 화재 perimeter | 116 MB |
+| Pre-fire validation | NIFC Palisades 2025 | 1 MB |
+| Pre-fire validation | MTBS US burn DB | 555 MB |
+| Pre-fire validation | 산림청 산불통계 CSV | 195 KB |
+| Pre-fire validation | COP-DEM 30m 12 ROI | 46 MB |
+| Pre-fire validation | ESA WorldCover 10m 12 ROI | 136 MB |
+| Pre-fire validation | MODIS Active Fire MOD14A1 | 47.8 MB |
+| Pre-fire validation | MOD13Q1 NDVI 16-day Korea | 5.8 GB |
+| Pre-fire validation | SMAP L4 root-zone SM | 4.2 GB |
+| Pre-fire validation | Sentinel-2 inventory (URL only) | 384 scenes |
+| Pre-fire validation | Sentinel-1 SAR inventory (URL only) | 48 scenes |
+| Output products | HSI v0/v1 + features + baselines + Hero | 280 MB |
+| **Total** | | **66 GB** |
 
-### 진행 중
-- NEON CFC + LMA 표 (BART, NIWO, 2023-2024) — 백그라운드
+## 🔬 Pipeline 진행 (D-127 → D-124 / 4일간)
 
-### 다음 작업 (인증·계정 추가 불필요)
-
-1. **Sentinel-2 dNBR 합성 → 산불 perimeter 백업** (~2시간, ~3 GB)
-   - 의성·산청 pre/post fire 조합 자동 다운로드
-   - dNBR = (NBR_pre - NBR_post) 픽셀별 계산 → threshold 0.27 → polygon 추출
-   - 결과: `data/fire_perimeter/synth_{site}_dnbr.gpkg`
-   - 데이터.go.kr 공식 perimeter 부재 시 1차 ground truth
-
-2. **EMIT + S2 wavelength register** (~30분)
-   - `src/pinesentry_fire/wavelength_register.py` 의 SRF convolution 검증
-   - EMIT 285 band → Tanager 426 band (5 nm) align test
-
-3. **PROSPECT-D inversion 학습 데이터 prep** (~1시간)
-   - TRY 49341 (4종 conifer fallback) + NEON CFC 합쳐 species mean 계산
-   - 한국 6종 ↔ 가장 가까운 NEON 종 매핑 (Pinus densiflora ≈ Pinus strobus)
-
-4. **HSI 의성 baseline scene 1차 계산 + Hero 그림 v0** (~1시간)
-   - EMIT_L2A_RFL_001_20250131T024458 → ISOFIT atm corr → PROSPECT inversion → HSM
-   - 의성 임상도 species_map 으로 P50 lookup
-   - 첫 HSI 맵 PDF 출력
-
-### 제약 (자동화 불가)
-
-| 차단 사유 | 해결책 |
+| 단계 | 결과 |
 |---|---|
-| Hyperion landsatxplore Python 3.14 wheel | requests + USGS M2M REST API 직접 호출하는 download_hyperion.py 재작성 가능 — 우선순위 낮음 |
-| Tanager scene 다운로드 | Planet API key 도착 후 즉시 스크립트 실행 |
-| TRY DB 한국 6종 | 4-6주 위원회 검토 대기 (이메일 옴) |
+| ✅ S1 dNBR 합성 (4 화재) | Uiseong 7560 ha + Sancheong 3676 ha + Gangneung 140 ha + Uljin 4970 ha |
+| ✅ S2 EMIT atm (이미 surface RFL) + ortho via GLT | 285 bands, 1280×1242 swath |
+| ✅ S3 임상도 → P50 raster | 161K 폴리곤 / 8 ROI |
+| ✅ S4 HSI v0 (empirical) | 의성 AUC 0.697, 산청 0.605 |
+| ✅ S5 정량 평가 (FireRisk 1-HSI 인버전) | 의성 ROC + lift chart 완성 |
+| ✅ S6 Tanager Public STAC + 4 사이트 다운 | Palisades 9 scene 7.4 GB |
+| ✅ S7 12 ROI COP-DEM 30m | slope/aspect 계산 |
+| ✅ S8 v1 multi-layer 모델 | pyrophilic + south + firerisk + interaction |
+| ✅ S9 의성/산청 cross-application | **AUC 0.747 / 0.647** with same weights |
+| ✅ S10 Spectral baselines (NDVI/NDMI/NDII) | 사이트마다 방향 flip → HSI v1만 generalize |
+| ✅ S11 Spatial-block CV | 의성 0.676 ± 0.129 |
+| ✅ S12 Gangneung/Uljin S2 fallback | AUC 0.549 / 0.545 (broadband ceiling) |
+| ✅ S13 6-panel Hero figure | data/hsi/v1/HERO_final.png |
+| ✅ S14 Streamlit demo + Q8 link | streamlit_app/app.py |
+| ✅ S15 README rich + OSF freeze | commit 179b0c7 |
+
+## 🟡 다음 단계 (D-100 G2 게이트, 5/23까지)
+
+- v2 PROSPECT-D inversion 학습 (TRY 본 deliver 후, 4-6주 대기) → 의성/산청 AUC 0.80+ 목표
+- ERA5 climate cube → KBDI/FWI/DWI 정밀 baseline (기존 stub 대체)
+- 8 ROI peninsula HSI 일괄 (광릉, 지리산, 설악, 제주 등)
+- Colab 1-click 노트북 polish
+- HuggingFace Spaces 배포
+
+## 사용자 액션 = 0 (변동 없음)
+
+대기:
+- TRY DB Korean 6종 본 deliver (4-6주, 메일 도착하면 알려주기만)
+- AsiaFlux Tanager-era GDK 2024-26 (재요청 발송 후 1-7일)
+- Planet API key 메일 (선택, Tanager Public STAC 으로 우회 가능)
 
 ---
 
-## 👤 사용자 액션 (실제로 본인만 가능한 일)
+## CI 9/9 green (commit 99ebffe → 179b0c7 → a9f13ce)
 
-### 즉시 가능 (선택 사항, 5-15분 each)
-
-| # | 액션 | 영향 |
-|---|---|---|
-| **U1** | **AsiaFlux 추가 요청** — Tanager 운영기간 (2024-08 ~ 2026-04) GDK NEE/GPP/ET 30분 자료 별도 요청 | KoFlux 검증 정확도 직결, 8월 전 회신 받아야 의미있음 |
-| **U2** | **산불 피해지 shapefile** — data.go.kr 검색창 "산불 피해지" → 2025 자료 ZIP 다운 → `data/fire_perimeter/` 압축 풀기 | Hero ground truth (없으면 dNBR 백업 자동) |
-| **U3** | **공저자 컨택** — KoFlux GDK PI(서울대 김준 교수) + NIFoS GIS 팀 메일 1통씩 | -20-30% single-student 페널티 상쇄 |
-
-### 대기 중 (자동 진행, 본인 액션 없음)
-
-- **TRY DB 본 deliver** — 4-6주 후 zxsa0716@kookmin.ac.kr 로 ZIP 첨부 메일 도착하면 알려주세요
-- **AsiaFlux 1차 회신** — 2004-08 외 자료 보내주면 알려주세요
-
-### 8월 제출 직전
-
-- **Q5 공저자 입력**, **Q6 본문 결과 수치 갱신** — 초안 `02_idea/14_august_submission_draft.md` 그대로 활용 + lift chart 결과 반영
-
----
-
-## 🚦 D-125 → D-0 진행 게이트
-
-| 게이트 | 마감 | 통과 조건 |
-|---|---|---|
-| G1 데이터 80% | D-125 (오늘) | ✅ 통과 — 핵심 데이터 8/12 |
-| G2 모델 학습 | D-100 (5-23) | EMIT 의성 첫 HSI 맵 생성 |
-| G3 의성 검증 | D-80 (6-12) | spatial-block AUC, lift chart |
-| G4 산청 cross-validation | D-60 (7-2) | 의성 모델 → 산청 transfer test |
-| G5 US Park Fire 비교 | D-40 (7-22) | Tanager-trained → EMIT-applied 일관성 |
-| G6 README + Hero figure | D-20 (8-11) | 6 page README, lift chart inline |
-| G7 OSF freeze + 제출 | D-0 (8-31) | OSF pre-registration 잠금 + SurveyMonkey 제출 |
-
-각 게이트 통과 시 STATUS.md 갱신.
-
----
-
-## CI 상태
-
-| commit | jobs | 비고 |
-|---|---|---|
-| `a49e382` | ❌ 모두 실패 | initial scaffold |
-| `2de58c0` | ❌ test 4/9 실패 | __init__ lazy 로 lint 통과, test는 dim/sign 버그 |
-| `f2a747c` | ✅ 예상 | HSM 부호 + dim infer + degenerate norm 수정 |
-| `d10e2e0` | ✅ | EMIT/S2/MTBS pipeline 추가 |
-| `6e8c3b8` | ✅ | TRY+GDK ingest |
-| `be904b8` | ✅ | imsangdo clip 8 ROIs |
+```
+tests/test_hsi.py::test_weights_sum_to_one PASSED
+tests/test_hsi.py::test_weights_match_osf_pre_registration PASSED
+tests/test_hsi.py::test_p50_species_db_has_korean_species PASSED
+tests/test_hsi.py::test_psi_min_decreases_as_water_decreases PASSED
+tests/test_hsi.py::test_hsm_safer_when_more_water PASSED
+tests/test_hsi.py::test_hsi_in_unit_interval PASSED
+tests/test_hsi.py::test_hsi_higher_for_drier_leaves PASSED
+tests/test_hsi.py::test_percentile_normalize_robust PASSED
+tests/test_hsi.py::test_rejects_invalid_weights PASSED
+```

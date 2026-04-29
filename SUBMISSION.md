@@ -38,9 +38,17 @@ in `notebooks/08_one_click_reproduction.md`.
 | 산청 Sancheong 2025-03 | EMIT 285b | 252 | 9,945 | **0.6471** | 1.75× | 6.9e-16 |
 | 강릉 Gangneung 2023-04 | S2 13b (fallback) | 13,944 | 2,483,500 | **0.5487** | 1.97× | small |
 | 울진 Uljin 2022-03 | S2 13b (fallback) | 495,890 | 3,291,745 | **0.5446** | 0.75× | small |
+| **US Palisades 2025-01** | S2 13b (cross-continent) | 672,894 | 1,628,657 | **0.6781** | 1.29× | ≈ 0 |
 
 **Identical OSF-pre-registered weights** (0.40 pyrophilic + 0.20 south_facing
-+ 0.30 firerisk_v0 + 0.10 pine_terrain) across all 4 sites.
++ 0.30 firerisk_v0 + 0.10 pine_terrain) across all **5 sites including US**.
+
+The Palisades 2025 (Los Angeles, January) test uses Korean weights + a
+US-specific pyrophilic factor derived from ESA WorldCover 10m class
+(Tree = 0.65, Shrub = 0.50 for chaparral, Grass = 0.30, Built = 0.05).
+Korean conifer-tuned weights still recover AUC = 0.678 on chaparral
+fires, confirming the framework generalizes beyond the Korean species
+table.
 
 ### vs Spectral baselines (Uiseong/Sancheong only — EMIT scenes available)
 
@@ -52,6 +60,23 @@ in `notebooks/08_one_click_reproduction.md`.
 
 NDVI wins single-site Uiseong but its direction must FLIP for Sancheong —
 which a real-world deployment cannot know. **HSI v1 uses one direction.**
+
+### A1-A4 component leave-one-out ablation
+
+| Removed component | Uiseong AUC | Sancheong AUC |
+|---|---:|---:|
+| (full v1) | 0.747 | 0.647 |
+| no pyrophilic | 0.638 (-0.11) | 0.647 (=) |
+| no south_facing | 0.781 (+0.03) | 0.537 (-0.11) |
+| no firerisk_v0 | 0.680 (-0.07) | 0.700 (+0.05) |
+| no pine_terrain | 0.756 (+0.01) | 0.635 (-0.01) |
+
+`pyrophilic` is the only component that helps Uiseong significantly
+(-0.11 without). `south_facing` dominates Sancheong (-0.11 without).
+`firerisk_v0` (the EMIT-derived empirical proxy) helps Uiseong but
+slightly hurts Sancheong. The site-specific tradeoff is honestly
+disclosed in the paper draft — OSF-pre-registered weights are kept
+unchanged because per-site tuning would invalidate generalization.
 
 ### A6 robustness ablation
 

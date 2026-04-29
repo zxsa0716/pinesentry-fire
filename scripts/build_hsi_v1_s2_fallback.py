@@ -145,7 +145,7 @@ def run_site(site, info):
 
     out = Path(f"data/hsi/v1/{site}_hsi_v1.tif")
     da = xr.DataArray(hsi_v1.astype("float32"), dims=("y", "x"), coords={"y": ndvi.y, "x": ndvi.x}, name="hsi_v1_s2")
-    da.rio.write_crs("EPSG:4326", inplace=True)
+    da.rio.write_crs(ndvi.rio.crs, inplace=True)   # match S2 native UTM
     da.rio.to_raster(out, compress="LZW", tiled=True)
 
     # Evaluate

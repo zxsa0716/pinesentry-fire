@@ -1,0 +1,1088 @@
+{
+  "type": "FeatureCollection",
+  "name": "PineSentry-Fire 30-scene Korean wishlist",
+  "license": "CC-BY-4.0",
+  "doi": "(to be assigned upon submission)",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "광릉 KoFlux GDK super-site",
+        "region": "Gwangneung",
+        "note": "KoFlux primary validation",
+        "priority": "high"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              127.1,
+              37.74
+            ],
+            [
+              127.2,
+              37.74
+            ],
+            [
+              127.2,
+              37.84
+            ],
+            [
+              127.1,
+              37.84
+            ],
+            [
+              127.1,
+              37.74
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "광릉 동학습림 평년 baseline 봄",
+        "region": "Gwangneung",
+        "note": "spring baseline",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              127.05,
+              37.7
+            ],
+            [
+              127.15,
+              37.7
+            ],
+            [
+              127.15,
+              37.8
+            ],
+            [
+              127.05,
+              37.8
+            ],
+            [
+              127.05,
+              37.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "광릉 가을 단풍 신호",
+        "region": "Gwangneung",
+        "note": "autumn senescence",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              127.1,
+              37.75
+            ],
+            [
+              127.2,
+              37.75
+            ],
+            [
+              127.2,
+              37.85
+            ],
+            [
+              127.1,
+              37.85
+            ],
+            [
+              127.1,
+              37.75
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "광릉 활엽수림 N face",
+        "region": "Gwangneung",
+        "note": "north-face deciduous",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              127.05,
+              37.78
+            ],
+            [
+              127.15,
+              37.78
+            ],
+            [
+              127.15,
+              37.88
+            ],
+            [
+              127.05,
+              37.88
+            ],
+            [
+              127.05,
+              37.78
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "화천 평년 비교",
+        "region": "Hwacheon",
+        "note": "untouched mixed forest",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              127.7,
+              38.05
+            ],
+            [
+              127.8,
+              38.05
+            ],
+            [
+              127.8,
+              38.15
+            ],
+            [
+              127.7,
+              38.15
+            ],
+            [
+              127.7,
+              38.05
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "춘천 호수~숲 경계",
+        "region": "Chuncheon",
+        "note": "transitional",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              127.7,
+              37.85
+            ],
+            [
+              127.8,
+              37.85
+            ],
+            [
+              127.8,
+              37.95
+            ],
+            [
+              127.7,
+              37.95
+            ],
+            [
+              127.7,
+              37.85
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "양평 두물머리 활엽수",
+        "region": "Yangpyeong",
+        "note": "lowland deciduous",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              127.4,
+              37.5
+            ],
+            [
+              127.5,
+              37.5
+            ],
+            [
+              127.5,
+              37.6
+            ],
+            [
+              127.4,
+              37.6
+            ],
+            [
+              127.4,
+              37.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "가평 잣나무림",
+        "region": "Gapyeong",
+        "note": "Pinus koraiensis ref",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              127.5,
+              37.85
+            ],
+            [
+              127.6,
+              37.85
+            ],
+            [
+              127.6,
+              37.95
+            ],
+            [
+              127.5,
+              37.95
+            ],
+            [
+              127.5,
+              37.85
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "태백산 정상 침엽수림",
+        "region": "Taebaek",
+        "note": "high-elev conifer",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              129.0,
+              37.1
+            ],
+            [
+              129.1,
+              37.1
+            ],
+            [
+              129.1,
+              37.2
+            ],
+            [
+              129.0,
+              37.2
+            ],
+            [
+              129.0,
+              37.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "소백산 능선 활엽수림",
+        "region": "Sobaek",
+        "note": "ridge mesic",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              128.5,
+              36.9
+            ],
+            [
+              128.6,
+              36.9
+            ],
+            [
+              128.6,
+              37.0
+            ],
+            [
+              128.5,
+              37.0
+            ],
+            [
+              128.5,
+              36.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "월악산 송이림",
+        "region": "Worak",
+        "note": "Pinus densiflora dense",
+        "priority": "high"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              128.2,
+              36.85
+            ],
+            [
+              128.3,
+              36.85
+            ],
+            [
+              128.3,
+              36.95
+            ],
+            [
+              128.2,
+              36.95
+            ],
+            [
+              128.2,
+              36.85
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "속리산 참나무림",
+        "region": "Songnisan",
+        "note": "Quercus mongolica",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              127.9,
+              36.55
+            ],
+            [
+              128.0,
+              36.55
+            ],
+            [
+              128.0,
+              36.65
+            ],
+            [
+              127.9,
+              36.65
+            ],
+            [
+              127.9,
+              36.55
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "덕유산 혼효림",
+        "region": "Deogyu",
+        "note": "mixed pine-oak",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              127.75,
+              35.85
+            ],
+            [
+              127.85,
+              35.85
+            ],
+            [
+              127.85,
+              35.95
+            ],
+            [
+              127.75,
+              35.95
+            ],
+            [
+              127.75,
+              35.85
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "지리산 천왕봉 침엽수",
+        "region": "Jirisan",
+        "note": "high pine",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              127.7,
+              35.3
+            ],
+            [
+              127.8,
+              35.3
+            ],
+            [
+              127.8,
+              35.4
+            ],
+            [
+              127.7,
+              35.4
+            ],
+            [
+              127.7,
+              35.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "강릉 옥계 산불 prone 소나무",
+        "region": "Gangneung",
+        "note": "fire-prone pine belt",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              128.85,
+              37.65
+            ],
+            [
+              128.95,
+              37.65
+            ],
+            [
+              128.95,
+              37.75
+            ],
+            [
+              128.85,
+              37.75
+            ],
+            [
+              128.85,
+              37.65
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "동해 묵호 송이림",
+        "region": "Donghae",
+        "note": "coastal pine",
+        "priority": "high"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              129.0,
+              37.45
+            ],
+            [
+              129.1,
+              37.45
+            ],
+            [
+              129.1,
+              37.55
+            ],
+            [
+              129.0,
+              37.55
+            ],
+            [
+              129.0,
+              37.45
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "삼척 해안 적송",
+        "region": "Samcheok",
+        "note": "red pine",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              129.1,
+              37.3
+            ],
+            [
+              129.2,
+              37.3
+            ],
+            [
+              129.2,
+              37.4
+            ],
+            [
+              129.1,
+              37.4
+            ],
+            [
+              129.1,
+              37.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "울진 금강송림",
+        "region": "Uljin",
+        "note": "Geumgang pine — fire-impacted 2022",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              129.3,
+              36.95
+            ],
+            [
+              129.4,
+              36.95
+            ],
+            [
+              129.4,
+              37.05
+            ],
+            [
+              129.3,
+              37.05
+            ],
+            [
+              129.3,
+              36.95
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "영덕 해안 침엽수",
+        "region": "Yeongdeok",
+        "note": "coastal Pinus thunbergii",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              129.3,
+              36.3
+            ],
+            [
+              129.4,
+              36.3
+            ],
+            [
+              129.4,
+              36.4
+            ],
+            [
+              129.3,
+              36.4
+            ],
+            [
+              129.3,
+              36.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "포항 호미곶 곰솔",
+        "region": "Pohang",
+        "note": "Pinus thunbergii",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              129.5,
+              36.05
+            ],
+            [
+              129.6,
+              36.05
+            ],
+            [
+              129.6,
+              36.15
+            ],
+            [
+              129.5,
+              36.15
+            ],
+            [
+              129.5,
+              36.05
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "봉화 백두대간 송이",
+        "region": "Bonghwa",
+        "note": "songi pine",
+        "priority": "high"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              128.65,
+              36.95
+            ],
+            [
+              128.75,
+              36.95
+            ],
+            [
+              128.75,
+              37.05
+            ],
+            [
+              128.65,
+              37.05
+            ],
+            [
+              128.65,
+              36.95
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "영양 송이특별보호림",
+        "region": "Yeongyang",
+        "note": "songi protected",
+        "priority": "high"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              129.05,
+              36.65
+            ],
+            [
+              129.15,
+              36.65
+            ],
+            [
+              129.15,
+              36.75
+            ],
+            [
+              129.05,
+              36.75
+            ],
+            [
+              129.05,
+              36.65
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "청송 주왕산 송이",
+        "region": "Cheongsong",
+        "note": "Juwangsan pine",
+        "priority": "high"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              129.15,
+              36.4
+            ],
+            [
+              129.25,
+              36.4
+            ],
+            [
+              129.25,
+              36.5
+            ],
+            [
+              129.15,
+              36.5
+            ],
+            [
+              129.15,
+              36.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "의성 송이주산지 (2025 화재지)",
+        "region": "Uiseong",
+        "note": "2025 fire epicenter",
+        "priority": "high"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              128.6,
+              36.4
+            ],
+            [
+              128.7,
+              36.4
+            ],
+            [
+              128.7,
+              36.5
+            ],
+            [
+              128.6,
+              36.5
+            ],
+            [
+              128.6,
+              36.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "철원 DMZ inland",
+        "region": "Cheorwon",
+        "note": "DMZ pristine",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              127.2,
+              38.2
+            ],
+            [
+              127.3,
+              38.2
+            ],
+            [
+              127.3,
+              38.3
+            ],
+            [
+              127.2,
+              38.3
+            ],
+            [
+              127.2,
+              38.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "양구 DMZ pine",
+        "region": "Yanggu",
+        "note": "DMZ pine",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              127.95,
+              38.2
+            ],
+            [
+              128.05,
+              38.2
+            ],
+            [
+              128.05,
+              38.3
+            ],
+            [
+              127.95,
+              38.3
+            ],
+            [
+              127.95,
+              38.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "고성 DMZ coastal",
+        "region": "Goseong",
+        "note": "DMZ coastal",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              128.45,
+              38.4
+            ],
+            [
+              128.55,
+              38.4
+            ],
+            [
+              128.55,
+              38.5
+            ],
+            [
+              128.45,
+              38.5
+            ],
+            [
+              128.45,
+              38.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "한라산 침엽수림",
+        "region": "Halla",
+        "note": "Abies koreana",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              126.55,
+              33.35
+            ],
+            [
+              126.65,
+              33.35
+            ],
+            [
+              126.65,
+              33.45
+            ],
+            [
+              126.55,
+              33.45
+            ],
+            [
+              126.55,
+              33.35
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "한라 동사면 활엽수",
+        "region": "Halla",
+        "note": "east face deciduous",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              126.65,
+              33.35
+            ],
+            [
+              126.75,
+              33.35
+            ],
+            [
+              126.75,
+              33.45
+            ],
+            [
+              126.65,
+              33.45
+            ],
+            [
+              126.65,
+              33.35
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "제주 곶자왈 자생림",
+        "region": "Jeju",
+        "note": "Gotjawal endemic",
+        "priority": "medium"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              126.4,
+              33.3
+            ],
+            [
+              126.5,
+              33.3
+            ],
+            [
+              126.5,
+              33.4
+            ],
+            [
+              126.4,
+              33.4
+            ],
+            [
+              126.4,
+              33.3
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

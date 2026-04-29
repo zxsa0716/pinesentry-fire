@@ -1,0 +1,35 @@
+# PineSentry-Fire — minimal pip deps for v1 reproduction (no conda).
+# Pin majors only; pip resolver picks compatible minors on Python 3.11+.
+
+# Numerical core
+numpy>=1.24
+scipy>=1.10
+pandas>=2.0
+xarray>=2023.6
+
+# Geo + raster
+rioxarray>=0.15
+rasterio>=1.3
+geopandas>=0.14
+shapely>=2.0
+pyogrio>=0.7
+
+# STAC + NASA EarthData
+pystac-client>=0.7
+earthaccess>=0.8
+h5netcdf>=1.3
+netCDF4>=1.6
+h5py>=3.10
+
+# ML eval / plotting
+scikit-learn>=1.3
+matplotlib>=3.7
+
+# Demo
+streamlit>=1.30
+folium>=0.15
+streamlit-folium>=0.15
+
+# Misc
+requests>=2.31
+python-dotenv>=1.0

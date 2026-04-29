@@ -108,7 +108,7 @@ def run_site(site, info):
     gdf_path = Path(f"data/imsangdo/{site}.gpkg")
     if not gdf_path.exists():
         print(f"  imsangdo missing: {gdf_path}"); return None
-    gdf = gpd.read_file(gdf_path).to_crs("EPSG:4326")
+    gdf = gpd.read_file(gdf_path).to_crs(ndvi.rio.crs)
     name_col = next((c for c in gdf.columns if "KOFTR" in c.upper()), "KOFTR_NM")
     gdf["_pyro"] = gdf[name_col].astype(str).str.strip().map(PYROPHILIC).fillna(0.30)
 
@@ -152,7 +152,7 @@ def run_site(site, info):
     peri_path = Path(f"data/fire_perimeter/synth_{site}_dnbr.gpkg")
     if not peri_path.exists():
         print(f"  no perimeter; skip eval"); return None
-    peri = gpd.read_file(peri_path).to_crs("EPSG:4326")
+    peri = gpd.read_file(peri_path).to_crs(ndvi.rio.crs)   # match NDVI's UTM CRS
     burn = rasterize(((g, 1) for g in peri.geometry if g is not None),
                      out_shape=hsi_v1.shape, transform=ndvi.rio.transform(),
                      fill=0, dtype="uint8").astype(bool)

@@ -1,0 +1,10 @@
+# HuggingFace Spaces config (Streamlit SDK)
+title: PineSentry-Fire
+emoji: 🌲🔥
+colorFrom: red
+colorTo: yellow
+sdk: streamlit
+sdk_version: 1.30.0
+app_file: streamlit_app/app.py
+pinned: false
+license: cc-by-4.0

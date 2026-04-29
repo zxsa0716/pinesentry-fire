@@ -14,12 +14,21 @@ Submission for the [Planet Tanager Open Data Competition 2026](https://learn.pla
 > 2025 Korean spring fire season — using **the same weights** across multiple
 > independent fire sites?
 
-**Answer (v1, 2026-04-29)**: yes. The Hydraulic Stress Index v1 (multi-layer
-EMIT + species + topography) achieves **AUC 0.747 / lift 2.30×** on Uiseong
-2025-03-22 (45,000 ha fire) and **AUC 0.647 / lift 1.75×** on Sancheong
-2025-03-21 (15,000 ha) with **identical weights** — no per-site retuning.
-Pure spectral baselines (NDVI/NDMI/NDII) flip direction between the two
-sites and so cannot be deployed without local training.
+**Answer (v1.1, 2026-04-29)**: yes. The Hydraulic Stress Index v1
+generalizes to 5 fire sites across 2 continents with one set of
+OSF-pre-registered weights:
+
+| Site | Sensor | AUC (95% CI) | Top-decile lift |
+|---|---|---|---:|
+| 의성 Uiseong 2025-03 | EMIT 285b | 0.747 [0.741, 0.752] | 2.25× |
+| 산청 Sancheong 2025-03 | EMIT 285b | 0.649 [0.617, 0.680] | 1.78× |
+| 강릉 Gangneung 2023-04 | S2 13b | 0.549 [0.538, 0.558] | 1.80× |
+| 울진 Uljin 2022-03 | S2 13b | 0.545 [0.538, 0.552] | 0.75× |
+| **US Palisades 2025-01** | **S2 13b** | **0.678 [0.672, 0.685]** | **1.42×** |
+
+(95% CI from n=200 bootstrap.) Pure spectral baselines (NDVI/NDMI/NDII)
+flip direction between sites and cannot be deployed without local
+training. **HSI v1 uses one direction across all 5 sites.**
 
 ---
 

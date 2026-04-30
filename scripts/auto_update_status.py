@@ -80,8 +80,8 @@ def main():
             lines.append(f"| {site} | {n_folds} | {mean:.3f} | {std:.3f} | [{mn:.3f}, {mx:.3f}] |")
         lines.append("")
 
-    OUT.write_text("\n".join(lines) + "\n")
-    print(f"wrote {OUT} — {total_files} files / {total_gb:.2f} GB")
+    OUT.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"wrote {OUT} - {total_files} files / {total_gb:.2f} GB")
 
 
 if __name__ == "__main__":

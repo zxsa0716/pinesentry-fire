@@ -1,4 +1,4 @@
-# PineSentry-Fire — STATUS (auto-generated 2026-04-29)
+# PineSentry-Fire — STATUS (auto-generated 2026-04-30)
 
 ## Data inventory (auto-scan)
 
@@ -12,19 +12,19 @@
 | fire_perimeter | 9 | 0.12 |
 | fire_stats | 1 | 0.00 |
 | gedi_l4a | 150 | 40.19 |
-| hsi | 32 | 0.10 |
+| hsi | 64 | 0.13 |
 | imsangdo | 8 | 0.74 |
 | koflux_gdk | 5 | 0.01 |
 | mod13q1_ndvi | 240 | 6.10 |
 | modis_fire_mcd14ml | 50 | 0.05 |
 | mtbs | 7 | 0.58 |
 | neon | 23 | 0.00 |
-| prospect | 2 | 0.00 |
+| prospect | 5 | 0.00 |
 | smap_l4 | 30 | 4.37 |
 | tanager | 9 | 7.91 |
 | try | 3 | 0.00 |
 | worldcover | 19 | 0.45 |
-| **Total** | **697** | **156.22** |
+| **Total** | **732** | **156.26** |
 
 ## v1 spatial-block CV (4×4 blocks)
 

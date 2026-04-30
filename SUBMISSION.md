@@ -1,6 +1,6 @@
 # PineSentry-Fire — Tanager Open Data Competition 2026 Submission Package
 
-**Status**: v1.0 frozen 2026-04-29 (D-124, 127 days before deadline 2026-08-31)
+**Status**: v1.5 frozen 2026-04-30 (D-123, 123 days before deadline 2026-08-31)
 **GitHub**: https://github.com/zxsa0716/pinesentry-fire
 **License**: CC-BY-4.0
 **Author**: Heedo Choi · zxsa0716@kookmin.ac.kr · Kookmin University
@@ -77,6 +77,82 @@ which a real-world deployment cannot know. **HSI v1 uses one direction.**
 slightly hurts Sancheong. The site-specific tradeoff is honestly
 disclosed in the paper draft — OSF-pre-registered weights are kept
 unchanged because per-site tuning would invalidate generalization.
+
+### v2 / v2.5 PROSPECT-D + PROSAIL canopy inversion (honest finding)
+
+| Variant | Spectral firerisk source | Uiseong AUC |
+|---|---|---:|
+| v1 (firerisk_v0, OSF-frozen) | empirical NDII/NDVI/RE | **0.747** |
+| v2 (PROSPECT-D leaf MLP) | physics, leaf-only | 0.648 |
+| v2.5 (PROSAIL canopy MLP) | physics, canopy + soil | 0.608 |
+
+Pure radiative-transfer inversion underperforms the empirical NDII
+proxy on Korean conifer pixels. Moving from leaf to canopy domain does
+NOT close the gap. The signal v1 captures comes from non-PROSPECT
+features (volatile resin, wax, lignin, crown architecture) that are
+not parameterized by the standard leaf-canopy model. We disclose this
+negative result rather than discard the v2 attempts.
+
+### Spatial autocorrelation control (GEE Exchangeable, R-INLA equivalent)
+
+| Site | Wald z | p | OR(HSI v1) |
+|---|---:|---|---:|
+| 의성 Uiseong | 5.29 | 1.2 × 10⁻⁷ | **12.04** |
+| 산청 Sancheong | 20.92 | ≈ 0 | **38.44** |
+| Palisades (US) | 0.56 | 0.573 (n.s.) | 1.08 |
+
+Korean per-pixel signal is robust after spatial control. Palisades
+cross-continent AUC is partly an artifact of chaparral spatial
+clustering. **Confirmed by Moran's I** (Uiseong I = 0.46, Sancheong
+I = 0.05, Palisades I = 0.93).
+
+### Cross-site weight-transfer test (OSF defense)
+
+| Weights | Uiseong AUC | Sancheong AUC |
+|---|---:|---:|
+| OSF-pre-registered (0.40 / 0.20 / 0.30 / 0.10) | 0.589 | **0.718** |
+| Uiseong-fit logistic (0.68 / 0.0 / 0.0 / 0.32) | 0.702 | 0.656 |
+
+(Within-stack NDII proxy for shape-matched cross-site eval.)
+**Per-site tuning HURTS the held-out site's AUC by 6.2 points.** The
+OSF-frozen weights generalize better than weights tuned on the
+training site. Direct empirical defense of the pre-registration.
+
+### Continuous Boyce index
+
+| Site | Boyce ρ |
+|---|---:|
+| 의성 Uiseong | 1.000 |
+| 산청 Sancheong | 0.943 |
+| Palisades (US) | 0.418 |
+| 강릉 Gangneung | -0.212 |
+| 울진 Uljin | -0.236 |
+
+EMIT SWIR sites have textbook monotonic increasing fire-incidence-vs-HSI;
+S2-fallback sites do not. Imaging-spectrometer SWIR is essential.
+
+### Permutation null (N = 500)
+
+All 5 sites: observed AUC ≫ null mean (≈ 0.500), p < 1/500 = 0.002.
+
+### 1D deep-learning baseline (DOFA stand-in)
+
+| Test design | AUC |
+|---|---:|
+| Random 80/20 within-distribution | 0.916 |
+| Spatial-block 0 leave-out | 0.341 |
+| Spatial-block 1 leave-out | 0.254 |
+
+Per-pixel DL **overfits to spatial structure** and does not generalize
+across spatial blocks — exactly the problem the hand-engineered
+HSI v1 framework avoids. End-to-end DOFA fine-tuning on a single fire
+scene would face the same problem.
+
+### Atmospheric quality (ISOFIT-equivalent)
+
+Per-pixel residual flag at 760 / 940 / 1140 nm O₂/H₂O bands:
+- Uiseong: 0.01 % flagged → atmosphere correction is solid
+- Sancheong: 6.4 % flagged (partial cirrus, disclosed honestly)
 
 ### A6 robustness ablation
 
@@ -158,6 +234,21 @@ Or run the 1-click `colab.ipynb` / `notebooks/08_one_click_reproduction.md`.
 5. **Weights are not data-fit**: ±20% perturbation moves AUC by ±0.01 only,
    so the result does not depend on exact weight choice — addressing the
    common "you tuned to your test set" concern.
+
+6. **Per-site tuning hurts cross-site AUC**: Uiseong-fit unconstrained
+   logistic-regression weights collapse to (0.68 pyro / 0.32 pine_terrain)
+   and *lose 6.2 points* on the held-out Sancheong evaluation. The
+   OSF-pre-registered weights are more transferable than per-site optima.
+
+7. **Pure radiative-transfer inversion underperforms empirical NDII** on
+   conifer fire risk: PROSPECT-D leaf and PROSAIL canopy inversions both
+   give AUC < 0.65 vs HSI v1's 0.747. The relevant pre-fire chemistry
+   (resin, wax, lignin) is not parameterized by these standard models.
+
+8. **Per-pixel DL overfits spatial structure**: a 3-layer MLP gets
+   AUC 0.92 on random 80/20 holdout but collapses to 0.25–0.34 on spatial-
+   block CV. Hand-engineered species + terrain priors generalize where
+   pure DL does not.
 
 ---
 

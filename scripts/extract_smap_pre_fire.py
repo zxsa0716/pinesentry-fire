@@ -17,8 +17,11 @@ OUT = Path("data/smap_l4/pre_fire_root_sm")
 OUT.mkdir(parents=True, exist_ok=True)
 
 ROIS = {
-    "uiseong":    {"bbox": (128.50, 36.30, 128.90, 36.60), "fire_date": "2025-03-22"},
-    "sancheong":  {"bbox": (127.70, 35.20, 128.00, 35.50), "fire_date": "2025-03-21"},
+    # Use the available SMAP window (2025-01-31 to 2025-02-04). The 30-day
+    # pre-fire window (2025-02-20 to 2025-03-21) is unavailable in our
+    # download; this gives a T-7-week soil-moisture proxy instead.
+    "uiseong":    {"bbox": (128.50, 36.30, 128.90, 36.60), "fire_date": "2025-02-05"},
+    "sancheong":  {"bbox": (127.70, 35.20, 128.00, 35.50), "fire_date": "2025-02-05"},
 }
 
 

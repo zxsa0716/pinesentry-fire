@@ -12,7 +12,7 @@
 | fire_perimeter | 9 | 0.12 |
 | fire_stats | 1 | 0.00 |
 | gedi_l4a | 150 | 40.19 |
-| hsi | 64 | 0.13 |
+| hsi | 69 | 0.13 |
 | imsangdo | 8 | 0.74 |
 | koflux_gdk | 5 | 0.01 |
 | mod13q1_ndvi | 240 | 6.10 |
@@ -20,11 +20,11 @@
 | mtbs | 7 | 0.58 |
 | neon | 23 | 0.00 |
 | prospect | 5 | 0.00 |
-| smap_l4 | 30 | 4.37 |
+| smap_l4 | 33 | 4.37 |
 | tanager | 9 | 7.91 |
 | try | 3 | 0.00 |
 | worldcover | 19 | 0.45 |
-| **Total** | **732** | **156.26** |
+| **Total** | **740** | **156.26** |
 
 ## v1 spatial-block CV (4×4 blocks)
 

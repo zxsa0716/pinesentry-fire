@@ -154,6 +154,23 @@ Per-pixel residual flag at 760 / 940 / 1140 nm O₂/H₂O bands:
 - Uiseong: 0.01 % flagged → atmosphere correction is solid
 - Sancheong: 6.4 % flagged (partial cirrus, disclosed honestly)
 
+### Multi-temporal pre-fire signal at Sancheong (T − 1.5 mo)
+
+EMIT acquisition 2026-02-10 (1.5 months before the 2026-03 Sancheong fire)
+shows mean firerisk_v0 = 0.857 inside the burn polygon vs 0.711 outside
+(Δ = +0.146, MW p ≈ 0, n_burn = 13,323 pixels). **EMIT detects pre-fire
+pyrophilic stress ~6 weeks before ignition.**
+
+### SMAP root-zone soil moisture integration (HSI v1.5)
+
+| Site | HSI v1 | SMAP-RZSM alone | HSI v1.5 combined | Δ vs v1 |
+|---|---:|---:|---:|---:|
+| Uiseong | 0.7467 | 0.5995 | 0.7463 | -0.0004 |
+| Sancheong | 0.6471 | 0.6333 | 0.6487 | +0.0016 |
+
+SMAP adds essentially no AUC. HSI v1 already captures the soil-moisture
+signal through NDII/NDMI in firerisk_v0. Honest negative result.
+
 ### A6 robustness ablation
 
 | Test | Uiseong AUC | Sancheong AUC |

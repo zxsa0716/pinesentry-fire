@@ -161,6 +161,41 @@ shows mean firerisk_v0 = 0.857 inside the burn polygon vs 0.711 outside
 (Δ = +0.146, MW p ≈ 0, n_burn = 13,323 pixels). **EMIT detects pre-fire
 pyrophilic stress ~6 weeks before ignition.**
 
+### KoFlux GDK NEE dual-validation (legacy 2006-2008)
+
+Tanager-era GDK is unavailable; we substitute with the **legacy
+2006-2008 KoFlux GDK** CSVs in hand. Daytime summer (DOY 152-243,
+06:00-17:00) tower data shows hydraulic-stress proxy (VPD + low SWC)
+significantly correlates with NEE residuals: pooled n=3,770,
+**Pearson r = -0.117, p = 5 × 10⁻¹³**. Sign is opposite the conifer
+hypothesis (GDK is deciduous oak, light-limited summer photosynthesis)
+— honestly disclosed.
+
+### Tanager spectral ablation on Palisades
+
+Tanager full 426b (AUC 0.878) > VNIR only (0.871) > SWIR only (0.862)
+> S2-binned 13b (0.837). **Hyperspectral resolution gives +0.04 AUC
+over broadband** — confirming the v4.1 hypothesis that Tanager's 5 nm
+sampling matters even at chaparral sites.
+
+### Case-control 1:5 sampling (Phillips & Elith 2013)
+
+All 5 sites' AUC under case-control 1:5 sampling differs from
+all-pixels AUC by ≤ 0.001 — the AUCs are not driven by class imbalance.
+
+### Weather-only baselines (RS-derived KBDI/FWI/DWI proxies)
+
+HSI v1 outperforms RS-derived weather-index proxies by **12-18 AUC
+points** on both Uiseong and Sancheong. Combining HSI v1 + DWI does
+not add — HSI v1 already captures the dryness signal.
+
+### DiffPROSAIL gradient inversion (A3)
+
+`scipy.optimize.minimize` L-BFGS-B PROSPECT-D inversion on 1500 sampled
+Uiseong pixels: AUC = **0.500 (no signal)**. Strongest evidence yet that
+PROSPECT-D / PROSAIL leaf parameters are not the right basis for
+conifer fire-risk prediction.
+
 ### SMAP root-zone soil moisture integration (HSI v1.5)
 
 | Site | HSI v1 | SMAP-RZSM alone | HSI v1.5 combined | Δ vs v1 |

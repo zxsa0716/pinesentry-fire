@@ -19,7 +19,7 @@ of (i) species **pyrophilic factor** from Korean Forest Service 1:5,000
 임상도 (3.41 M polygons), (ii) **south-facing slope** from COP-DEM 30 m,
 (iii) an empirical SWIR firerisk_v0 from EMIT 285-band reflectance
 (NDII / NDVI / red-edge senescence), and (iv) a species × terrain
-interaction. Weights (0.40 / 0.20 / 0.30 / 0.10) are **OSF-pre-registered
+interaction. Weights (0.40 / 0.20 / 0.30 / 0.10) are **git-timestamp-locked pre-registered
 before any Korean validation** (commit `c181cc2`, 2026-04-29). Cross-
 validate on 5 fires (4 Korea + 1 US chaparral) with **identical weights**
 and a layered statistical battery: bootstrap 95% CI, spatial-block CV,
@@ -36,7 +36,7 @@ case-control 1:5, PR-AUC, Brier with isotonic calibration.
 | Uljin 2022 | S2 13b | 0.545 | [0.538, 0.552] | 0.75× |
 | **Palisades 2025 (US)** | S2 13b | **0.678** | [0.672, 0.685] | 1.42× |
 
-**The same OSF-pre-registered weights generalize from Korean conifer
+**The same git-timestamp-locked pre-registered weights generalize from Korean conifer
 forests to a Los Angeles chaparral fire**, and survive every robustness
 test we ran.
 

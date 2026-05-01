@@ -40,7 +40,7 @@ in `notebooks/08_one_click_reproduction.md`.
 | 울진 Uljin 2022-03 | S2 13b (fallback) | 495,890 | 3,291,745 | **0.5446** | 0.75× | small |
 | **US Palisades 2025-01** | S2 13b (cross-continent) | 672,894 | 1,628,657 | **0.6781** | 1.29× | ≈ 0 |
 
-**Identical OSF-pre-registered weights** (0.40 pyrophilic + 0.20 south_facing
+**Identical pre-registered (git-timestamp-locked) weights** (0.40 pyrophilic + 0.20 south_facing
 + 0.30 firerisk_v0 + 0.10 pine_terrain) across all **5 sites including US**.
 
 The Palisades 2025 (Los Angeles, January) test uses Korean weights + a
@@ -75,7 +75,7 @@ which a real-world deployment cannot know. **HSI v1 uses one direction.**
 (-0.11 without). `south_facing` dominates Sancheong (-0.11 without).
 `firerisk_v0` (the EMIT-derived empirical proxy) helps Uiseong but
 slightly hurts Sancheong. The site-specific tradeoff is honestly
-disclosed in the paper draft — OSF-pre-registered weights are kept
+disclosed in the paper draft — pre-registered (git-timestamp-locked) weights are kept
 unchanged because per-site tuning would invalidate generalization.
 
 ### v2 / v2.5 PROSPECT-D + PROSAIL canopy inversion (honest finding)
@@ -110,7 +110,7 @@ I = 0.05, Palisades I = 0.93).
 
 | Weights | Uiseong AUC | Sancheong AUC |
 |---|---:|---:|
-| OSF-pre-registered (0.40 / 0.20 / 0.30 / 0.10) | 0.589 | **0.718** |
+| pre-registered (git-timestamp-locked) (0.40 / 0.20 / 0.30 / 0.10) | 0.589 | **0.718** |
 | Uiseong-fit logistic (0.68 / 0.0 / 0.0 / 0.32) | 0.702 | 0.656 |
 
 (Within-stack NDII proxy for shape-matched cross-site eval.)
@@ -210,7 +210,7 @@ signal through NDII/NDMI in firerisk_v0. Honest negative result.
 
 | Test | Uiseong AUC | Sancheong AUC |
 |---|---:|---:|
-| Default OSF-pre-registered weights | 0.747 | 0.647 |
+| Default pre-registered (git-timestamp-locked) weights | 0.747 | 0.647 |
 | ±20% weight perturbation (n=64 random samples) mean | 0.745 ± 0.006 | 0.649 ± 0.011 |
 | Spatial-block 4×4 CV mean ± std | 0.676 ± 0.129 | 0.647 ± 0.000 |
 
@@ -290,7 +290,7 @@ Or run the 1-click `colab.ipynb` / `notebooks/08_one_click_reproduction.md`.
 6. **Per-site tuning hurts cross-site AUC**: Uiseong-fit unconstrained
    logistic-regression weights collapse to (0.68 pyro / 0.32 pine_terrain)
    and *lose 6.2 points* on the held-out Sancheong evaluation. The
-   OSF-pre-registered weights are more transferable than per-site optima.
+   pre-registered (git-timestamp-locked) weights are more transferable than per-site optima.
 
 7. **Pure radiative-transfer inversion underperforms empirical NDII** on
    conifer fire risk: PROSPECT-D leaf and PROSAIL canopy inversions both

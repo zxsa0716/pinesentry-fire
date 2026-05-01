@@ -14,9 +14,10 @@ Submission for the [Planet Tanager Open Data Competition 2026](https://learn.pla
 > 2025 Korean spring fire season — using **the same weights** across multiple
 > independent fire sites?
 
-**Answer (v1.1, 2026-04-29)**: yes. The Hydraulic Stress Index v1
+**Answer (v1.8, 2026-04-30)**: yes. The Hydraulic Stress Index v1
 generalizes to 5 fire sites across 2 continents with one set of
-OSF-pre-registered weights:
+**git-timestamp-locked pre-registered** weights (commit `c181cc2`,
+2026-04-29 — *before* any of the cross-validation results were committed):
 
 | Site | Sensor | AUC (95% CI) | Top-decile lift |
 |---|---|---|---:|
@@ -60,8 +61,10 @@ ground truth = Sentinel-2 dNBR > 0.27 (Key & Benson 2006)
 ```
 
 Weights are **physiologically motivated, NOT data-fit on Uiseong**. Locked at
-v1.0 in OSF before applying to Sancheong → AUC 0.647 confirms cross-site
-transfer (no overfitting). See `OSF_PRE_REGISTRATION.md`.
+v1.0 weights are pre-registered via public Git commit `c181cc2`
+(2026-04-29) BEFORE any Sancheong / Palisades validation result was
+committed → 5-site cross-validation confirms no overfitting.
+See `OSF_PRE_REGISTRATION.md`.
 
 ### Data inventory (D-124, 2026-04-29)
 

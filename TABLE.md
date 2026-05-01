@@ -5,7 +5,7 @@ Generated 2026-04-30, commit corresponds to tag v1.5.*
 
 ---
 
-## Table 1 — HSI v1 across 5 sites (identical OSF-pre-registered weights)
+## Table 1 — HSI v1 across 5 sites (identical pre-registered (git-locked) weights)
 
 | Site | Sensor | n_burn | n_unburn | AUC | Bootstrap 95 % CI | Lift@10 % | MW p |
 |---|---|---:|---:|---:|---|---:|---|
@@ -76,7 +76,7 @@ re-run confirms p < 0.001 with finer null resolution.)
 
 | Test | Uiseong AUC | Sancheong AUC |
 |---|---:|---:|
-| OSF-pre-registered weights | 0.747 | 0.647 |
+| pre-registered (git-locked) weights | 0.747 | 0.647 |
 | ±20 % perturbation, n=64 random | 0.745 ± 0.006 | 0.649 ± 0.011 |
 | **±50 % perturbation, n=128 random (v4.1 spec)** | **0.739 ± 0.018** [0.705, 0.766] | **0.648 ± 0.025** [0.597, 0.683] |
 | 4 × 4 spatial-block CV mean ± std | 0.676 ± 0.129 | 0.647 ± 0.000 |
@@ -88,7 +88,7 @@ The result is genuinely insensitive to weight choice.
 
 | Weights | Uiseong AUC (within-stack proxy) | Sancheong AUC (held-out) | Δ |
 |---|---:|---:|---:|
-| OSF-pre-registered (0.40 / 0.20 / 0.30 / 0.10) | 0.589 | **0.718** | — |
+| pre-registered (git-locked) (0.40 / 0.20 / 0.30 / 0.10) | 0.589 | **0.718** | — |
 | Uiseong-fit logistic (0.68 / 0.0 / 0.0 / 0.32) | 0.702 | 0.656 | **−0.062** |
 
 ## Table 10 — Per-species AUC breakdown (Uiseong, KFS FRTP_NM)
@@ -109,6 +109,7 @@ The result is genuinely insensitive to weight choice.
 | **v1 (firerisk_v0, OSF-frozen)** | empirical | **0.747** |
 | v2 (PROSPECT-D leaf MLP) | physics, leaf | 0.648 |
 | v2.5 (PROSAIL canopy MLP) | physics, leaf + canopy + soil | 0.608 |
+| **v2.8 (PyTorch autograd PROSPECT-D)** | **physics, leaf, end-to-end differentiable** | **0.683** |
 
 PROSAIL canopy MLP train R²: LMA 0.911, EWT 0.886, Cab 0.933, LAI 0.907.
 
@@ -195,7 +196,7 @@ species + terrain priors generalize where DL does not.
 (All three proxies are dominated by SMAP-RZSM-derived dryness; ERA5-Land
 not in our pipeline. HSI v1 outperforms by 12-18 AUC points.)
 
-## Table 20 — DiffPROSAIL gradient inversion (A3, scipy L-BFGS-B PROSPECT-D)
+## Table 20 — DiffPROSAIL gradient inversion (A3) — scipy + PyTorch
 
 | Variant | Method | Uiseong AUC |
 |---|---|---:|
@@ -203,7 +204,14 @@ not in our pipeline. HSI v1 outperforms by 12-18 AUC points.)
 | v1 | full HSI | 0.747 |
 | v2 | leaf PROSPECT-D MLP | 0.648 |
 | v2.5 | canopy PROSAIL MLP | 0.608 |
-| **v2.7** | **leaf gradient inversion (DiffPROSAIL stand-in)** | **0.500** (no signal) |
+| v2.7 | leaf gradient (scipy L-BFGS-B finite-diff) | 0.500 (no signal) |
+| **v2.8** | **leaf gradient (PyTorch autograd, torch-native PROSPECT-D)** | **0.683** |
+
+The PyTorch autograd implementation **recovers a real signal (0.683)** that
+the scipy finite-difference variant missed. Adam with proper gradients
+converges to physically meaningful traits; L-BFGS-B with finite-difference
+gradients gets stuck. v2.8 still under-performs the v1 hand-engineered
+HSI by 0.064 AUC.
 
 ## Table 21 — Calibration (isotonic regression)
 

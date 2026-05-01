@@ -1,8 +1,16 @@
-# PineSentry-Fire OSF Pre-Registration
+# PineSentry-Fire Pre-Registration (git-timestamp-locked)
 
-**Frozen**: 2026-04-29 (D-124, before any further hyperparameter changes)
+**Frozen via public git commit**: `c181cc2` (2026-04-29)
+**OSF DOI registration**: pending (administrative step before 8/31 submission)
 **Author**: Heedo Choi (Kookmin University, zxsa0716@kookmin.ac.kr)
-**Repo at freeze**: `c181cc2` (https://github.com/zxsa0716/pinesentry-fire)
+**Repo**: https://github.com/zxsa0716/pinesentry-fire
+
+> **Honest framing**: This document was committed to a public Git repository
+> at hash `c181cc2` on 2026-04-29 — *before* the v1 cross-validation runs
+> reported in §7. That public timestamp is the strongest "did-not-tune-to-
+> test" claim available without an OSF DOI; the OSF DOI registration is
+> a separate administrative step the author will complete before 8/31.
+> See `SUBMISSION_CHECKLIST.md` Phase 1 for the OSF.io upload procedure.
 
 ---
 

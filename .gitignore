@@ -1,3 +1,6 @@
+# Private / internal-only docs (NOT for public repo)
+.private/
+
 # Data (large, downloaded by scripts)
 data/
 *.h5

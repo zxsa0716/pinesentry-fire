@@ -6,7 +6,7 @@ All notable changes to this project. The format follows [Keep a Changelog](https
 
 ### Added
 - **US Palisades 2025-01 cross-continent validation**: AUC 0.678
-  (95% CI [0.672, 0.685]) using Korean OSF-pre-registered weights and
+  (95% CI [0.672, 0.685]) using Korean pre-registered (git-locked) weights and
   ESA WorldCover-derived US pyrophilic factor. Confirms HSI v1 framework
   generalizes beyond the Korean species table.
 - A1-A4 component leave-one-out ablation. Findings: pyrophilic is the
@@ -22,7 +22,7 @@ All notable changes to this project. The format follows [Keep a Changelog](https
 
 Initial submission-ready release for the Planet Tanager Open Data Competition 2026.
 
-### Multi-site results (identical OSF-pre-registered weights)
+### Multi-site results (identical pre-registered (git-locked) weights)
 
 | Site | Sensor | AUC | Lift@10% |
 |---|---|---:|---:|

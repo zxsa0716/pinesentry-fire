@@ -67,7 +67,7 @@ arrival (1–7 days). The submission is built without them.
 
 ## 3 — Method
 
-### 3.1 — HSI v1 (OSF-pre-registered)
+### 3.1 — HSI v1 (pre-registered (git-timestamp-locked at c181cc2))
 
 For each pixel **i**:
 
@@ -118,7 +118,7 @@ LAI (m²/m²). Outputs are clipped to the training-physical bounds
 
 ## 4 — Results
 
-### 4.1 — HSI v1 across 5 sites (identical OSF-pre-registered weights)
+### 4.1 — HSI v1 across 5 sites (identical pre-registered (git-timestamp-locked at c181cc2) weights)
 
 | Site | Sensor | n_burn | n_unburn | AUC | 95 % CI | Lift@10 % | MW p |
 |---|---|---:|---:|---:|---|---:|---|
@@ -191,13 +191,13 @@ The pyrophilic factor is the dominant signal at Uiseong; south-facing
 slope is dominant at Sancheong. The empirical firerisk_v0 helps
 Uiseong but slightly hurts Sancheong — this site-specific tradeoff
 is **not corrected by per-site tuning** because we keep the
-OSF-pre-registered weights frozen.
+pre-registered (git-timestamp-locked at c181cc2) weights frozen.
 
 ### 4.7 — A6 weight-perturbation robustness
 
 | Test | Uiseong AUC | Sancheong AUC |
 |---|---:|---:|
-| OSF-pre-registered weights | 0.747 | 0.647 |
+| pre-registered (git-timestamp-locked at c181cc2) weights | 0.747 | 0.647 |
 | ±20 % weights, n=64 random | 0.745 ± 0.006 | 0.649 ± 0.011 |
 | 4×4 spatial-block CV mean ± std | 0.676 ± 0.129 | 0.647 ± 0.000 |
 
@@ -263,11 +263,11 @@ and firerisk_v0. Applying these *Uiseong-tuned* weights to Sancheong:
 
 | Weights | Uiseong AUC (within-stack proxy) | Sancheong AUC (held-out) |
 |---|---:|---:|
-| OSF-pre-registered (0.40/0.20/0.30/0.10) | 0.589 | **0.718** |
+| pre-registered (git-timestamp-locked at c181cc2) (0.40/0.20/0.30/0.10) | 0.589 | **0.718** |
 | Uiseong-fit (0.68/0.0/0.0/0.32) | 0.702 | 0.656 |
 
 **Per-site tuning makes the cross-site held-out AUC *worse* (0.718 → 0.656).**
-The OSF-pre-registered weights, which are *not* tuned to either site,
+The pre-registered (git-timestamp-locked at c181cc2) weights, which are *not* tuned to either site,
 generalize better. This is direct empirical evidence that the
 pre-registration was not a self-handicap — it forced a generalizable
 configuration. (Note: this analysis uses a within-stack NDII/NDVI
@@ -436,10 +436,13 @@ Combining HSI v1 + DWI does not further improve AUC at either site
 because HSI v1 already captures the soil-dryness signal through NDII
 in firerisk_v0.
 
-### 4.20 — DiffPROSAIL gradient inversion (A3)
+### 4.20 — DiffPROSAIL gradient inversion (A3) — scipy and PyTorch
 
-Per-pixel `scipy.optimize.minimize` (L-BFGS-B) PROSPECT-D inversion on
-1500 balanced sampled Uiseong pixels (750 burn / 750 unburn):
+Two implementations: scipy.optimize.minimize (L-BFGS-B, finite-difference
+gradients) and **PyTorch autograd** with a torch-native PROSPECT-D-equivalent
+plate-model implementation using `prosail.spectral_library.get_spectra().prospectd`
+absorption coefficients. Both run on 1500 balanced sampled Uiseong pixels
+(750 burn / 750 unburn).
 
 | Variant | Method | Uiseong AUC |
 |---|---|---:|
@@ -447,16 +450,19 @@ Per-pixel `scipy.optimize.minimize` (L-BFGS-B) PROSPECT-D inversion on
 | v1 full HSI | empirical + species + terrain | **0.747** |
 | v2 leaf MLP | PROSPECT-D inverse network | 0.648 |
 | v2.5 canopy MLP | PROSAIL inverse network | 0.608 |
-| **v2.7 leaf gradient (DiffPROSAIL stand-in)** | scipy L-BFGS-B PROSPECT-D | **0.500** (no signal) |
+| v2.7 leaf gradient (scipy finite-diff) | scipy L-BFGS-B PROSPECT-D | 0.500 (no signal) |
+| **v2.8 leaf gradient (PyTorch autograd)** | torch-native PROSPECT-D + Adam, 80 steps | **0.683** |
 
-**Direct gradient inversion of leaf PROSPECT-D parameters has no
-fire-risk signal at all** on a balanced burn/unburn sample. ML-based
-inverse mapping (v2 MLP) captures statistical regularities the gradient
-inverter does not — at the cost of physical interpretability. Both
-underperform the empirical proxy. This is the strongest evidence yet
-that PROSPECT-D / PROSAIL leaf and canopy parameters are not the right
-basis for conifer fire-risk prediction. Volatile resin / wax / lignin
-/ crown-architectural features carry the actual signal.
+**The PyTorch autograd-differentiable PROSPECT-D inversion (v2.8) recovers
+a real signal (AUC 0.683)** that the scipy finite-difference variant (v2.7)
+misses. This shows that the issue with v2.7 was *optimization quality* rather
+than the inversion-problem fundamental. Adam with proper gradients converges
+to physically meaningful traits; L-BFGS-B with finite-difference gradients
+gets stuck. The v2.8 result still under-performs HSI v1 by 0.064 AUC,
+confirming that even with a properly-converged PROSPECT-D inversion the
+empirical NDII / species-aware proxy holds an edge for conifer fire risk.
+Volatile-resin / wax / lignin / crown-architecture signals not parameterized
+by PROSPECT-D remain the unaccounted-for residual.
 
 ### 4.21 — Why the v4.1 deep-learning ambitions did not land before 8/31
 

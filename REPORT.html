@@ -117,7 +117,8 @@ test we ran.
 <tr><td><strong>v1</strong></td><td><strong>full HSI (empirical + species + terrain)</strong></td><td><strong>0.747</strong></td></tr>
 <tr><td>v2</td><td>PROSPECT-D leaf MLP</td><td>0.648</td></tr>
 <tr><td>v2.5</td><td>PROSAIL canopy MLP</td><td>0.608</td></tr>
-<tr><td>v2.7</td><td>DiffPROSAIL gradient (scipy L-BFGS-B)</td><td><strong>0.500</strong> (no signal)</td></tr>
+<tr><td>v2.7</td><td>DiffPROSAIL gradient (scipy L-BFGS-B finite-diff)</td><td>0.500 (no signal)</td></tr>
+<tr><td><strong>v2.8</strong></td><td><strong>PyTorch autograd PROSPECT-D + Adam</strong></td><td><strong>0.683</strong></td></tr>
 </table>
 <div class="negative">
 <strong>Negative result we disclose</strong>: pure leaf / canopy radiative-transfer inversion

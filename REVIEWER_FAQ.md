@@ -20,15 +20,15 @@ Tables 1 + 2.
 
 **Answer**: Three independent demonstrations:
 
-1. **OSF pre-registration**: weights (0.40 / 0.20 / 0.30 / 0.10) are
+1. **git-timestamp-locked pre-registration**: weights (0.40 / 0.20 / 0.30 / 0.10) are
    committed at git hash `c181cc2` on 2026-04-29 *before* any Korean
    fire validation. Verify via:
    `git log c181cc2 -1 OSF_PRE_REGISTRATION.md`
 2. **Cross-site weight transfer** (`TABLE.md` Table 9): if we *did*
    fit weights on Uiseong via logistic regression, we get
    (0.68/0/0/0.32). Applying these *Uiseong-fit* weights to Sancheong
-   gives AUC 0.656 vs the OSF-pre-registered 0.718 — **per-site
-   tuning loses 6.2 AUC points**. The OSF weights are demonstrably
+   gives AUC 0.656 vs the pre-registered 0.718 — **per-site
+   tuning loses 6.2 AUC points**. The pre-registered weights are demonstrably
    more transferable than per-site optima.
 3. **±50 % weight sensitivity** (`TABLE.md` Table 8): randomly
    perturbing all four weights by ±50 % across 128 random samples
@@ -95,7 +95,7 @@ A balanced US/Korea split would dilute the Korean-data-gap argument
 that justifies the wishlist. Reviewers wanting more US sites can
 re-run on the MTBS Park Fire 2024 data we downloaded but did not
 add to v1 (Tanager-era US Park Fire data exists; we did not include
-it in the v1 evaluation to keep the OSF pre-registration tight on
+it in the v1 evaluation to keep the git-timestamp-locked pre-registration tight on
 Korean fires).
 
 ## Q7. "Korean Forest Service 1:5,000 임상도 — is it really worth

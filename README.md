@@ -6,14 +6,23 @@ Submission for the [Planet Tanager Open Data Competition 2026](https://learn.pla
 [![CC-BY-4.0](https://img.shields.io/badge/License-CC--BY--4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/zxsa0716/pinesentry-fire/blob/main/colab.ipynb)
 [![pytest](https://img.shields.io/badge/pytest-9%2F9%20green-brightgreen)](tests/)
-[![git-pre-registration](https://img.shields.io/badge/pre--registration-c181cc2-blue)](OSF_PRE_REGISTRATION.md)
-[![v1.9](https://img.shields.io/badge/version-v1.9-success)](CHANGELOG.md)
+[![git-pre-registration](https://img.shields.io/badge/pre--registration-c181cc2-blue)](WEIGHTS_FREEZE.md)
 
-> **Quick links**:
-> [📖 EXECUTIVE_SUMMARY](EXECUTIVE_SUMMARY.md) · [⚡ QUICKSTART](QUICKSTART.md) ·
-> [🌐 REPORT.html](REPORT.html) · [📚 PAPER](PAPER.md) · [📊 TABLE](TABLE.md) ·
-> [🧭 REVIEWER_GUIDE](REVIEWER_GUIDE.md) · [❓ REVIEWER_FAQ](REVIEWER_FAQ.md) ·
-> [🗂 INDEX](INDEX.md) · [🎨 examples/](examples/)
+
+> **Quick links** —
+> [📖 1-page brief](EXECUTIVE_SUMMARY.md) ·
+> [⚡ QUICKSTART](QUICKSTART.md) ·
+> [📚 PAPER](PAPER.md) ·
+> [📊 22 tables](TABLE.md) ·
+> [🧭 reviewer guide](REVIEWER_GUIDE.md) ·
+> [❓ FAQ](REVIEWER_FAQ.md) ·
+> [🗂 master index](INDEX.md) ·
+> [🎨 example outputs](examples/)
+>
+> **Browser dashboards** — open in any browser, no install:
+> [`REPORT.html`](REPORT.html) (static, 2.9 MB) ·
+> [`REPORT_INTERACTIVE.html`](REPORT_INTERACTIVE.html) (Plotly, 0.12 MB) ·
+> [`REPORT_MAP.html`](REPORT_MAP.html) (Folium map, 0.06 MB)
 
 ---
 
@@ -24,7 +33,7 @@ Submission for the [Planet Tanager Open Data Competition 2026](https://learn.pla
 > 2025 Korean spring fire season — using **the same weights** across multiple
 > independent fire sites?
 
-**Answer (v1.8, 2026-04-30)**: yes. The Hydraulic Stress Index v1
+**Answer**: yes. The Hydraulic Stress Index v1
 generalizes to 5 fire sites across 2 continents with one set of
 **git-timestamp-locked pre-registered** weights (commit `c181cc2`,
 2026-04-29 — *before* any of the cross-validation results were committed):
@@ -78,7 +87,7 @@ Weights are **physiologically motivated, NOT data-fit on Uiseong**. Locked at
 v1.0 weights are pre-registered via public Git commit `c181cc2`
 (2026-04-29) BEFORE any Sancheong / Palisades validation result was
 committed → 5-site cross-validation confirms no overfitting.
-See `OSF_PRE_REGISTRATION.md`.
+See `WEIGHTS_FREEZE.md`.
 
 ### Data inventory (D-124, 2026-04-29)
 
@@ -139,7 +148,7 @@ pinesentry-fire/
 │   └── hsi/v0/, hsi/v1/, baselines/
 ├── streamlit_app/app.py        # Q8 submission link target
 ├── wishlist/korea_30_scenes.geojson    # 30 priority Tanager scenes for Q7
-├── OSF_PRE_REGISTRATION.md     # weights frozen 2026-04-29
+├── WEIGHTS_FREEZE.md     # weights frozen 2026-04-29
 ├── STATUS.md                   # data acquisition + result tracker
 ├── tests/test_hsi.py           # 9/9 green
 └── .github/workflows/ci.yml    # ruff + pytest on push
@@ -163,22 +172,15 @@ pinesentry-fire/
 
 ---
 
-## 📜 Citation
+## Acknowledgements
 
-```bibtex
-@misc{choi2026pinesentry,
-  author    = {Choi, Heedo},
-  title     = {{PineSentry-Fire}: EMIT-aligned, species-aware Hydraulic
-               Stress Index for pre-fire risk mapping over Korean pine forests},
-  year      = 2026,
-  publisher = {Zenodo},
-  doi       = {10.5281/zenodo.XXXXXXX},
-  url       = {https://github.com/zxsa0716/pinesentry-fire},
-}
-```
-
-This work uses Tanager-1 imagery (c) Planet Labs PBC (CC-BY-4.0 via the
+This submission uses NASA EMIT L2A reflectance (URS), Tanager-1 imagery
+©Planet Labs PBC (CC-BY-4.0 via the
 [Tanager Open Data Catalog](https://www.planet.com/data/stac/tanager-core-imagery/)),
-NASA EMIT L2A, GEDI L4A, MOD13Q1, MOD14A1, SMAP L4 (NASA EarthData URS),
-ESA WorldCover 10m and Copernicus DEM 30m (open),
-산림청 임상도 1:5,000 + 산불통계 (data.go.kr), and AsiaFlux GDK historical.
+ESA Sentinel-2 + Copernicus DEM 30 m + WorldCover 10 m,
+산림청 임상도 1:5,000 + 산불통계 (data.go.kr),
+AsiaFlux KoFlux GDK 2004–2008,
+NIFC + MTBS US burn perimeters,
+and the GEDI L4A / MOD13Q1 / MOD14A1 / SMAP L4 NASA archives.
+
+— Heedo Choi · zxsa0716@kookmin.ac.kr · Kookmin University

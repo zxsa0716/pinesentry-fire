@@ -1,39 +1,20 @@
 cff-version: 1.2.0
 message: "If you use PineSentry-Fire, please cite as below."
-title: "PineSentry-Fire: Tanager-trained Hydraulic Stress Index for Korean Pine Fire Prediction"
-abstract: "A wavelength-aware foundation-model retrieval engine for hyperspectral leaf functional traits (LMA, EWT, foliar N, lignin, REIP), trained on global Tanager forest scenes and transferred to EMIT-observed Korean Pinus densiflora forests for predicting ignition susceptibility at the 의성 and 산청 2025 fires."
-authors: []
+title: "PineSentry-Fire: a species-aware Hydraulic Stress Index for Korean pine fire prediction"
+abstract: "Per-pixel pre-fire risk index combining EMIT 285-band SWIR reflectance, Korean Forest Service 1:5,000 임상도 species data, and COP-DEM 30 m topography. Cross-validated on 5 fires (4 Korean + 1 US chaparral) with identical pre-registered weights."
+authors:
+  - family-names: "Choi"
+    given-names: "Heedo"
+    affiliation: "Kookmin University"
+    email: "zxsa0716@kookmin.ac.kr"
 keywords:
   - hyperspectral
   - Tanager
   - EMIT
-  - hydraulic safety margin
+  - hydraulic stress
   - fire prediction
   - Pinus densiflora
-  - PROSAIL
-  - foundation model
 license: CC-BY-4.0
-version: 0.1.0
 date-released: 2026-08-31
-url: "https://github.com/pinesentry-fire"
-repository-code: "https://github.com/pinesentry-fire"
-references:
-  - type: article
-    title: "Plant resistance to drought depends on timely stomatal closure"
-    journal: "Ecology Letters"
-    year: 2017
-    doi: "10.1111/ele.12851"
-  - type: article
-    title: "Hydraulic diversity of forests regulates ecosystem resilience during drought"
-    journal: "Science"
-    year: 2020
-    doi: "10.1126/science.aaz7005"
-  - type: article
-    title: "DOFA: Neural Plasticity-Inspired Foundation Model for Observing the Earth"
-    year: 2024
-    url: "https://arxiv.org/abs/2403.15356"
-  - type: article
-    title: "Optimal estimation for imaging spectrometer atmospheric correction"
-    journal: "Remote Sensing of Environment"
-    year: 2018
-    doi: "10.1016/j.rse.2018.07.003"
+url: "https://github.com/zxsa0716/pinesentry-fire"
+repository-code: "https://github.com/zxsa0716/pinesentry-fire"

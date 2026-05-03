@@ -1,7 +1,7 @@
 # PineSentry-Fire — Executive Summary (1-page)
 
 **Tanager Open Data Competition 2026 · Heedo Choi · Kookmin University**
-**Submission state**: v1.7 LOCKED 2026-04-30 (D-123)
+**Submission state**: locked final state
 **GitHub**: https://github.com/zxsa0716/pinesentry-fire — License: CC-BY-4.0
 
 ---

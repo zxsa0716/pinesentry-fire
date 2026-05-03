@@ -27,7 +27,7 @@ Legend: ✅ done / 🟡 substituted / ⏸ abandoned (with reason) / 🚧 in prog
 | HSM = (P50 − Ψmin) | ✅ done | `src/pinesentry_fire/hsi.py` `compute_hsm()` |
 | Ψmin from EWT via PROSPECT inversion | ✅ done | `prospect_inversion.py` + `train_prospect_mlp.py` |
 | EWT_norm, LMA_norm percentile-normed | ✅ done | `percentile_normalize()` 5–95 % |
-| Pre-registered weights | ✅ done | `OSF_PRE_REGISTRATION.md` locked at c181cc2 |
+| Pre-registered weights | ✅ done | `WEIGHTS_FREEZE.md` locked at c181cc2 |
 | HSI sensitivity ±50 % (A6) | ✅ done | `scripts/hsi_sensitivity_analysis.py`; ±20 % in main report |
 
 The original v4.1 strict HSM-based formula

@@ -1,4 +1,4 @@
-# Reviewer Guide — PineSentry-Fire v1.7
+# Reviewer Guide — PineSentry-Fire
 
 **Three reading paths depending on your time budget.**
 
@@ -20,7 +20,7 @@ After the 5-minute path, add:
 
 4. **`SUBMISSION.md`** — 8/31 SurveyMonkey form fields Q1–Q8, plus full numerical results table, A1–A6 ablations, GEE / Moran I, cross-site weight transfer, and 8 limitations honestly disclosed.
 5. **`data/hsi/v1/HERO_methods.png`** — 6-panel methods comparison: HSI v1 vs v0 vs v2 (PROSPECT) vs v2.5 (PROSAIL) vs DL random vs DL spatial, plus cross-site weight transfer + GEE OR + Moran I + Boyce + permutation null + per-species AUC. Designed so reviewers immediately see *every* finding at once.
-6. **`OSF_PRE_REGISTRATION.md`** — locked at git commit `c181cc2` (2026-04-29). Verify via `git log c181cc2 -1 OSF_PRE_REGISTRATION.md` that the weight choices were committed BEFORE any Korean fire validation.
+6. **`WEIGHTS_FREEZE.md`** — locked at git commit `c181cc2` (2026-04-29). Verify via `git log c181cc2 -1 WEIGHTS_FREEZE.md` that the weight choices were committed BEFORE any Korean fire validation.
 7. **`REVIEWER_FAQ.md`** — 10 anticipated reviewer questions with prepared answers.
 
 ---

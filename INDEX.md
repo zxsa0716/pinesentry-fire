@@ -1,4 +1,4 @@
-# Master File Index — PineSentry-Fire v1.9
+# Master File Index — PineSentry-Fire
 
 Comprehensive map of every artifact in the repository (and which are
 local-only). Use this to find any file by category.
@@ -18,7 +18,7 @@ local-only). Use this to find any file by category.
 | **`PAPER.md`** | Deep readers | Academic writeup §1–§7 + 21 numbered results |
 | **`TABLE.md`** | Deep readers | All 22 numerical tables in one place |
 | **`V41_AUDIT.md`** | Deep readers | Original v4.1 design ↔ current state mapping |
-| **`OSF_PRE_REGISTRATION.md`** | Verifiers | Weights + species priors locked at git `c181cc2` |
+| **`WEIGHTS_FREEZE.md`** | Verifiers | Weights + species priors locked at git `c181cc2` |
 | **`CHANGELOG.md`** | Versioning | v1.0 → v1.9 history |
 | **`STATUS.md`** | Auto-generated | Data inventory (765 files / 156 GB) |
 | **`HUGGINGFACE_SPACES.md`** | Author / deployer | Step-by-step HF Space deployment guide |

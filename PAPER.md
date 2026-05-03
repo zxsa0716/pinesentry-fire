@@ -1,7 +1,7 @@
 # PineSentry-Fire — Pre-Fire Pyrophilic Hydraulic Stress Index from EMIT Imaging Spectrometry
 
 **Heedo Choi**, Kookmin University · zxsa0716@kookmin.ac.kr
-*Tanager Open Data Competition 2026 submission · v1.5 · 2026-04-30*
+*Tanager Open Data Competition 2026 submission*
 
 ---
 
@@ -504,7 +504,7 @@ All code, data inventory, and one-click Colab + HuggingFace Spaces
 configurations are at https://github.com/zxsa0716/pinesentry-fire under
 CC-BY-4.0. The full pipeline runs in 60–90 minutes on a free Colab
 instance. The OSF pre-registration document is locked at commit
-`c181cc2` (2026-04-29) and will be posted to osf.io with a permanent
+`c181cc2` (2026-04-29) and will be posted to GitHub commit history with a permanent
 DOI before the 8/31 submission.
 
 ## 7 — Acknowledgements

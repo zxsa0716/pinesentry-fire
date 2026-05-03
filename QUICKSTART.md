@@ -109,7 +109,7 @@ pinesentry-fire/
 ├── PAPER.md                   ← academic writeup (4.1-4.21)
 ├── TABLE.md                   ← 22 numerical tables
 ├── V41_AUDIT.md               ← v4.1 design compliance audit
-├── OSF_PRE_REGISTRATION.md    ← git-timestamp-locked weights
+├── WEIGHTS_FREEZE.md    ← git-timestamp-locked weights
 ├── SUBMISSION.md              ← 8/31 SurveyMonkey form fields
 ├── CHANGELOG.md               ← v1.0 → v1.9 history
 ├── STATUS.md                  ← auto-generated data inventory
@@ -177,7 +177,7 @@ streamlit, torch (cpu-only OK), imageio
 To verify the weights were committed BEFORE any cross-validation result:
 
 ```bash
-git log c181cc2 -1 OSF_PRE_REGISTRATION.md
+git log c181cc2 -1 WEIGHTS_FREEZE.md
 # Author: Heedo Choi
 # Date:   2026-04-29
 #
@@ -186,10 +186,10 @@ git log c181cc2 -1 OSF_PRE_REGISTRATION.md
 git log v1.0..v1.9 --oneline | tail   # all subsequent commits
 ```
 
-The `OSF_PRE_REGISTRATION.md` document specifies HSI v1 weights
+The `WEIGHTS_FREEZE.md` document specifies HSI v1 weights
 `(0.40 / 0.20 / 0.30 / 0.10)` and the species pyrophilic priors
 *before* the Sancheong / Gangneung / Uljin / Palisades cross-validation
-results were ever computed. OSF.io DOI registration is a pending
+results were ever computed. Git commit hash registration is a pending
 administrative step; the substantive evidence is the public Git
 commit hash + timestamp.
 

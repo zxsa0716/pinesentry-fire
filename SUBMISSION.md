@@ -1,6 +1,6 @@
 # PineSentry-Fire — Tanager Open Data Competition 2026 Submission Package
 
-**Status**: v1.5 frozen 2026-04-30 (D-123, 123 days before deadline 2026-08-31)
+**Status**: submission package, deadline 2026-08-31
 **GitHub**: https://github.com/zxsa0716/pinesentry-fire
 **License**: CC-BY-4.0
 **Author**: Heedo Choi · zxsa0716@kookmin.ac.kr · Kookmin University
@@ -306,11 +306,11 @@ Or run the 1-click `colab.ipynb` / `notebooks/08_one_click_reproduction.md`.
 
 ## Pre-registration
 
-`OSF_PRE_REGISTRATION.md` locks v1 weights at commit `c181cc2` (2026-04-29).
+`WEIGHTS_FREEZE.md` locks v1 weights at commit `c181cc2` (2026-04-29).
 Subsequent commits add evaluation infrastructure but do NOT alter the model.
 
 To-do before submission (5 weeks before 8/31):
-- [ ] Post `OSF_PRE_REGISTRATION.md` on osf.io and replace placeholder DOI in
+- [ ] Post `WEIGHTS_FREEZE.md` on GitHub commit history and replace placeholder DOI in
   CITATION.cff.
 - [ ] Update Q6 narrative with final v1.5 numbers if PROSPECT v2 lands in
   time (TRY DB Korean species delivery expected ~6 weeks from 2026-04-28).

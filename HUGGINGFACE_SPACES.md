@@ -116,7 +116,7 @@ Project Materials Link:
 
 GitHub:                  https://github.com/zxsa0716/pinesentry-fire
 HuggingFace Spaces (live): https://huggingface.co/spaces/<your-username>/pinesentry-fire
-OSF DOI:                 (after Phase 1 step 1 in SUBMISSION_CHECKLIST.md)
+public Git commit hash:                 (after Phase 1 step 1 in SUBMISSION_CHECKLIST.md)
 ```
 
 ---

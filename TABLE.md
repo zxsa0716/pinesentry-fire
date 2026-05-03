@@ -272,7 +272,7 @@ incompatibility), DOFA + LoRA full pretraining (deferred to v2.0).
 | HSI v0 / v1 / v1.5 / v2 / v2.5 outputs + features + sensitivity + Hero figures | 50+ | 410 MB |
 | **Total** | **732** | **156 GB** |
 
-OSF pre-registration: `OSF_PRE_REGISTRATION.md` locked at commit `c181cc2`
+OSF pre-registration: `WEIGHTS_FREEZE.md` locked at commit `c181cc2`
 (2026-04-29). Subsequent commits (94df1dc and beyond) add evaluation
 infrastructure without altering the model.
 

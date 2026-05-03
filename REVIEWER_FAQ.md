@@ -1,4 +1,4 @@
-# Reviewer FAQ — PineSentry-Fire v1.7
+# Reviewer FAQ — PineSentry-Fire
 
 Anticipated questions a Tanager-competition reviewer might raise,
 with prepared answers grounded in committed results.
@@ -23,7 +23,7 @@ Tables 1 + 2.
 1. **git-timestamp-locked pre-registration**: weights (0.40 / 0.20 / 0.30 / 0.10) are
    committed at git hash `c181cc2` on 2026-04-29 *before* any Korean
    fire validation. Verify via:
-   `git log c181cc2 -1 OSF_PRE_REGISTRATION.md`
+   `git log c181cc2 -1 WEIGHTS_FREEZE.md`
 2. **Cross-site weight transfer** (`TABLE.md` Table 9): if we *did*
    fit weights on Uiseong via logistic regression, we get
    (0.68/0/0/0.32). Applying these *Uiseong-fit* weights to Sancheong

@@ -50,7 +50,7 @@ st.set_page_config(
 # ────────────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.title("🌲🔥 PineSentry-Fire")
-    st.caption("Tanager 2026 · v1.9")
+    st.caption("Tanager 2026 submission")
     st.markdown(
         "Pre-fire **Hydraulic Stress Index** for Korean *Pinus densiflora* + "
         "cross-continent generalization to LA chaparral."
@@ -336,7 +336,7 @@ with tab_repro:
     st.header("Reproducibility")
     st.markdown("""
 - **GitHub**: https://github.com/zxsa0716/pinesentry-fire (commit-frozen at submission)
-- **Pre-registration**: `OSF_PRE_REGISTRATION.md` git-locked at commit `c181cc2`
+- **Pre-registration**: `WEIGHTS_FREEZE.md` git-locked at commit `c181cc2`
 - **Colab**: open `colab.ipynb` — 1-click pipeline + view all examples
 - **Local install**: `pip install -r requirements.txt`; `PYTHONPATH=src pytest tests/` → 9/9
 - **License**: CC-BY-4.0 on code + data products

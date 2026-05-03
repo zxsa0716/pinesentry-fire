@@ -1,0 +1,52 @@
+{
+  "uiseong": {
+    "n_burn": 25804,
+    "n_unburn_total": 319923,
+    "n_unburn_kept_per_run": 129020,
+    "auc_all_pixels": 0.7466822611632601,
+    "auc_case_control_1to5_mean": 0.7466332356154036,
+    "auc_case_control_1to5_std": 0.000589077103803024,
+    "auc_case_control_q025": 0.745594974100604,
+    "auc_case_control_q975": 0.7476794686389061
+  },
+  "sancheong": {
+    "n_burn": 252,
+    "n_unburn_total": 9945,
+    "n_unburn_kept_per_run": 1260,
+    "auc_all_pixels": 0.647081567669803,
+    "auc_case_control_1to5_mean": 0.646765195893172,
+    "auc_case_control_1to5_std": 0.007032960668047797,
+    "auc_case_control_q025": 0.6316733197908793,
+    "auc_case_control_q975": 0.6605200066137566
+  },
+  "gangneung": {
+    "n_burn": 13944,
+    "n_unburn_total": 2483500,
+    "n_unburn_kept_per_run": 69720,
+    "auc_all_pixels": 0.5486523913682282,
+    "auc_case_control_1to5_mean": 0.5485168729225978,
+    "auc_case_control_1to5_std": 0.0009064875752776341,
+    "auc_case_control_q025": 0.5467987825898917,
+    "auc_case_control_q975": 0.5504941270105624
+  },
+  "uljin": {
+    "n_burn": 495890,
+    "n_unburn_total": 3291745,
+    "n_unburn_kept_per_run": 2479450,
+    "auc_all_pixels": 0.5446484963578189,
+    "auc_case_control_1to5_mean": 0.5446491191516669,
+    "auc_case_control_1to5_std": 0.0001091432705361961,
+    "auc_case_control_q025": 0.544438692320999,
+    "auc_case_control_q975": 0.5448465790354418
+  },
+  "palisades": {
+    "n_burn": 672894,
+    "n_unburn_total": 1628657,
+    "n_unburn_kept_per_run": 1628657,
+    "auc_all_pixels": 0.6780133189854535,
+    "auc_case_control_1to5_mean": 0.6780133189854531,
+    "auc_case_control_1to5_std": 3.3306690738754696e-16,
+    "auc_case_control_q025": 0.6780133189854535,
+    "auc_case_control_q975": 0.6780133189854535
+  }
+}

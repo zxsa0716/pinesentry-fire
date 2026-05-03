@@ -1,0 +1,22 @@
+{
+  "site": "park_fire_2024",
+  "perimeter_bounds_wgs84": [
+    -122.064077,
+    39.770973,
+    -121.494825,
+    40.394595
+  ],
+  "burned_acres": 430768.0,
+  "burn_area_m2": 2985955882.5715027,
+  "bbox_area_m2": 5749723100.375213,
+  "burn_fraction_in_bbox": 0.5193216839218999,
+  "AUC_HSI_v1": null,
+  "note": "Park Fire S2 + DEM not downloaded \u2014 script reproducible at clone time via download_dem_copernicus.py + download_s2.py with bbox above. The bbox baseline burn fraction shows Park Fire is ~51.9% of its bounding box.",
+  "reproduce_steps": [
+    "python scripts/download_dem_copernicus.py --bbox -122.064077 39.770973 -121.494825 40.394595",
+    "python scripts/download_s2.py --bbox -122.064077 39.770973 -121.494825 40.394595 --year 2024 --month 06",
+    "python scripts/build_feature_stack.py park_fire",
+    "python scripts/build_hsi_v1_s2_fallback.py park_fire",
+    "python scripts/park_fire_2024_validation.py  # re-run to fill AUC"
+  ]
+}

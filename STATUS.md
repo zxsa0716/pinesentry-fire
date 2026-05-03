@@ -1,4 +1,4 @@
-# PineSentry-Fire — STATUS (auto-generated 2026-05-01)
+# PineSentry-Fire — STATUS (auto-generated 2026-05-04)
 
 ## Data inventory (auto-scan)
 

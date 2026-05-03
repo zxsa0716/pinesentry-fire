@@ -1,0 +1,51 @@
+{
+  "site": "Gwangneung Deciduous (GDK)",
+  "tower_id": "FxMt_GDK",
+  "years_used": [
+    2006,
+    2007,
+    2008
+  ],
+  "years": {
+    "2006": {
+      "n_daytime_summer": 1162,
+      "mean_NEE_low_stress_p10": -5.4112548828125,
+      "mean_NEE_high_stress_p90": -4.956028461456299,
+      "delta_NEE_high_minus_low": 0.45522642135620117,
+      "pearson_r_HSI_NEE": 0.0006702238756402967,
+      "pearson_p": 0.9817921904188261,
+      "spearman_r_HSI_NEE": -0.026834439812318218,
+      "spearman_p": 0.36076113924220177,
+      "mw_p_high_gt_low": 0.7318215370178223
+    },
+    "2007": {
+      "n_daytime_summer": 1158,
+      "mean_NEE_low_stress_p10": -4.186788082122803,
+      "mean_NEE_high_stress_p90": -6.790034770965576,
+      "delta_NEE_high_minus_low": -2.6032466888427734,
+      "pearson_r_HSI_NEE": -0.09691054318425078,
+      "pearson_p": 0.0009599097519285902,
+      "spearman_r_HSI_NEE": -0.11299663732399726,
+      "spearman_p": 0.00011648780237562449,
+      "mw_p_high_gt_low": 0.9999992847442627
+    },
+    "2008": {
+      "n_daytime_summer": 1450,
+      "mean_NEE_low_stress_p10": -2.5708277225494385,
+      "mean_NEE_high_stress_p90": -6.178400039672852,
+      "delta_NEE_high_minus_low": -3.607572317123413,
+      "pearson_r_HSI_NEE": -0.21264422722691068,
+      "pearson_p": 2.744843814949613e-16,
+      "spearman_r_HSI_NEE": -0.20708973153012367,
+      "spearman_p": 1.6463483552830168e-15,
+      "mw_p_high_gt_low": 1.0
+    }
+  },
+  "pooled_2004_2008": {
+    "n": 3770,
+    "pearson_r": -0.11722087855301459,
+    "pearson_p": 5.20197815078241e-13,
+    "spearman_r": -0.11899461300771523,
+    "spearman_p": 2.3025382684012097e-13
+  }
+}

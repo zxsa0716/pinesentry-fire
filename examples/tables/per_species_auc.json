@@ -1,0 +1,59 @@
+{
+  "uiseong": {
+    "FRTP_NM": {
+      "Ä§¿±¼ö¸²": {
+        "n_total": 127615,
+        "n_burn": 19225,
+        "auc": 0.5429959627799771,
+        "mean_score_burned": 0.7644105553627014,
+        "mean_score_unburned": 0.7418595552444458
+      },
+      "È°¿±¼ö¸²": {
+        "n_total": 78921,
+        "n_burn": 2219,
+        "auc": 0.5866425465056062,
+        "mean_score_burned": 0.5724202990531921,
+        "mean_score_unburned": 0.5224989056587219
+      },
+      "È¥È¿¸²": {
+        "n_total": 33371,
+        "n_burn": 3861,
+        "auc": 0.5785789934553065,
+        "mean_score_burned": 0.7081432342529297,
+        "mean_score_unburned": 0.6691612601280212
+      },
+      "¹«¸³¸ñÁö/ºñ»ê¸²": {
+        "n_total": 12477,
+        "n_burn": 215,
+        "auc": 0.7191140714553943,
+        "mean_score_burned": 0.2762698233127594,
+        "mean_score_unburned": 0.1857801377773285
+      }
+    }
+  },
+  "sancheong": {
+    "FRTP_NM": {
+      "È°¿±¼ö¸²": {
+        "n_total": 6308,
+        "n_burn": 149,
+        "auc": 0.6769511741969791,
+        "mean_score_burned": 0.38069286942481995,
+        "mean_score_unburned": 0.2970578670501709
+      },
+      "Ä§¿±¼ö¸²": {
+        "n_total": 2358,
+        "n_burn": 28,
+        "auc": 0.6739117106069896,
+        "mean_score_burned": 0.33028680086135864,
+        "mean_score_unburned": 0.23825843632221222
+      },
+      "Á×¸²": {
+        "n_total": 252,
+        "n_burn": 8,
+        "auc": 0.5404713114754099,
+        "mean_score_burned": 0.23573829233646393,
+        "mean_score_unburned": 0.23418845236301422
+      }
+    }
+  }
+}

@@ -4,6 +4,16 @@
 Submission for the [Planet Tanager Open Data Competition 2026](https://learn.planet.com/2026-Tanager-Open-Data-Competition.html).
 
 [![CC-BY-4.0](https://img.shields.io/badge/License-CC--BY--4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/zxsa0716/pinesentry-fire/blob/main/colab.ipynb)
+[![pytest](https://img.shields.io/badge/pytest-9%2F9%20green-brightgreen)](tests/)
+[![git-pre-registration](https://img.shields.io/badge/pre--registration-c181cc2-blue)](OSF_PRE_REGISTRATION.md)
+[![v1.9](https://img.shields.io/badge/version-v1.9-success)](CHANGELOG.md)
+
+> **Quick links**:
+> [📖 EXECUTIVE_SUMMARY](EXECUTIVE_SUMMARY.md) · [⚡ QUICKSTART](QUICKSTART.md) ·
+> [🌐 REPORT.html](REPORT.html) · [📚 PAPER](PAPER.md) · [📊 TABLE](TABLE.md) ·
+> [🧭 REVIEWER_GUIDE](REVIEWER_GUIDE.md) · [❓ REVIEWER_FAQ](REVIEWER_FAQ.md) ·
+> [🗂 INDEX](INDEX.md) · [🎨 examples/](examples/)
 
 ---
 
@@ -35,7 +45,11 @@ training. **HSI v1 uses one direction across all 5 sites.**
 
 ## 📊 Hero result
 
-![Hero](data/hsi/v1/HERO_final.png)
+![9-panel grand hero](examples/figures/01_HERO_GRAND_9panel.png)
+
+![6-panel methods comparison](examples/figures/02_HERO_methods_6panel.png)
+
+![5-site bootstrap ROC envelope](examples/figures/03_HERO_roc_envelope_5site.png)
 
 | Site | dNBR pixels | NDVI | NDMI | NDII | **HSI v1** |
 |---|---:|---:|---:|---:|---:|

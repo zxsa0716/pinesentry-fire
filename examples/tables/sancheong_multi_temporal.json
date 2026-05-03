@@ -1,0 +1,14 @@
+{
+  "perimeter_n_features": 1,
+  "scenes": {
+    "T-1.5mo_2026-02-10": {
+      "n_burn_pixels_in_scene": 13323,
+      "n_unburn_pixels": 2227462,
+      "mean_firerisk_burned": 0.857244074344635,
+      "mean_firerisk_unburned": 0.711043655872345,
+      "delta_burned_minus_unburned": 0.14620041847229004,
+      "mw_u_stat": 20029730816.0,
+      "mw_p": 0.0
+    }
+  }
+}

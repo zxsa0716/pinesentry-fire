@@ -1,0 +1,18 @@
+{
+  "site": "uiseong",
+  "n_samples": 64,
+  "auc_mean": 0.7446071407265489,
+  "auc_std": 0.006155475738027658,
+  "auc_min": 0.7316337136900772,
+  "auc_max": 0.7571427864332452,
+  "auc_median": 0.7441936952491184,
+  "auc_q05": 0.7352026954356861,
+  "auc_q95": 0.7551633625753769,
+  "default_weights": {
+    "pyro": 0.4,
+    "south": 0.2,
+    "firerisk": 0.3,
+    "pine_tx": 0.1
+  },
+  "perturbation_pct": 20
+}

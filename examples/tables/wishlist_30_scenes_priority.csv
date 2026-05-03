@@ -1,0 +1,31 @@
+name,region,lon,lat,atlas_roi,predicted_HSI_v1,user_priority,note
+울진 금강송림,Uljin,129.34,36.989999999999995,uljin,0.7205632328987122,medium,Geumgang pine — fire-impacted 2022
+광릉 가을 단풍 신호,Gwangneung,127.14000000000001,37.79,gwangneung,0.6807826161384583,medium,autumn senescence
+의성 송이주산지 (2025 화재지),Uiseong,128.64,36.440000000000005,uiseong,0.6721144914627075,high,2025 fire epicenter
+한라 동사면 활엽수,Halla,126.68999999999998,33.39,jeju,0.485477089881897,medium,east face deciduous
+한라산 침엽수림,Halla,126.59,33.39,jeju,0.38199496269226074,medium,Abies koreana
+광릉 KoFlux GDK super-site,Gwangneung,127.14000000000001,37.78000000000001,gwangneung,0.3674134612083435,high,KoFlux primary validation
+지리산 천왕봉 침엽수,Jirisan,127.74000000000001,35.339999999999996,sancheong,0.3477340638637543,medium,high pine
+광릉 동학습림 평년 baseline 봄,Gwangneung,127.09,37.739999999999995,gwangneung,,medium,spring baseline
+광릉 활엽수림 N face,Gwangneung,127.09,37.82,gwangneung,,medium,north-face deciduous
+화천 평년 비교,Hwacheon,127.74000000000001,38.089999999999996,gwangneung,,medium,untouched mixed forest
+춘천 호수~숲 경계,Chuncheon,127.74000000000001,37.89,gwangneung,,medium,transitional
+양평 두물머리 활엽수,Yangpyeong,127.43999999999998,37.54,gwangneung,,medium,lowland deciduous
+가평 잣나무림,Gapyeong,127.54,37.89,gwangneung,,medium,Pinus koraiensis ref
+태백산 정상 침엽수림,Taebaek,129.04000000000002,37.14,uljin,,medium,high-elev conifer
+소백산 능선 활엽수림,Sobaek,128.54000000000002,36.940000000000005,uiseong,,medium,ridge mesic
+월악산 송이림,Worak,128.24,36.89,uiseong,,high,Pinus densiflora dense
+속리산 참나무림,Songnisan,127.93999999999998,36.589999999999996,uiseong,,medium,Quercus mongolica
+덕유산 혼효림,Deogyu,127.79,35.89,jirisan,,medium,mixed pine-oak
+강릉 옥계 산불 prone 소나무,Gangneung,128.89,37.690000000000005,gangneung,,medium,fire-prone pine belt
+동해 묵호 송이림,Donghae,129.04000000000002,37.489999999999995,gangneung,,high,coastal pine
+삼척 해안 적송,Samcheok,129.14,37.339999999999996,gangneung,,medium,red pine
+영덕 해안 침엽수,Yeongdeok,129.34,36.339999999999996,uljin,,medium,coastal Pinus thunbergii
+포항 호미곶 곰솔,Pohang,129.54000000000002,36.089999999999996,uljin,,medium,Pinus thunbergii
+봉화 백두대간 송이,Bonghwa,128.69,36.989999999999995,uiseong,,high,songi pine
+영양 송이특별보호림,Yeongyang,129.09,36.690000000000005,uljin,,high,songi protected
+청송 주왕산 송이,Cheongsong,129.19,36.440000000000005,uiseong,,high,Juwangsan pine
+철원 DMZ inland,Cheorwon,127.24000000000001,38.239999999999995,gwangneung,,medium,DMZ pristine
+양구 DMZ pine,Yanggu,127.99000000000001,38.239999999999995,seorak,,medium,DMZ pine
+고성 DMZ coastal,Goseong,128.49,38.440000000000005,seorak,,medium,DMZ coastal
+제주 곶자왈 자생림,Jeju,126.43999999999998,33.339999999999996,jeju,,medium,Gotjawal endemic

@@ -1,0 +1,14 @@
+{
+  "n_pixels": 1500,
+  "n_burn": 750,
+  "n_unburn": 750,
+  "auc_diff_prospect": 0.5,
+  "comparison": {
+    "v0_empirical": 0.697,
+    "v1_full_HSI": 0.747,
+    "v2_MLP_leaf": 0.648,
+    "v2_5_MLP_canopy": 0.608,
+    "v2_7_diff_prospect_leaf": 0.5
+  },
+  "method": "scipy.optimize.minimize L-BFGS-B PROSPECT-D inversion (DiffPROSAIL stand-in via finite-difference gradient)"
+}

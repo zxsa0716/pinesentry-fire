@@ -1,0 +1,14 @@
+{
+  "n_total": 19239,
+  "n_burn": 1843,
+  "n_train": 15391,
+  "n_test": 3848,
+  "scenes_used": 4,
+  "aucs": {
+    "Tanager_full_426b": 0.8781792095995826,
+    "Tanager_VNIR_only": 0.8709162842722253,
+    "Tanager_SWIR_only": 0.8619656852864105,
+    "S2_binned_13b": 0.8370806012386813
+  },
+  "interpretation": "If full > S2_binned, hyperspectral matters. If full ~ SWIR_only, the SWIR is what drives the signal."
+}

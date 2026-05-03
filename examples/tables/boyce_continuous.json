@@ -1,0 +1,27 @@
+{
+  "uiseong": {
+    "boyce_rho": 0.9999999999999999,
+    "n_bins": 10,
+    "n_presence": 25804
+  },
+  "sancheong": {
+    "boyce_rho": 0.942857142857143,
+    "n_bins": 6,
+    "n_presence": 252
+  },
+  "gangneung": {
+    "boyce_rho": -0.2121212121212121,
+    "n_bins": 10,
+    "n_presence": 13944
+  },
+  "uljin": {
+    "boyce_rho": -0.23636363636363633,
+    "n_bins": 10,
+    "n_presence": 495890
+  },
+  "palisades": {
+    "boyce_rho": 0.41818181818181815,
+    "n_bins": 10,
+    "n_presence": 672894
+  }
+}

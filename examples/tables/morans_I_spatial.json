@@ -1,0 +1,59 @@
+{
+  "uiseong": {
+    "burn_label": {
+      "I": 0.4608969997567883,
+      "n_points": 4000,
+      "n_neighbors": 8,
+      "p_perm": 0.01,
+      "perm_I_mean": 0.00014184832096279386,
+      "perm_I_std": 0.00669078339200004
+    },
+    "residual_after_HSI": {
+      "I": 0.4491825179797423,
+      "n_points": 4000,
+      "n_neighbors": 8,
+      "p_perm": 0.01,
+      "perm_I_mean": 0.0005621393193004165,
+      "perm_I_std": 0.0076686145797340705
+    },
+    "logit_slope_b_sx": 0.21713457206890782
+  },
+  "sancheong": {
+    "burn_label": {
+      "I": 0.04707833705150347,
+      "n_points": 4000,
+      "n_neighbors": 8,
+      "p_perm": 0.01,
+      "perm_I_mean": -0.0010127534876535173,
+      "perm_I_std": 0.0067647776602694915
+    },
+    "residual_after_HSI": {
+      "I": 0.045188914059434614,
+      "n_points": 4000,
+      "n_neighbors": 8,
+      "p_perm": 0.01,
+      "perm_I_mean": 0.0012356605989410688,
+      "perm_I_std": 0.006549837908504578
+    },
+    "logit_slope_b_sx": 0.03541235784765364
+  },
+  "palisades": {
+    "burn_label": {
+      "I": 0.9302995015878017,
+      "n_points": 4000,
+      "n_neighbors": 8,
+      "p_perm": 0.01,
+      "perm_I_mean": -0.0005266712153359904,
+      "perm_I_std": 0.007959670926091143
+    },
+    "residual_after_HSI": {
+      "I": 0.8836769233670235,
+      "n_points": 4000,
+      "n_neighbors": 8,
+      "p_perm": 0.01,
+      "perm_I_mean": -0.0004478914706109104,
+      "perm_I_std": 0.006656517315850719
+    },
+    "logit_slope_b_sx": 0.48589595551731446
+  }
+}

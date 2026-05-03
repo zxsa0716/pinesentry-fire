@@ -1,0 +1,16 @@
+{
+  "model": "sklearn MLPClassifier(256,128,64) on 244 good EMIT bands",
+  "auc_random_8020": 0.9162465466361486,
+  "auc_spatial_blocks": [
+    0.3405220785557453,
+    0.25421279110676037
+  ],
+  "auc_spatial_mean": 0.29736743483125283,
+  "auc_spatial_std": 0.04315464372449246,
+  "n_train_random": 19212,
+  "n_test_random": 4788,
+  "comparison": {
+    "hsi_v1_auc": 0.7467,
+    "hsi_v0_auc": 0.697
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "uiseong": {
+    "ap_pr_auc": 0.15251690832912843,
+    "positive_baseline": 0.07463692450980108,
+    "pr_auc_lift_over_baseline": 2.0434511380369162,
+    "n_burned": 25804,
+    "n_unburned": 319923
+  },
+  "sancheong": {
+    "ap_pr_auc": 0.03941125913255931,
+    "positive_baseline": 0.02471315092674316,
+    "pr_auc_lift_over_baseline": 1.5947484498996318,
+    "n_burned": 252,
+    "n_unburned": 9945
+  },
+  "gangneung": {
+    "ap_pr_auc": 0.007788481308568818,
+    "positive_baseline": 0.005583308374482071,
+    "pr_auc_lift_over_baseline": 1.3949581119619436,
+    "n_burned": 13944,
+    "n_unburned": 2483500
+  },
+  "uljin": {
+    "ap_pr_auc": 0.13257505606539283,
+    "positive_baseline": 0.1309233862291377,
+    "pr_auc_lift_over_baseline": 1.0126155447382366,
+    "n_burned": 495890,
+    "n_unburned": 3291745
+  },
+  "palisades": {
+    "ap_pr_auc": 0.3954582107054498,
+    "positive_baseline": 0.29236545268820896,
+    "pr_auc_lift_over_baseline": 1.3526160737164228,
+    "n_burned": 672894,
+    "n_unburned": 1628657
+  }
+}

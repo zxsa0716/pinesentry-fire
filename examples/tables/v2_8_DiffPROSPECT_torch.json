@@ -1,0 +1,16 @@
+{
+  "n_pixels": 1500,
+  "n_burn": 750,
+  "auc_torch_diff_prospect": 0.6832293333333334,
+  "method": "PyTorch differentiable PROSPECT-D-equivalent (Allen plate model approximation), Adam optimizer 80 steps, lr=0.1",
+  "comparison": {
+    "v0_empirical": 0.697,
+    "v1_full_HSI": 0.747,
+    "v2_MLP_leaf": 0.648,
+    "v2_5_MLP_canopy": 0.608,
+    "v2_7_scipy_BFGS": 0.5,
+    "v2_8_torch_autograd": 0.6832293333333334
+  },
+  "loss_initial": 0.06858304888010025,
+  "loss_final": 0.021823065355420113
+}

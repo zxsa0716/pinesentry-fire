@@ -1,0 +1,302 @@
+[
+  {
+    "name": "울진 금강송림",
+    "region": "Uljin",
+    "lon": 129.34,
+    "lat": 36.989999999999995,
+    "atlas_roi": "uljin",
+    "predicted_HSI_v1": 0.7205632328987122,
+    "user_priority": "medium",
+    "note": "Geumgang pine — fire-impacted 2022"
+  },
+  {
+    "name": "광릉 가을 단풍 신호",
+    "region": "Gwangneung",
+    "lon": 127.14000000000001,
+    "lat": 37.79,
+    "atlas_roi": "gwangneung",
+    "predicted_HSI_v1": 0.6807826161384583,
+    "user_priority": "medium",
+    "note": "autumn senescence"
+  },
+  {
+    "name": "의성 송이주산지 (2025 화재지)",
+    "region": "Uiseong",
+    "lon": 128.64,
+    "lat": 36.440000000000005,
+    "atlas_roi": "uiseong",
+    "predicted_HSI_v1": 0.6721144914627075,
+    "user_priority": "high",
+    "note": "2025 fire epicenter"
+  },
+  {
+    "name": "한라 동사면 활엽수",
+    "region": "Halla",
+    "lon": 126.68999999999998,
+    "lat": 33.39,
+    "atlas_roi": "jeju",
+    "predicted_HSI_v1": 0.485477089881897,
+    "user_priority": "medium",
+    "note": "east face deciduous"
+  },
+  {
+    "name": "한라산 침엽수림",
+    "region": "Halla",
+    "lon": 126.59,
+    "lat": 33.39,
+    "atlas_roi": "jeju",
+    "predicted_HSI_v1": 0.38199496269226074,
+    "user_priority": "medium",
+    "note": "Abies koreana"
+  },
+  {
+    "name": "광릉 KoFlux GDK super-site",
+    "region": "Gwangneung",
+    "lon": 127.14000000000001,
+    "lat": 37.78000000000001,
+    "atlas_roi": "gwangneung",
+    "predicted_HSI_v1": 0.3674134612083435,
+    "user_priority": "high",
+    "note": "KoFlux primary validation"
+  },
+  {
+    "name": "지리산 천왕봉 침엽수",
+    "region": "Jirisan",
+    "lon": 127.74000000000001,
+    "lat": 35.339999999999996,
+    "atlas_roi": "sancheong",
+    "predicted_HSI_v1": 0.3477340638637543,
+    "user_priority": "medium",
+    "note": "high pine"
+  },
+  {
+    "name": "광릉 동학습림 평년 baseline 봄",
+    "region": "Gwangneung",
+    "lon": 127.09,
+    "lat": 37.739999999999995,
+    "atlas_roi": "gwangneung",
+    "predicted_HSI_v1": null,
+    "user_priority": "medium",
+    "note": "spring baseline"
+  },
+  {
+    "name": "광릉 활엽수림 N face",
+    "region": "Gwangneung",
+    "lon": 127.09,
+    "lat": 37.82,
+    "atlas_roi": "gwangneung",
+    "predicted_HSI_v1": null,
+    "user_priority": "medium",
+    "note": "north-face deciduous"
+  },
+  {
+    "name": "화천 평년 비교",
+    "region": "Hwacheon",
+    "lon": 127.74000000000001,
+    "lat": 38.089999999999996,
+    "atlas_roi": "gwangneung",
+    "predicted_HSI_v1": null,
+    "user_priority": "medium",
+    "note": "untouched mixed forest"
+  },
+  {
+    "name": "춘천 호수~숲 경계",
+    "region": "Chuncheon",
+    "lon": 127.74000000000001,
+    "lat": 37.89,
+    "atlas_roi": "gwangneung",
+    "predicted_HSI_v1": null,
+    "user_priority": "medium",
+    "note": "transitional"
+  },
+  {
+    "name": "양평 두물머리 활엽수",
+    "region": "Yangpyeong",
+    "lon": 127.43999999999998,
+    "lat": 37.54,
+    "atlas_roi": "gwangneung",
+    "predicted_HSI_v1": null,
+    "user_priority": "medium",
+    "note": "lowland deciduous"
+  },
+  {
+    "name": "가평 잣나무림",
+    "region": "Gapyeong",
+    "lon": 127.54,
+    "lat": 37.89,
+    "atlas_roi": "gwangneung",
+    "predicted_HSI_v1": null,
+    "user_priority": "medium",
+    "note": "Pinus koraiensis ref"
+  },
+  {
+    "name": "태백산 정상 침엽수림",
+    "region": "Taebaek",
+    "lon": 129.04000000000002,
+    "lat": 37.14,
+    "atlas_roi": "uljin",
+    "predicted_HSI_v1": null,
+    "user_priority": "medium",
+    "note": "high-elev conifer"
+  },
+  {
+    "name": "소백산 능선 활엽수림",
+    "region": "Sobaek",
+    "lon": 128.54000000000002,
+    "lat": 36.940000000000005,
+    "atlas_roi": "uiseong",
+    "predicted_HSI_v1": null,
+    "user_priority": "medium",
+    "note": "ridge mesic"
+  },
+  {
+    "name": "월악산 송이림",
+    "region": "Worak",
+    "lon": 128.24,
+    "lat": 36.89,
+    "atlas_roi": "uiseong",
+    "predicted_HSI_v1": null,
+    "user_priority": "high",
+    "note": "Pinus densiflora dense"
+  },
+  {
+    "name": "속리산 참나무림",
+    "region": "Songnisan",
+    "lon": 127.93999999999998,
+    "lat": 36.589999999999996,
+    "atlas_roi": "uiseong",
+    "predicted_HSI_v1": null,
+    "user_priority": "medium",
+    "note": "Quercus mongolica"
+  },
+  {
+    "name": "덕유산 혼효림",
+    "region": "Deogyu",
+    "lon": 127.79,
+    "lat": 35.89,
+    "atlas_roi": "jirisan",
+    "predicted_HSI_v1": null,
+    "user_priority": "medium",
+    "note": "mixed pine-oak"
+  },
+  {
+    "name": "강릉 옥계 산불 prone 소나무",
+    "region": "Gangneung",
+    "lon": 128.89,
+    "lat": 37.690000000000005,
+    "atlas_roi": "gangneung",
+    "predicted_HSI_v1": null,
+    "user_priority": "medium",
+    "note": "fire-prone pine belt"
+  },
+  {
+    "name": "동해 묵호 송이림",
+    "region": "Donghae",
+    "lon": 129.04000000000002,
+    "lat": 37.489999999999995,
+    "atlas_roi": "gangneung",
+    "predicted_HSI_v1": null,
+    "user_priority": "high",
+    "note": "coastal pine"
+  },
+  {
+    "name": "삼척 해안 적송",
+    "region": "Samcheok",
+    "lon": 129.14,
+    "lat": 37.339999999999996,
+    "atlas_roi": "gangneung",
+    "predicted_HSI_v1": null,
+    "user_priority": "medium",
+    "note": "red pine"
+  },
+  {
+    "name": "영덕 해안 침엽수",
+    "region": "Yeongdeok",
+    "lon": 129.34,
+    "lat": 36.339999999999996,
+    "atlas_roi": "uljin",
+    "predicted_HSI_v1": null,
+    "user_priority": "medium",
+    "note": "coastal Pinus thunbergii"
+  },
+  {
+    "name": "포항 호미곶 곰솔",
+    "region": "Pohang",
+    "lon": 129.54000000000002,
+    "lat": 36.089999999999996,
+    "atlas_roi": "uljin",
+    "predicted_HSI_v1": null,
+    "user_priority": "medium",
+    "note": "Pinus thunbergii"
+  },
+  {
+    "name": "봉화 백두대간 송이",
+    "region": "Bonghwa",
+    "lon": 128.69,
+    "lat": 36.989999999999995,
+    "atlas_roi": "uiseong",
+    "predicted_HSI_v1": null,
+    "user_priority": "high",
+    "note": "songi pine"
+  },
+  {
+    "name": "영양 송이특별보호림",
+    "region": "Yeongyang",
+    "lon": 129.09,
+    "lat": 36.690000000000005,
+    "atlas_roi": "uljin",
+    "predicted_HSI_v1": null,
+    "user_priority": "high",
+    "note": "songi protected"
+  },
+  {
+    "name": "청송 주왕산 송이",
+    "region": "Cheongsong",
+    "lon": 129.19,
+    "lat": 36.440000000000005,
+    "atlas_roi": "uiseong",
+    "predicted_HSI_v1": null,
+    "user_priority": "high",
+    "note": "Juwangsan pine"
+  },
+  {
+    "name": "철원 DMZ inland",
+    "region": "Cheorwon",
+    "lon": 127.24000000000001,
+    "lat": 38.239999999999995,
+    "atlas_roi": "gwangneung",
+    "predicted_HSI_v1": null,
+    "user_priority": "medium",
+    "note": "DMZ pristine"
+  },
+  {
+    "name": "양구 DMZ pine",
+    "region": "Yanggu",
+    "lon": 127.99000000000001,
+    "lat": 38.239999999999995,
+    "atlas_roi": "seorak",
+    "predicted_HSI_v1": null,
+    "user_priority": "medium",
+    "note": "DMZ pine"
+  },
+  {
+    "name": "고성 DMZ coastal",
+    "region": "Goseong",
+    "lon": 128.49,
+    "lat": 38.440000000000005,
+    "atlas_roi": "seorak",
+    "predicted_HSI_v1": null,
+    "user_priority": "medium",
+    "note": "DMZ coastal"
+  },
+  {
+    "name": "제주 곶자왈 자생림",
+    "region": "Jeju",
+    "lon": 126.43999999999998,
+    "lat": 33.339999999999996,
+    "atlas_roi": "jeju",
+    "predicted_HSI_v1": null,
+    "user_priority": "medium",
+    "note": "Gotjawal endemic"
+  }
+]

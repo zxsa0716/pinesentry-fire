@@ -1,0 +1,42 @@
+{
+  "uiseong": {
+    "observed_auc": 0.7479237980000001,
+    "n_perm": 1000,
+    "null_mean": 0.500160276889801,
+    "null_std": 0.004396563395857811,
+    "p_value": 0.0,
+    "p_value_text": "< 1/1000"
+  },
+  "sancheong": {
+    "observed_auc": 0.647081567669803,
+    "n_perm": 1000,
+    "null_mean": 0.5001333951950073,
+    "null_std": 0.01790851540863514,
+    "p_value": 0.0,
+    "p_value_text": "< 1/1000"
+  },
+  "gangneung": {
+    "observed_auc": 0.5472592999999999,
+    "n_perm": 1000,
+    "null_mean": 0.499941885471344,
+    "null_std": 0.0043959771282970905,
+    "p_value": 0.0,
+    "p_value_text": "< 1/1000"
+  },
+  "uljin": {
+    "observed_auc": 0.5441701120000001,
+    "n_perm": 1000,
+    "null_mean": 0.5001471042633057,
+    "null_std": 0.004343577194958925,
+    "p_value": 0.0,
+    "p_value_text": "< 1/1000"
+  },
+  "palisades": {
+    "observed_auc": 0.678165754,
+    "n_perm": 1000,
+    "null_mean": 0.5001313090324402,
+    "null_std": 0.00438311230391264,
+    "p_value": 0.0,
+    "p_value_text": "< 1/1000"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "site": "sancheong",
+  "n_samples": 128,
+  "auc_mean": 0.6483737222631217,
+  "auc_std": 0.025171409335949625,
+  "auc_min": 0.5827439807831964,
+  "auc_max": 0.6894435266984286,
+  "auc_q05": 0.5970359596830184,
+  "auc_q95": 0.6827232915958406,
+  "default_weights": {
+    "pyro": 0.4,
+    "south": 0.2,
+    "firerisk": 0.3,
+    "pine_tx": 0.1
+  },
+  "perturbation_pct": 50
+}

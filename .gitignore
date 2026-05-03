@@ -10,6 +10,11 @@ data/
 *.tiff
 !notebooks/figures/*.tif
 
+# But DO commit small example outputs that demonstrate the pipeline
+# (these are kept tiny so the repo stays under 50 MB)
+!examples/
+!examples/**
+
 # ML artifacts
 checkpoints/
 runs/

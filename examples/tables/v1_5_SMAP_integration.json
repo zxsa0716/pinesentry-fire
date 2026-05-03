@@ -1,0 +1,14 @@
+{
+  "uiseong": {
+    "auc_HSI_v1": 0.7466822611632601,
+    "auc_SMAP_RZSM_dryness_only": 0.5995281570363792,
+    "auc_HSI_v1_5_combined": 0.7463014224135073,
+    "delta_combined_minus_v1": -0.00038083874975280985
+  },
+  "sancheong": {
+    "auc_HSI_v1": 0.647081567669803,
+    "auc_SMAP_RZSM_dryness_only": 0.6332939487426882,
+    "auc_HSI_v1_5_combined": 0.6487189462679659,
+    "delta_combined_minus_v1": 0.0016373785981629307
+  }
+}

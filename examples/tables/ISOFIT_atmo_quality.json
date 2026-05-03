@@ -1,0 +1,58 @@
+{
+  "uiseong": {
+    "per_band": {
+      "O2A_760": {
+        "wavelength_nm": 760.5963134765625,
+        "threshold_R": 0.4,
+        "n_high": 308,
+        "n_valid": 1589760,
+        "fraction_flagged": 0.00019373993558776168
+      },
+      "H2O_940": {
+        "wavelength_nm": 939.6787719726562,
+        "threshold_R": 0.55,
+        "n_high": 125,
+        "n_valid": 1589760,
+        "fraction_flagged": 7.862822061191626e-05
+      },
+      "H2O_1140": {
+        "wavelength_nm": 1141.1129150390625,
+        "threshold_R": 0.5,
+        "n_high": 393,
+        "n_valid": 1589760,
+        "fraction_flagged": 0.00024720712560386476
+      }
+    },
+    "fraction_flagged_any": 0.0001444319270107702,
+    "n_pixels_ortho": 4500390,
+    "out_tif": "data\\hsi\\v1\\uiseong_atmo_flag.tif"
+  },
+  "sancheong": {
+    "per_band": {
+      "O2A_760": {
+        "wavelength_nm": 760.4486083984375,
+        "threshold_R": 0.4,
+        "n_high": 439648,
+        "n_valid": 3100032,
+        "fraction_flagged": 0.14182047153061647
+      },
+      "H2O_940": {
+        "wavelength_nm": 939.5310668945312,
+        "threshold_R": 0.55,
+        "n_high": 141978,
+        "n_valid": 3100032,
+        "fraction_flagged": 0.04579888207605599
+      },
+      "H2O_1140": {
+        "wavelength_nm": 1140.9652099609375,
+        "threshold_R": 0.5,
+        "n_high": 282589,
+        "n_valid": 3100032,
+        "fraction_flagged": 0.09115680096205458
+      }
+    },
+    "fraction_flagged_any": 0.06428106092857051,
+    "n_pixels_ortho": 9922176,
+    "out_tif": "data\\hsi\\v1\\sancheong_atmo_flag.tif"
+  }
+}

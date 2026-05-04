@@ -11,7 +11,7 @@ from datetime import date
 from pathlib import Path
 
 DATA = Path("data")
-OUT = Path("STATUS.md")
+OUT = Path("docs/STATUS.md")
 
 
 def dir_summary(p: Path) -> tuple[int, float]:

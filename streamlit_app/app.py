@@ -336,14 +336,14 @@ with tab_repro:
     st.header("Reproducibility")
     st.markdown("""
 - **GitHub**: https://github.com/zxsa0716/pinesentry-fire (commit-frozen at submission)
-- **Pre-registration**: `WEIGHTS_FREEZE.md` git-locked at commit `c181cc2`
+- **Pre-registration**: `docs/WEIGHTS_FREEZE.md` git-locked at commit `c181cc2`
 - **Colab**: open `colab.ipynb` — 1-click pipeline + view all examples
 - **Local install**: `pip install -r requirements.txt`; `PYTHONPATH=src pytest tests/` → 9/9
 - **License**: CC-BY-4.0 on code + data products
-- **HuggingFace Spaces deployment**: see `HUGGINGFACE_SPACES.md` for steps
+- **HuggingFace Spaces deployment**: see `docs/HUGGINGFACE_SPACES.md` for steps
 
 Raw EMIT and Sentinel-2 are obtained via NASA earthaccess + Element84 STAC.
 임상도 1:5,000 from data.go.kr (Korean Forest Service product 3045619).
 """)
     st.markdown("---")
-    st.markdown("**Reading guide for reviewers** — see `REVIEWER_GUIDE.md` for 5/15/full reading paths.")
+    st.markdown("**Reading guide for reviewers** — see `docs/REVIEWER_GUIDE.md` for 5/15/full reading paths.")

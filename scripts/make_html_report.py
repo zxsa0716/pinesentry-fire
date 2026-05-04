@@ -8,7 +8,7 @@ import base64
 import json
 from pathlib import Path
 
-OUT = Path("REPORT.html")
+OUT = Path("reports/REPORT.html")
 
 
 def img_b64(p: Path) -> str:

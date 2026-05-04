@@ -26,10 +26,10 @@ streamlit app and the colab notebook work without re-running the pipeline.
 | Action | Where |
 |---|---|
 | 📖 Read 1-page brief | [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md) |
-| 🎨 See the 9-panel hero | [`examples/figures/01_HERO_GRAND_9panel.png`](examples/figures/01_HERO_GRAND_9panel.png) |
+| 🎨 See the 9-panel hero | [`examples/figures/01_HERO_GRAND_9panel.png`](../examples/figures/01_HERO_GRAND_9panel.png) |
 | 📊 Browse all 22 result tables | [`TABLE.md`](TABLE.md) |
 | 🌐 Open the browser dashboard | Open [`REPORT.html`](REPORT.html) in any browser |
-| 🎬 Watch pre-fire signal animation | [`examples/figures/16_sancheong_temporal_T-1.5mo_animation.gif`](examples/figures/16_sancheong_temporal_T-1.5mo_animation.gif) |
+| 🎬 Watch pre-fire signal animation | [`examples/figures/16_sancheong_temporal_T-1.5mo_animation.gif`](../examples/figures/16_sancheong_temporal_T-1.5mo_animation.gif) |
 | ❓ Read FAQ | [`REVIEWER_FAQ.md`](REVIEWER_FAQ.md) |
 
 ---

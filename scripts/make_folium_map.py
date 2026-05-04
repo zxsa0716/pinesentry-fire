@@ -12,7 +12,7 @@ from pathlib import Path
 import folium
 import geopandas as gpd
 
-OUT = Path("REPORT_MAP.html")
+OUT = Path("reports/REPORT_MAP.html")
 
 SITES = [
     ("uiseong",   (36.45, 128.70),  "data/fire_perimeter/synth_uiseong_dnbr.gpkg",

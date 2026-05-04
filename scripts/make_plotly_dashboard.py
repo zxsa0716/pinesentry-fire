@@ -17,7 +17,7 @@ import numpy as np
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-OUT = Path("REPORT_INTERACTIVE.html")
+OUT = Path("reports/REPORT_INTERACTIVE.html")
 
 
 def load(p):

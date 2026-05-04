@@ -55,7 +55,7 @@ local-only). Use this to find any file by category.
 | 13 | `13_uiseong_eval.png` | Uiseong distribution + ROC + lift |
 | 14 | `14_sancheong_eval.png` | Sancheong distribution + ROC + lift |
 | 15 | `15_palisades_eval.png` | Palisades distribution + ROC + lift |
-| 16 | `16_sancheong_temporal_T-1.5mo_animation.gif` | 3-frame multi-temporal pre-fire signal animation |
+| 16 | `16_sancheong_temporal_animation.gif` | 3-frame multi-temporal pre-fire signal animation |
 
 ---
 

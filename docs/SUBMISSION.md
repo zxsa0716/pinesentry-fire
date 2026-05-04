@@ -230,10 +230,10 @@ AUC, confirming the result is not driven by spatial autocorrelation.
 | MOD13Q1 NDVI 16-day Korea 2020-2025 | 240 | 5.8 GB |
 | SMAP L4 root-zone soil moisture Feb-Apr 2025 | 30 | 4.2 GB |
 | MTBS US burn DB + NIFC Palisades 2025 perimeter | 8 | 555 MB |
-| 산림청 임상도 1:5,000 (8 ROIs, 161K polygons) | 8 | 738 MB |
+| Korean Forest Service 1:5,000 forest stand map (8 ROIs, 161K polygons) | 8 | 738 MB |
 | dNBR perimeters (4 Korean fires) | 9 | 116 MB |
 | COP-DEM 30m + ESA WorldCover 10m (12 ROIs) | 38 | 690 MB |
-| MODIS Active Fire MOD14A1 + AsiaFlux GDK + NEON + 산림청 통계 | 80+ | 60 MB |
+| MODIS Active Fire MOD14A1 + AsiaFlux GDK + NEON + Korean Forest Service (산림청) 통계 | 80+ | 60 MB |
 | TRY DB public-only + species priors | 4 | 712 KB |
 | Atlas (8 ROI HSI v1 maps + montage) | 17 | 280 MB |
 | HSI v0/v1 outputs + features + sensitivity + Hero figures | 40+ | 380 MB |
@@ -278,7 +278,7 @@ Or run the 1-click `colab.ipynb` / `notebooks/08_one_click_reproduction.md`.
    sites, S2 (13 bands, broadband) gives 0.54-0.55. Tanager 5 nm sampling
    would close the remaining gap to v2 PROSPECT-D inversion.
 
-4. **Korean Forest Service 임상도 1:5,000 is the unsung hero**: 161K
+4. **Korean Forest Service 1:5,000 forest stand map (임상도) is the unsung hero**: 161K
    polygons across 8 ROIs convert species + age + density into a per-pixel
    P50 raster directly usable for HSM computation. Without it, the
    pyrophilic factor cannot be spatialized and v1 collapses to v0 AUC.

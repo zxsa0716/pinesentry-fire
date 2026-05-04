@@ -98,16 +98,16 @@ add to v1 (Tanager-era US Park Fire data exists; we did not include
 it in the v1 evaluation to keep the git-timestamp-locked pre-registration tight on
 Korean fires).
 
-## Q7. "Korean Forest Service 1:5,000 임상도 — is it really worth
+## Q7. "Korean Forest Service 1:5,000 forest stand map (임상도) — is it really worth
 that 0.10 AUC bump?"
 
 **Answer**: A1 leave-one-out (`TABLE.md` Table 7): removing the
 pyrophilic component drops Uiseong AUC by 0.108 — the *single largest*
-component contribution. The 임상도 layer (3.41 M nationwide polygons,
+component contribution. The forest stand map (임상도) layer (3.41 M nationwide polygons,
 161K in our 8 ROIs) gives per-pixel species + age + density that no
 satellite-derived land-cover product matches. ESA WorldCover 10 m gets
 us "Tree" / "Shrub" but not "Pinus densiflora" vs "Quercus mongolica".
-The 임상도 is the difference between a 0.64 and a 0.75 AUC system,
+The forest stand map (임상도) is the difference between a 0.64 and a 0.75 AUC system,
 and it was unsung in prior literature.
 
 ## Q8. "What about deep learning? DOFA, transformers, foundation models?"

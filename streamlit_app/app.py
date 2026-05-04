@@ -113,7 +113,7 @@ species data + topography predict **where the next pine fire will ignite**,
 ### Method (one paragraph)
 Per-pixel Hydraulic Stress Index as a fixed convex combination of
 **(i)** species pyrophilic factor from Korean Forest Service 1:5,000
-임상도 (3.41 M polygons), **(ii)** south-facing slope from COP-DEM 30 m,
+forest stand map (임상도) (3.41 M polygons), **(ii)** south-facing slope from COP-DEM 30 m,
 **(iii)** EMIT 285-band SWIR firerisk_v0 (NDII / NDVI / red-edge senescence),
 and **(iv)** species × terrain interaction.
 Weights `(0.40 / 0.20 / 0.30 / 0.10)` are **pre-registered at public git
@@ -125,7 +125,7 @@ weights** and a 9-test statistical battery.
 1. **Git-timestamp-locked pre-registration** on weights — no other
    submission can demonstrate "we did not tune to test data" with a
    public commit hash. Verify via `git log c181cc2 -1`.
-2. **Korean Forest Service 임상도 1:5,000** (3.41 M polygons).
+2. **Korean Forest Service 1:5,000 forest stand map (임상도)** (3.41 M polygons).
    Removing this layer drops Uiseong AUC by 0.108 — largest single
    component contribution.
 3. **Cross-continent generalization** — Korean conifer-tuned weights
@@ -203,7 +203,7 @@ within each scene to make the index sensor-agnostic.
 
 | Component | Source | Rationale |
 |---|---|---|
-| `pyrophilic` | Korean Forest Service 1:5,000 임상도 (FRTP_NM) | 소나무=1.0, 잣나무=0.85, oak=0.5, mesic broadleaf=0.2, non-forest=0 |
+| `pyrophilic` | Korean Forest Service 1:5,000 forest stand map (임상도) (FRTP_NM) | 소나무=1.0, 잣나무=0.85, oak=0.5, mesic broadleaf=0.2, non-forest=0 |
 | `south_facing` | COP-DEM 30 m aspect | cos(aspect − 180°), thresholded |
 | `firerisk_v0` | EMIT 285b NDII + NDVI + red-edge senescence | Empirical proxy beating PROSPECT-D inversion at this task |
 | `pine_terrain` | (pyrophilic × south_facing) | Captures species-on-aspect effect |
@@ -310,7 +310,7 @@ with tab_temporal:
 At 2026-02-10 (T−1.5 mo), mean firerisk_v0 = 0.857 inside the burn polygon
 vs 0.711 outside (Δ = +0.146, MW p ≈ 0, n_burn = 13,323 pixels).
 """)
-    gif_path = EX_FIG / "16_sancheong_temporal_T-1.5mo_animation.gif"
+    gif_path = EX_FIG / "16_sancheong_temporal_animation.gif"
     if gif_path.exists():
         st.image(str(gif_path), caption="Sancheong firerisk_v0 — T−15mo / T−1.5mo / T+3d", use_column_width=True)
 
@@ -343,7 +343,7 @@ with tab_repro:
 - **HuggingFace Spaces deployment**: see `docs/HUGGINGFACE_SPACES.md` for steps
 
 Raw EMIT and Sentinel-2 are obtained via NASA earthaccess + Element84 STAC.
-임상도 1:5,000 from data.go.kr (Korean Forest Service product 3045619).
+1:5,000 forest stand map (임상도) from data.go.kr (Korean Forest Service product 3045619).
 """)
     st.markdown("---")
     st.markdown("**Reading guide for reviewers** — see `docs/REVIEWER_GUIDE.md` for 5/15/full reading paths.")

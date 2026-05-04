@@ -25,7 +25,7 @@
 
 <h1>PineSentry-Fire — Tanager Open Data Competition 2026</h1>
 <p class="meta"><strong>Heedo Choi</strong> · zxsa0716@kookmin.ac.kr · Kookmin University<br/>
-<strong>Submission state</strong>: v1.7 final state<br/>
+<strong>Submission state</strong>: final state<br/>
 <strong>GitHub</strong>: <a href="https://github.com/zxsa0716/pinesentry-fire">github.com/zxsa0716/pinesentry-fire</a> · License CC-BY-4.0</p>
 
 <div class="nav">
@@ -51,7 +51,7 @@ before it ignites?</strong></p>
 
 <h2 id="method">2. Method (one paragraph)</h2>
 <p>Per-pixel <strong>Hydraulic Stress Index (HSI v1)</strong> as a fixed convex combination
-of (i) species pyrophilic factor from Korean Forest Service 1:5,000 임상도
+of (i) species pyrophilic factor from Korean Forest Service 1:5,000 forest stand map (임상도)
 (3.41 M polygons), (ii) south-facing slope from COP-DEM 30 m,
 (iii) empirical SWIR firerisk_v0 from EMIT 285-band reflectance,
 (iv) species × terrain interaction. Weights
@@ -172,7 +172,7 @@ full DOFA + LoRA pretraining for the August deadline.
 <li><strong>OSF pre-registration on weights</strong> — date-locked at <code>c181cc2</code>
 (2026-04-29). Verifiable via <code>git log c181cc2 -1</code>. No other Tanager
 submission can demonstrate "we did not tune to test data" with a date-stamped file.</li>
-<li><strong>Korean Forest Service 1:5,000 임상도</strong> — 3.41 M polygons converted
+<li><strong>Korean Forest Service 1:5,000 forest stand map (임상도)</strong> — 3.41 M polygons converted
 to per-pixel pyrophilic raster. Removing this layer drops Uiseong AUC by 0.108
 (largest A1 component contribution). No other entrant has this layer.</li>
 <li><strong>Cross-continent generalization</strong> — Korean conifer-tuned weights work

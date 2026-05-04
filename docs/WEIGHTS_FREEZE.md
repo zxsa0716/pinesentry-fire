@@ -15,7 +15,7 @@
 
 A pre-fire Hydraulic Stress Index that combines (i) EMIT 7.4 nm SWIR-derived
 empirical EWT/LMA proxies, (ii) species-specific pyrophilic factor from the
-산림청 임상도 1:5,000, and (iii) COP-DEM 30 m south-facing slope, will
+Korean Forest Service 1:5,000 forest stand map, and (iii) COP-DEM 30 m south-facing slope, will
 jointly predict the pixel-level burned/unburned status of the 2025 Korean
 spring fires (Uiseong + Sancheong) with ROC AUC ≥ 0.65 on each site, using
 identical fixed weights across both sites.
@@ -61,7 +61,7 @@ within the site before the weighted sum.
 - dNBR: Sentinel-2 NBR pre/post (S2A/B/C, lowest cc per window)
   - 의성: 2025-03-14 → 2025-04-26
   - 산청: 2025-01-21 → 2025-03-22
-- 임상도: `TB_FGDI_FS_IM5000.gdb` (산림청, 2021 현행화) clipped to 8 ROIs
+- forest stand map (임상도): `TB_FGDI_FS_IM5000.gdb` (Korean Forest Service (산림청), 2021 현행화) clipped to 8 ROIs
 
 ## 5. What will NOT be done post-hoc
 

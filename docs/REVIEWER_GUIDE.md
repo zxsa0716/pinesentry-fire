@@ -97,7 +97,7 @@ Every metric in `TABLE.md` corresponds to a script + a JSON output.
 | Layer | Source | Path |
 |---|---|---|
 | EMIT L2A reflectance | NASA / JPL via earthaccess | `data/emit/{site}/EMIT_L2A_RFL_*.nc` |
-| Korean Forest Service 임상도 1:5,000 | data.go.kr `3045619` | `data/imsangdo/{site}.gpkg` (clipped) |
+| Korean Forest Service 1:5,000 forest stand map (임상도) | data.go.kr `3045619` | `data/imsangdo/{site}.gpkg` (clipped) |
 | COP-DEM 30 m | ESA via opentopography | `data/dem/{site}_dem.tif` |
 | dNBR perimeters | Sentinel-2 NBR pre-post threshold > 0.27 | `data/fire_perimeter/synth_{site}_dnbr.gpkg` |
 | NIFC Palisades 2025 | NIFC authoritative | `data/fire_perimeter/nifc_palisades_2025.geojson` |

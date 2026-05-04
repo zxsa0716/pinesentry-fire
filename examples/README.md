@@ -32,7 +32,7 @@ examples/
 | `11_PR_curves.png` | 5 | Precision-Recall curves with average precision (AP). |
 | `12_sensitivity_pm20pct.png` | 1 | A6 weight perturbation ±20% (n=64) — AUC drift bars. |
 | `13_uiseong_eval.png` / `14_sancheong_eval.png` / `15_palisades_eval.png` | 3 | Per-site distribution + ROC + lift triptych. |
-| `16_sancheong_temporal_T-1.5mo_animation.gif` | 3 frames | EMIT firerisk_v0 trajectory at Sancheong: T−15mo → T−1.5mo → T+3d showing pre-fire stress accumulation. |
+| `16_sancheong_temporal_animation.gif` | 3 frames | EMIT firerisk_v0 trajectory at Sancheong: T−15mo → T−1.5mo → T+3d showing pre-fire stress accumulation. |
 
 ---
 

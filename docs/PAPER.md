@@ -5,6 +5,54 @@
 
 ---
 
+## Why this matters — at a glance
+
+**The Korean spring fire problem.** Korean spring wildfires are dominated by
+*Pinus densiflora* (소나무, red pine), which is uniquely flammable because of
+volatile resin, waxy cuticles, low hydraulic safety margin (P50 ≈ −2.5 to
+−3.5 MPa), and a tendency to occupy south-facing slopes that desiccate first.
+
+**The empirical paradox.** Conventional hydraulic-stress proxies derived from
+multispectral satellites (NDII, NDMI, NDVI) **score winter pines as
+"hydraulically safe"** because evergreen conifers maintain canopy water
+content year-round. Yet the same pines ignite first every spring. *Bulk leaf
+water* is not the right feature — **species identity + terrain dryness** is.
+
+**Our approach.** Per-pixel **Hydraulic Stress Index (HSI v1)** fuses four
+components with weights pre-registered before any cross-validation:
+
+```
+HSI v1 = 0.40 × pyrophilic     (species, from Korean Forest Service 임상도 stand map)
+       + 0.20 × south_facing   (COP-DEM 30 m aspect → cos(aspect − 180°))
+       + 0.30 × firerisk_v0    (EMIT 285-band NDII / NDVI / red-edge senescence)
+       + 0.10 × pyro × south   (species × terrain interaction)
+```
+
+**Why the Tanager Open Data Competition?** Tanager-1 (Planet, 2024) provides
+**426 spectral bands at 5 nm SWIR sampling** — substantially finer than EMIT
+(285 bands, ~7.4 nm). At present **Tanager has zero scenes acquired over
+Korea**. We use EMIT to build and pre-register the framework; we then use
+the framework's HSI v1 score on the 8-ROI Korean atlas to **prioritise a
+30-scene Korean Tanager wishlist** (Q7 of the competition form). Each
+wishlist scene is scored quantitatively rather than nominated by intuition.
+
+**Headline result.** Five fires, two continents, **identical weights**:
+
+| Site | Sensor | AUC (95 % CI) | Lift @ top-decile |
+|---|---|---|---:|
+| 의성 Uiseong 2025-03 | EMIT 285b | **0.747** [0.741, 0.752] | 2.30× |
+| 산청 Sancheong 2025-03 | EMIT 285b | **0.647** [0.617, 0.680] | 1.78× |
+| 강릉 Gangneung 2023-04 | Sentinel-2 13b | 0.549 [0.538, 0.558] | 1.80× |
+| 울진 Uljin 2022-03 | Sentinel-2 13b | 0.545 [0.538, 0.552] | 0.75× |
+| 🇺🇸 Palisades (LA) 2025-01 | Sentinel-2 13b | **0.678** [0.672, 0.685] | 1.42× |
+
+**Pre-fire lead time.** EMIT detects the pyrophilic stress signal at Sancheong
+**six weeks before the 2026-03-21 ignition** — mean firerisk_v0 inside the
+future burn area = 0.857 versus 0.711 outside (Δ = +0.146, n = 13,323 burn
+pixels, Mann–Whitney p ≈ 0).
+
+---
+
 ## Abstract
 
 We present an EMIT-aligned, species-aware Hydraulic Stress Index (HSI) that
@@ -52,7 +100,7 @@ slope-aspect dryness into the spectral risk score.
 |---|---|---|---|
 | EMIT L2A reflectance | NASA / JPL | Uiseong 2024-02-16, Sancheong 2026-03-24, 6 KR atlas ROIs | 285 bands, ~7.4 nm SWIR, ISOFIT atmosphere |
 | Sentinel-2 L2A | ESA / Copernicus | Gangneung, Uljin (KR), Palisades (US) | 13 broadband fallback |
-| Korean Forest Service 1:5,000 임상도 | KFS / NSDI | 8 ROIs, 161 K polygons clipped | KOFTR_NM Korean species names |
+| Korean Forest Service 1:5,000 forest stand map (임상도) | KFS / NSDI | 8 ROIs, 161 K polygons clipped | KOFTR_NM Korean species names |
 | COP-DEM 30 m | ESA | All sites | Slope/aspect → south-facing |
 | ESA WorldCover 10 m | ESA | Palisades (US chaparral pyrophilic) | Tree=0.65, Shrub=0.50 |
 | dNBR perimeters | Sentinel-2 derived | 4 Korean fires | Key & Benson 2006 threshold > 0.27 |
@@ -510,7 +558,7 @@ DOI before the 8/31 submission.
 ## 7 — Acknowledgements
 
 NASA EMIT mission (PI: David Schimel, JPL); Korea Forest Service
-National Spatial Data Infrastructure for the 1:5,000 임상도; ESA
+National Spatial Data Infrastructure for the 1:5,000 forest stand map (임상도); ESA
 Copernicus / Sentinel-2; Hirzel et al. 2006 (Boyce); Diggle 2002 / Wang
 2014 (GEE); Féret et al. 2017 (PROSPECT-D); Verhoef 1984 / Jacquemoud
 1990 (PROSAIL). Submitted to the Planet Tanager Open Data Competition

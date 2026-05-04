@@ -258,7 +258,7 @@ incompatibility), DOFA + LoRA full pretraining (deferred to v2.0).
 | EMIT L2A reflectance (Korea peninsula 8 ROIs + Sancheong multi-temporal 3 acquisitions) | 21 | 21.7 GB |
 | Tanager Open Data via public STAC (Palisades) | 9 | 7.4 GB |
 | Sentinel-2 L2A (Korea peninsula + Palisades) | 67 | 4.0 GB |
-| Korean Forest Service 임상도 1:5,000 (8 ROIs / 161 K polygons) | 8 | 738 MB |
+| Korean Forest Service 1:5,000 forest stand map (임상도) (8 ROIs / 161 K polygons) | 8 | 738 MB |
 | COP-DEM 30 m (12 ROIs) | 38 | 690 MB |
 | GEDI L4A AGB (Korea + BART + NIWO) | 150 | 37.4 GB |
 | MOD13Q1 NDVI 16-day | 240 | 5.8 GB |
@@ -266,7 +266,7 @@ incompatibility), DOFA + LoRA full pretraining (deferred to v2.0).
 | MTBS US burn DB + NIFC Palisades 2025 | 8 | 555 MB |
 | ESA WorldCover 10 m (12 ROIs) | 12 | 320 MB |
 | dNBR perimeters (4 KR + 1 US) | 9 | 116 MB |
-| MODIS Active Fire MOD14A1 + AsiaFlux GDK + NEON + 산림청 통계 | 80+ | 60 MB |
+| MODIS Active Fire MOD14A1 + AsiaFlux GDK + NEON + Korean Forest Service (산림청) 통계 | 80+ | 60 MB |
 | TRY DB public-only + species priors | 4 | 712 KB |
 | Atlas (8 ROI HSI v1 maps + montage) | 17 | 280 MB |
 | HSI v0 / v1 / v1.5 / v2 / v2.5 outputs + features + sensitivity + Hero figures | 50+ | 410 MB |

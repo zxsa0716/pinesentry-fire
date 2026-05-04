@@ -158,16 +158,16 @@ HSI v1(i) = 0.40 · pyrophilic(i)                  ← species (소나무 = 1.0,
 
 ```mermaid
 graph LR
-    A[EMIT L2A<br/>285 b · ~7.4 nm SWIR] -->|NDII / NDVI / RE| F[firerisk_v0]
-    B[Korean Forest Service<br/>1:5,000 forest stand map (임상도)<br/>3.41 M polygons] -->|species lookup| P[pyrophilic]
-    C[COP-DEM 30 m] -->|cos aspect-180°| S[south_facing]
-    P --> X[pine × terrain]
+    A["EMIT L2A<br/>285 bands<br/>~7.4 nm SWIR"] -->|"NDII / NDVI / red-edge"| F["firerisk_v0"]
+    B["Korean Forest Service<br/>1:5,000 forest stand map<br/>3.41 M polygons"] -->|"species lookup"| P["pyrophilic"]
+    C["COP-DEM 30 m"] -->|"cos aspect-180°"| S["south_facing"]
+    P --> X["pine x terrain"]
     S --> X
-    F --> H{HSI v1}
+    F --> H{"HSI v1"}
     P --> H
     S --> H
     X --> H
-    H -->|cross-validated on 5 fires| R[(AUC 0.55–0.75)]
+    H -->|"cross-validated on 5 fires"| R(("AUC 0.55-0.75"))
     style H fill:#a50026,color:#fff
     style R fill:#fdae61
 ```

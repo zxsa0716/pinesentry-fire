@@ -5,7 +5,7 @@ files (PNG, GIF) via xet/LFS — bypassing the 'binary files rejected'
 error you get from a plain `git push`.
 
 Usage:
-    pip install huggingface_hub      # one-time install (already done)
+    pip install huggingface_hub      # one-time install
     python scripts/deploy_to_hf.py   # asks for token, then uploads
 
 This script is self-contained — it does NOT need `huggingface-cli login`
@@ -24,7 +24,6 @@ HF_REPO_ID = "Hee-do/pinesentry-fire"
 
 
 def get_token() -> str:
-    """Read the HF write token from $HF_TOKEN or interactive prompt."""
     token = os.environ.get("HF_TOKEN")
     if token:
         print("Using HF_TOKEN environment variable.")
@@ -47,6 +46,7 @@ def get_token() -> str:
 def main():
     try:
         from huggingface_hub import HfApi
+        from huggingface_hub.utils import EntryNotFoundError
     except ImportError:
         print("Run first:  pip install huggingface_hub", file=sys.stderr)
         sys.exit(1)
@@ -54,24 +54,48 @@ def main():
     token = get_token()
     api = HfApi(token=token)
 
-    # Files that should NEVER be uploaded — saves bandwidth and avoids
-    # mirroring the user's local-only directories
+    # === Server-side cleanup BEFORE upload ===
+    # When you create a Streamlit Space on the HuggingFace UI it auto-seeds
+    # a Dockerfile copied from `streamlit/streamlit-template-space`. That
+    # Dockerfile takes priority over the YAML `sdk: streamlit` config and
+    # will run the default spiral demo, ignoring our `streamlit_app/app.py`.
+    # We delete it so HF falls back to the SDK auto-builder + our YAML.
+    #
+    # We also remove any accidentally-uploaded local `.env` (it can contain
+    # secrets — never push it to a public Space).
+    server_side_cleanup_paths = ["Dockerfile", ".env", ".envrc"]
+    for p in server_side_cleanup_paths:
+        try:
+            api.delete_file(path_in_repo=p, repo_id=HF_REPO_ID,
+                             repo_type="space",
+                             commit_message=f"Remove auto-generated {p}")
+            print(f"  removed pre-existing {p} from Space")
+        except EntryNotFoundError:
+            pass   # already absent — fine
+        except Exception as e:
+            print(f"  could not remove {p}: {e}")
+
+    # === Files to NEVER upload ===
     IGNORE = [
-        # Git internals (huggingface_hub already excludes .git, but be explicit)
+        # Git internals
         ".git", ".git/**", ".gitignore",
-        # Local-only docs (PROGRESS_REPORT, SUBMISSION_CHECKLIST)
+        # Local-only docs / large files
         ".private", ".private/**",
-        # Raw data (huge, gitignored on GitHub too)
         "data", "data/**",
         # Build artefacts
         "**/__pycache__", "**/__pycache__/**", "**/*.pyc",
         ".pytest_cache", ".pytest_cache/**",
         # Virtual envs
         "env", "env/**", "venv", "venv/**", ".venv", ".venv/**",
-        # Files we don't need on HF
+        # Heavy raw-data extensions (just in case)
         "**/*.h5", "**/*.tif", "**/*.tiff", "**/*.nc",
         # CI workflows aren't useful on the Space
         ".github", ".github/**",
+        # Secrets / local-only configs (NEVER push these to a public Space)
+        ".env", ".envrc", "**/.env", "**/.envrc",
+        "_netrc", ".netrc", "**/_netrc", "**/.netrc",
+        # Auto-seeded HF templates we replace via YAML
+        "Dockerfile",
     ]
 
     print()

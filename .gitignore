@@ -41,11 +41,23 @@ dist/
 .ipynb_checkpoints/
 *-checkpoint.ipynb
 
-# Env
+# Env / secrets — NEVER commit (and never upload to a public Space)
 .env
+.env.*
+*.env
 .envrc
+**/.env
+**/.envrc
 .venv/
 env-local/
+_netrc
+.netrc
+**/_netrc
+**/.netrc
+secrets.*
+*.secret
+*.pem
+*.key
 
 # IDE
 .vscode/

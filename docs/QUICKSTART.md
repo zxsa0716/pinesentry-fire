@@ -10,7 +10,7 @@
 ```bash
 git clone https://github.com/zxsa0716/pinesentry-fire.git
 cd pinesentry-fire
-pip install -r requirements.txt
+pip install -r requirements-pipeline.txt
 PYTHONPATH=src python -m pytest tests/   # 9/9 should pass
 streamlit run streamlit_app/app.py        # interactive demo, browser opens
 ```
@@ -161,7 +161,7 @@ pinesentry-fire/
 - **Disk**: 200 MB for repo only; +156 GB for full pipeline (data layers)
 - **GPU**: not required (PyTorch DiffPROSPECT runs CPU in ~5 min)
 
-Key Python deps (full list in `requirements.txt`):
+Key Python deps (full list in `requirements-pipeline.txt`):
 ```
 numpy, pandas, scikit-learn, scipy, statsmodels
 xarray, rioxarray, rasterio, geopandas, shapely

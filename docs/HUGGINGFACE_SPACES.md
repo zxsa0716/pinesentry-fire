@@ -1,149 +1,181 @@
 # HuggingFace Spaces deployment guide
 
-**Goal**: deploy the `streamlit_app/app.py` interactive demo as a
-public live URL (free) so reviewers can interact without cloning
-the repo. Once deployed the URL goes into Q8 of the SurveyMonkey
-form alongside the GitHub link.
+**Goal**: deploy the Streamlit demo at
+`https://huggingface.co/spaces/Hee-do/pinesentry-fire` so reviewers can
+interact without cloning anything.
 
-**Time required**: ~15 min hands-on + ~15 min build wait
+**Time required**: ~10 minutes hands-on + ~5–10 minutes build wait
 **Cost**: free (HuggingFace Spaces free tier — 16 GB RAM, 2 vCPU)
+
+> The Space is already created at
+> [huggingface.co/spaces/Hee-do/pinesentry-fire](https://huggingface.co/spaces/Hee-do/pinesentry-fire).
+> What follows is how to push the local repo into it.
 
 ---
 
 ## 1 — Prerequisites
 
-- A GitHub account (`zxsa0716`) — already have
-- A HuggingFace account (free) — sign up at https://huggingface.co/join
-  if you don't already have one
-- The repo `zxsa0716/pinesentry-fire` already public on GitHub ✅
-- This repo already has the right config files committed:
-  - `Spacefile` (HF Space metadata)
-  - `streamlit_app/app.py` (the app)
-  - `requirements.txt` (Python deps)
-  - `examples/` (data loaded by the app)
+You already have:
+- A GitHub account (`zxsa0716`) with the repo public
+- A HuggingFace Space created at `Hee-do/pinesentry-fire` (Streamlit SDK)
+
+You still need:
+- A **HuggingFace write-access token** (one-time setup)
+- Git installed locally
+
+### Get a HuggingFace access token (1 minute)
+
+1. Go to https://huggingface.co/settings/tokens
+2. Click **"+ New token"**
+3. Token type: **Write** (must be Write, not Read)
+4. Name: `pinesentry-push` (any name)
+5. Click **Generate**, then **copy the token** (`hf_...` long string)
+
+You will paste this when Git asks for your password during the push.
 
 ---
 
-## 2 — Step-by-step deployment
+## 2 — Push your local repo to the Space (3 minutes)
 
-### 2.1 Create the Space
-
-1. Go to https://huggingface.co/spaces and click **"+ New Space"**.
-2. Fill in:
-   - **Space name**: `pinesentry-fire`
-   - **License**: `cc-by-4.0`
-   - **Space SDK**: **Streamlit**
-   - **Streamlit Space hardware**: **CPU basic** (free tier)
-   - **Public** / Private: **Public**
-3. Click **"Create Space"**. You now have an empty Space at
-   `https://huggingface.co/spaces/<your-username>/pinesentry-fire`.
-
-### 2.2 Connect the GitHub repo (recommended path)
-
-The cleanest deployment is to mirror the GitHub repo into the Space.
-You have two options:
-
-**Option A — Push from local clone** (simplest):
+In a terminal at the local clone (`C:/Users/admin/pinesentry-fire`):
 
 ```bash
-# In your existing pinesentry-fire local clone
-git remote add hf https://huggingface.co/spaces/<your-username>/pinesentry-fire
+# 1) Add the Space as a second git remote (do this ONCE only)
+git remote add hf https://huggingface.co/spaces/Hee-do/pinesentry-fire
+
+# 2) Push the entire 'main' branch to that remote
 git push hf main:main
 ```
 
-The Space will detect the push and start building. Watch the build
-log at the URL above.
-
-**Option B — Mirror via HF Hub web UI**:
-
-1. On the Space page, click **"Files"** → **"Upload files"**.
-2. Drag-drop the entire `pinesentry-fire/` directory.
-3. Or use the HF Hub Python client:
-
-```python
-from huggingface_hub import HfApi
-api = HfApi()
-api.upload_folder(
-    folder_path="C:/Users/admin/pinesentry-fire",
-    repo_id="<your-username>/pinesentry-fire",
-    repo_type="space",
-    ignore_patterns=[".git", "data/", ".private/", "*.h5", "*.tif", "*.nc"],
-)
-```
-
-### 2.3 Wait for the build (~10–15 min)
-
-The build will install everything in `requirements.txt` (heaviest:
-`prosail`, `torch`, `geopandas`). Watch logs at:
-`https://huggingface.co/spaces/<your-username>/pinesentry-fire/logs`
-
-When the build succeeds, the Space shows **"Running"** in green and
-you can interact with the demo at:
-`https://huggingface.co/spaces/<your-username>/pinesentry-fire`
-
-### 2.4 Verify
-
-The 10 tabs should all render content. Specifically:
-- **Hero figures** tab: 4 PNGs visible
-- **5-site results** tab: dataframe shows 5 rows with AUC values
-- **Statistical battery**: 4 PNGs + GEE odds-ratio table
-- **Trait inversion**: 6-row table including v2.8 PyTorch result
-- **Pre-fire temporal**: animated GIF plays
-- **Q7 wishlist**: top-7 ranking visible
-
----
-
-## 3 — Common issues and fixes
-
-| Problem | Fix |
-|---|---|
-| Build fails: `ERROR: Could not find a version that satisfies the requirement torch` | HF Spaces auto-pins `torch==X` from `requirements.txt`. Either pin to a known-good version (`torch==2.1.0`) or use `--index-url https://download.pytorch.org/whl/cpu` in the requirements line |
-| Build fails: `prosail not found` | Confirm `prosail` is in `requirements.txt` (it is, in v1.9) |
-| App loads but figures are missing | The Space build did not include `examples/`. Check `.gitignore` did not exclude `examples/` (it doesn't, in v1.9) |
-| Korean characters render as boxes | Add a Korean font in `Spacefile`'s `app_file_dependencies`, e.g. `apt: fonts-nanum`. The current submission renders Korean glyphs in matplotlib output PNGs but inside text labels they may show as boxes |
-| OOM (Out of Memory) | Comment out the heaviest tabs (Statistical battery has 5 PNGs; consider lazy loading) |
-| 503 / Container exit | HF free tier sleeps after inactivity; first visitor wakes it up in ~30s |
-
----
-
-## 4 — Add the live URL to Q8 of the SurveyMonkey form
-
-Once the Space is running, paste the URL into the Q8 field alongside
-the GitHub link. Suggested format:
+When Git prompts:
 
 ```
-Project Materials Link:
-
-GitHub:                  https://github.com/zxsa0716/pinesentry-fire
-HuggingFace Spaces (live): https://huggingface.co/spaces/<your-username>/pinesentry-fire
-public Git commit hash:                 (after Phase 1 step 1 in SUBMISSION_CHECKLIST.md)
+Username for 'https://huggingface.co': Hee-do
+Password for 'https://Hee-do@huggingface.co': hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
+(Paste the access token from step 1 — it acts as your password. Git won't echo it as you type.)
+
+If the first push fails because the Space already has commits (an empty
+init commit from when you created it), do:
+
+```bash
+git pull hf main --allow-unrelated-histories     # merge any auto-init commit
+# resolve any conflict in README.md if Git asks
+git push hf main:main
+```
+
+After a successful push you will see your repo files appear in the
+Space's **Files** tab on the website.
+
 ---
 
-## 5 — Optional: persistence config
+## 3 — Watch the build (5–10 minutes)
 
-If you want the Space to NOT sleep on inactivity (for the review window
-between 8/31 and 11/02), upgrade the Space to **CPU upgraded**
-(non-free, ~$0.05 / hour). The free tier is fine for the submission
-itself — judges will wake it up on first visit.
+Open
+`https://huggingface.co/spaces/Hee-do/pinesentry-fire/logs`
+in your browser. You will see HF run, in order:
+
+1. `Cloning the repo` (~10 s)
+2. `pip install -r requirements.txt` (~1–2 minutes — only streamlit + numpy)
+3. `streamlit run streamlit_app/app.py` (~30 s)
+
+Once the log shows
+`Streamlit app running on http://localhost:8501`,
+the Space is **Running** (green badge top-right).
+
+The live URL is
+`https://huggingface.co/spaces/Hee-do/pinesentry-fire`
+— that is what goes into Q8 of the SurveyMonkey form.
 
 ---
 
-## 6 — `Spacefile` reference
+## 4 — Verify the running Space
 
-This repo's `Spacefile` is already correct:
+The 10 tabs of the demo should all render content. Specifically check:
+- **Hero figures** tab: 4 PNGs visible (Grand Tour GIF, methods, ROC envelope, dual hero)
+- **5-site results** tab: 5 rows in the AUC dataframe
+- **Statistical battery** tab: 4 PNGs + GEE odds-ratio table populated
+- **Trait inversion** tab: 6-row table including v2.8 PyTorch row
+- **Pre-fire temporal** tab: pre-fire signal figure visible
+- **Q7 wishlist** tab: top-7 ranking visible
+
+---
+
+## 5 — Why the README has a YAML block at the top
+
+HF Spaces reads the deployment config from a YAML frontmatter at the top
+of `README.md`:
 
 ```yaml
+---
 title: PineSentry-Fire
-emoji: 🌲🔥
+emoji: 🌲
 colorFrom: red
-colorTo: yellow
+colorTo: orange
 sdk: streamlit
 sdk_version: 1.30.0
 app_file: streamlit_app/app.py
 pinned: false
 license: cc-by-4.0
+short_description: Pre-fire Hydraulic Stress Index for Korean pine forests
+---
 ```
 
-Do not modify unless you intend a different SDK or app entry point.
+GitHub renders the block as plain text (it doesn't break GitHub's display)
+but HF treats it as configuration. **Do not edit the YAML block** — the
+deployment depends on the exact `app_file` path.
+
+---
+
+## 6 — Why `requirements.txt` is small (only `streamlit`, `numpy`)
+
+The Streamlit app only reads PNG / JSON files in `examples/` — it doesn't
+re-run any of the modeling pipeline. So we keep `requirements.txt`
+minimal to make the Space build fast.
+
+The full pipeline deps (rasterio, geopandas, prosail, torch, etc.) are
+in `requirements-pipeline.txt` — used only when reproducing the analysis
+locally or in Colab.
+
+---
+
+## 7 — Common issues
+
+| Problem | Fix |
+|---|---|
+| `git push hf main:main` says "Authentication failed" | Token must be **Write**-scoped, not Read. Regenerate at huggingface.co/settings/tokens. |
+| Build log: `streamlit app file not found` | Confirm `streamlit_app/app.py` exists in the pushed branch and `app_file` matches in YAML. |
+| Build log: requires `xxx` not satisfied | The slim `requirements.txt` should not have heavy deps. If you accidentally pushed `requirements-pipeline.txt` content, restore the slim version. |
+| Space shows empty page | Click the menu top-right → **Restart Space**. First boot can hang; restart fixes it 90 % of the time. |
+| Korean characters render as boxes | Already fixed: site labels and figures use English only. |
+| 503 / Container exit | HF free-tier sleeps after inactivity. First visitor wakes it in ~30 s — totally normal. |
+
+---
+
+## 8 — Adding the live URL to Q8 of the SurveyMonkey form
+
+Final Q8 field text (paste exactly):
+
+```
+GitHub repository (case study + code):
+  https://github.com/zxsa0716/pinesentry-fire
+
+Live interactive demo (HuggingFace Spaces):
+  https://huggingface.co/spaces/Hee-do/pinesentry-fire
+
+1-click reproduction (Google Colab):
+  https://colab.research.google.com/github/zxsa0716/pinesentry-fire/blob/main/colab.ipynb
+```
+
+---
+
+## 9 — Updating the Space after future GitHub commits
+
+After every meaningful GitHub commit you want mirrored, just run:
+
+```bash
+git push hf main:main
+```
+
+It re-uploads the changed files and HF auto-rebuilds the Space.

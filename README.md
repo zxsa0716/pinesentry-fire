@@ -1,3 +1,16 @@
+---
+title: PineSentry-Fire
+emoji: 🌲
+colorFrom: red
+colorTo: orange
+sdk: streamlit
+sdk_version: 1.30.0
+app_file: streamlit_app/app.py
+pinned: false
+license: cc-by-4.0
+short_description: Pre-fire Hydraulic Stress Index for Korean pine forests
+---
+
 <div align="center">
 
 # 🌲🔥 PineSentry-Fire

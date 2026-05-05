@@ -9,24 +9,111 @@
 
 ## Submission form fields (8/31 SurveyMonkey)
 
-### Q1-Q5 Personal info — to fill at submission
+### Q1–Q5 Personal info
+Fill at submission time (name, email, affiliation, country, co-authors).
+Author: Heedo Choi · zxsa0716@kookmin.ac.kr · Kookmin University ·
+Republic of Korea · co-authors: none.
 
-### Q6 — Project Description (300 words)
-See `02_idea/14_august_submission_draft.md`. The 290-word draft will be
-updated with final lift values from v1.5+.
+---
 
-### Q7 — Next Steps (100 words)
-30-scene Korean Tanager wishlist at `wishlist/korea_30_scenes.geojson`
-visualized at `wishlist/korea_30_scenes.png`. Six site groups: Gwangneung KoFlux
-super-site (8) · Baekdudaegan transect (6) · East Coast fire-prone (6) · matsutake forest (4)
-· DMZ (3) · Hallasan (3).
+### Q6 — Project Description (≤300 words)
+
+**Final text (paste this into the form, ~295 words):**
+
+> PineSentry-Fire is a per-pixel pre-fire risk index that identifies
+> fire-prone Korean *Pinus densiflora* forests **six weeks before**
+> spring ignition. It fuses imaging-spectrometer reflectance with the
+> Korean Forest Service 1:5,000 forest stand map (3.41 M polygons) and
+> Copernicus 30-meter topography into a single Hydraulic Stress Index,
+> with weights pre-registered at public git commit `c181cc2` *before*
+> any of the cross-validation runs we report. The same fixed weights
+> generalize across five fires — four in Korea (Uiseong, Sancheong,
+> Gangneung, Uljin) and one US chaparral case (Los Angeles Palisades
+> 2025) — with AUCs from 0.55 (broadband Sentinel-2 fallback) to 0.75
+> (EMIT 285-band).
+>
+> **Stakeholders.** Korea Forest Service operations for pre-positioning
+> suppression resources; provincial governments in Gyeongsangbuk-do,
+> Gyeongsangnam-do, and Gangwon-do for fuel-treatment prioritization;
+> international fire-management agencies adapting the framework to
+> their own conifer landscapes; remote-sensing researchers studying
+> pyrogeography and pre-fire flammability detection.
+>
+> **Actionable insights.** A 30-meter risk map that lets agencies
+> (1) identify high-risk pine stands weeks before peak fire season,
+> (2) prioritize fuel-reduction treatments where pyrophilic species
+> coincide with south-facing slopes, (3) verify our claims are not
+> data-fit by inspecting the public git timestamp, (4) honestly
+> distinguish per-pixel hydraulic signal (Korean sites, GEE OR 12–38)
+> from spatial-clustering artifacts (Palisades, OR 1.08 n.s.).
+>
+> **Tanager contribution.** We applied the framework to all eight
+> Tanager scenes over the Palisades fire. Tanager's 426 bands at 5-nm
+> SWIR resolution gave the cleanest spectral discrimination available:
+> full-spectrum AUC 0.878 versus Sentinel-2 13-band 0.837 (+0.041).
+> Deep narrow-band SWIR around 1450 / 1900 / 2080–2200 nm captured leaf
+> water and foliar-nitrogen variations that broadband sensors merge
+> into noise — at fidelity higher than EMIT's 7.4 nm sampling delivers.
+> This empirically motivates the 30-scene Korean wishlist in Q7.
+
+---
+
+### Q7 — Next Steps (≤100 words)
+
+**Final text (paste this into the form, ~95 words):**
+
+> If granted Tanager scenes over Korea, our 30-scene wishlist
+> (`wishlist/korea_30_scenes_priority.csv`) is already prioritized
+> by predicted HSI v1: Uljin matsutake forest (0.721), Gwangneung
+> autumn senescence (0.681), Uiseong burn scar (0.672). Acquisitions
+> would (a) close the 0.04 AUC gap between EMIT 7.4-nm and Tanager
+> 5-nm sampling, (b) enable fully-differentiable PROSPECT-D inversion
+> at species level for *Pinus densiflora*, *P. koraiensis*,
+> *P. thunbergii*, *P. rigida*, (c) extend cross-validation to 2–3
+> additional Korean fire cohorts, and (d) inform fuel-treatment
+> prioritization across the Baekdudaegan transect.
+
+---
 
 ### Q8 — Project Materials link
-**https://github.com/zxsa0716/pinesentry-fire**
 
-The README is the case study; running `streamlit run streamlit_app/app.py`
-gives the interactive demo. Free HuggingFace Spaces deployment instructions
-in `notebooks/08_one_click_reproduction.md`.
+**Primary link (paste into the form):**
+
+```
+https://github.com/zxsa0716/pinesentry-fire
+```
+
+The README at that URL is the case study (Code & Scripts track). The
+repo ships with `examples/` containing all key figures + JSON tables,
+so reviewers can see every result without running anything.
+
+**Optional extras** to add alongside the GitHub link in the same Q8 field:
+
+- HuggingFace Spaces live demo (after deployment per `HUGGINGFACE_SPACES.md`):
+  `https://huggingface.co/spaces/<your-username>/pinesentry-fire`
+- 1-click Colab reproduction:
+  `https://colab.research.google.com/github/zxsa0716/pinesentry-fire/blob/main/colab.ipynb`
+
+Reviewers can navigate the repo via:
+- Static dashboard: open `reports/REPORT.html` in a browser
+- Interactive dashboard: `reports/REPORT_INTERACTIVE.html` (Plotly)
+- Spatial map: `reports/REPORT_MAP.html` (Folium)
+- 16-frame whole-study tour: `examples/figures/00_grand_tour_animation.gif`
+- Reading guide: `docs/REVIEWER_GUIDE.md` (5-min / 15-min / full paths)
+- Anticipated FAQ: `docs/REVIEWER_FAQ.md`
+- Numerical results: `docs/TABLE.md` (22 tables)
+- Academic writeup: `docs/PAPER.md` (sections 4.1–4.21)
+
+---
+
+### Q9 — Terms and Conditions
+
+**Answer**: Yes.
+
+Confirm that GitHub repository is publicly visible and license is set to
+CC-BY-4.0 (already done; see `LICENSE`). The Tanager Open Data is used
+under its CC-BY-4.0 license; attribution to Planet Labs PBC is in
+README's Acknowledgements section.
 
 ---
 

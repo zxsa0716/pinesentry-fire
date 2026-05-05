@@ -2,7 +2,7 @@
 title: PineSentry-Fire
 emoji: 🌲
 colorFrom: red
-colorTo: orange
+colorTo: yellow
 sdk: streamlit
 sdk_version: 1.30.0
 app_file: streamlit_app/app.py

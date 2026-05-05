@@ -1,9 +1,9 @@
 """Final Hero figure — 6-panel for the August submission and README.
 
 Layout:
-  Row 1: 의성 HSI v1 map + dNBR overlay  |  산청 HSI v1 map + dNBR overlay
-  Row 2: ROC curves (의성 + 산청)           |  AUC bar chart (HSI v1 vs NDVI/NDMI/NDII × 2 sites)
-  Row 3: Lift chart (의성 + 산청)            |  Two-site decile lift comparison
+  Row 1: Uiseong HSI v1 map + dNBR overlay  |  Sancheong HSI v1 map + dNBR overlay
+  Row 2: ROC curves (Uiseong + Sancheong)           |  AUC bar chart (HSI v1 vs NDVI/NDMI/NDII × 2 sites)
+  Row 3: Lift chart (Uiseong + Sancheong)            |  Two-site decile lift comparison
 """
 from __future__ import annotations
 

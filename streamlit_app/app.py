@@ -60,10 +60,10 @@ with st.sidebar:
         "**Headline result (5 sites · identical pre-registered weights)**\n\n"
         "| Site | Sensor | AUC |\n"
         "|---|---|---:|\n"
-        "| 의성 Uiseong | EMIT 285b | **0.747** |\n"
-        "| 산청 Sancheong | EMIT 285b | 0.647 |\n"
-        "| 강릉 Gangneung | S2 13b | 0.549 |\n"
-        "| 울진 Uljin | S2 13b | 0.545 |\n"
+        "| Uiseong | EMIT 285b | **0.747** |\n"
+        "| Sancheong | EMIT 285b | 0.647 |\n"
+        "| Gangneung | S2 13b | 0.549 |\n"
+        "| Uljin | S2 13b | 0.545 |\n"
         "| **US Palisades** | S2 13b | **0.678** |\n"
     )
     st.markdown("---")
@@ -113,7 +113,7 @@ species data + topography predict **where the next pine fire will ignite**,
 ### Method (one paragraph)
 Per-pixel Hydraulic Stress Index as a fixed convex combination of
 **(i)** species pyrophilic factor from Korean Forest Service 1:5,000
-forest stand map (임상도) (3.41 M polygons), **(ii)** south-facing slope from COP-DEM 30 m,
+forest stand map (3.41 M polygons), **(ii)** south-facing slope from COP-DEM 30 m,
 **(iii)** EMIT 285-band SWIR firerisk_v0 (NDII / NDVI / red-edge senescence),
 and **(iv)** species × terrain interaction.
 Weights `(0.40 / 0.20 / 0.30 / 0.10)` are **pre-registered at public git
@@ -125,7 +125,7 @@ weights** and a 9-test statistical battery.
 1. **Git-timestamp-locked pre-registration** on weights — no other
    submission can demonstrate "we did not tune to test data" with a
    public commit hash. Verify via `git log c181cc2 -1`.
-2. **Korean Forest Service 1:5,000 forest stand map (임상도)** (3.41 M polygons).
+2. **Korean Forest Service 1:5,000 forest stand map** (3.41 M polygons).
    Removing this layer drops Uiseong AUC by 0.108 — largest single
    component contribution.
 3. **Cross-continent generalization** — Korean conifer-tuned weights
@@ -203,7 +203,7 @@ within each scene to make the index sensor-agnostic.
 
 | Component | Source | Rationale |
 |---|---|---|
-| `pyrophilic` | Korean Forest Service 1:5,000 forest stand map (임상도) (FRTP_NM) | 소나무=1.0, 잣나무=0.85, oak=0.5, mesic broadleaf=0.2, non-forest=0 |
+| `pyrophilic` | Korean Forest Service 1:5,000 forest stand map (FRTP_NM) | Pinus densiflora (Korean red pine)=1.0, Pinus koraiensis=0.85, oak=0.5, mesic broadleaf=0.2, non-forest=0 |
 | `south_facing` | COP-DEM 30 m aspect | cos(aspect − 180°), thresholded |
 | `firerisk_v0` | EMIT 285b NDII + NDVI + red-edge senescence | Empirical proxy beating PROSPECT-D inversion at this task |
 | `pine_terrain` | (pyrophilic × south_facing) | Captures species-on-aspect effect |
@@ -343,7 +343,7 @@ with tab_repro:
 - **HuggingFace Spaces deployment**: see `docs/HUGGINGFACE_SPACES.md` for steps
 
 Raw EMIT and Sentinel-2 are obtained via NASA earthaccess + Element84 STAC.
-1:5,000 forest stand map (임상도) from data.go.kr (Korean Forest Service product 3045619).
+1:5,000 forest stand map from data.go.kr (Korean Forest Service product 3045619).
 """)
     st.markdown("---")
     st.markdown("**Reading guide for reviewers** — see `docs/REVIEWER_GUIDE.md` for 5/15/full reading paths.")

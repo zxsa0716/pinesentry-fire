@@ -1,10 +1,10 @@
-"""Clip 산림청 임상도 1:5,000 (TB_FGDI_FS_IM5000) FGDB to project ROIs.
+"""Clip Korean Forest Service 1:5,000 forest stand map (TB_FGDI_FS_IM5000) FGDB to project ROIs.
 
 Source: Esri File Geodatabase (4.14 GB nationwide).
 Output: per-ROI GeoPackage with the fields needed for HSI species_map.
 
 Run once after data.go.kr ZIP is extracted to:
-    C:/Users/admin/Downloads/Tanager-Competition/데이터/임상도/TB_FGDI_FS_IM5000/
+    C:/Users/admin/Downloads/Tanager-Competition/데이터/forest stand map/TB_FGDI_FS_IM5000/
         TB_FGDI_FS_IM5000.gdb/
 
 Outputs to data/imsangdo/{roi}.gpkg with columns:
@@ -19,7 +19,7 @@ from pathlib import Path
 import pyogrio
 
 GDB = Path(
-    r"C:\Users\admin\Downloads\Tanager-Competition\데이터\임상도"
+    r"C:\Users\admin\Downloads\Tanager-Competition\데이터\forest stand map"
     r"\TB_FGDI_FS_IM5000\TB_FGDI_FS_IM5000.gdb"
 )
 LAYER = "TB_FGDI_FS_IM5000"

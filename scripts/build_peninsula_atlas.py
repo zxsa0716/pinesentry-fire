@@ -24,16 +24,16 @@ import xarray as xr
 from rasterio.enums import Resampling
 
 PYROPHILIC = {
-    "소나무": 1.0, "잣나무": 0.85, "낙엽송": 0.55, "리기다소나무": 0.95,
-    "곰솔": 0.95, "잔나무": 0.7, "전나무": 0.65, "편백나무": 0.6,
-    "삼나무": 0.55, "비자나무": 0.5, "은행나무": 0.3, "기타침엽수": 0.65,
-    "신갈나무": 0.5, "굴참나무": 0.55, "상수리나무": 0.5, "갈참나무": 0.45,
+    "Pinus densiflora (Korean red pine)": 1.0, "Pinus koraiensis": 0.85, "Larix": 0.55, "Pinus rigidaPinus densiflora (Korean red pine)": 0.95,
+    "Pinus thunbergii": 0.95, "Abies sp.": 0.7, "Picea sp.": 0.65, "Cupressus나무": 0.6,
+    "Cryptomeria": 0.55, "Torreya나무": 0.5, "은행나무": 0.3, "기타침엽수": 0.65,
+    "Quercus mongolica나무": 0.5, "Quercus variabilis나무": 0.55, "Quercus acutissima나무": 0.5, "갈참나무": 0.45,
     "졸참나무": 0.45, "기타 참나무류": 0.5, "기타참나무류": 0.5,
-    "오리나무": 0.2, "자작나무": 0.25, "박달나무": 0.3, "밤나무": 0.3,
-    "물푸레나무": 0.25, "서어나무": 0.25, "느티나무": 0.2, "벚나무": 0.25,
-    "포플러": 0.2, "백합나무": 0.3, "아까시나무": 0.4, "고로쇠나무": 0.3,
-    "기타활엽수": 0.4, "침활혼효림": 0.6, "죽림": 0.3,
-    "비산림": float("nan"), "미립목지": float("nan"), "관목덤불": 0.2,
+    "오리나무": 0.2, "Betula나무": 0.25, "Betula schmidtii나무": 0.3, "Castanea나무": 0.3,
+    "Fraxinus나무": 0.25, "Carpinus나무": 0.25, "Zelkova나무": 0.2, "Prunus나무": 0.25,
+    "포플러": 0.2, "백합나무": 0.3, "Robinia pseudoacacia나무": 0.4, "고로쇠나무": 0.3,
+    "기타활엽수": 0.4, "침활mixed forest": 0.6, "bamboo": 0.3,
+    "non-forest": float("nan"), "미립목지": float("nan"), "관목덤불": 0.2,
     "주거지": 0.0, "초지": 0.1, "경작지": 0.0, "수체": 0.0, "과수원": 0.0,
     "기타": 0.1, "제지": 0.0,
 }

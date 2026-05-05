@@ -16,7 +16,7 @@ species data + topography predict where the **next pine fire will ignite**,
 
 Build a per-pixel **Hydraulic Stress Index** as a fixed convex combination
 of (i) species **pyrophilic factor** from Korean Forest Service 1:5,000
-forest stand map (임상도) (3.41 M polygons), (ii) **south-facing slope** from COP-DEM 30 m,
+forest stand map (3.41 M polygons), (ii) **south-facing slope** from COP-DEM 30 m,
 (iii) an empirical SWIR firerisk_v0 from EMIT 285-band reflectance
 (NDII / NDVI / red-edge senescence), and (iv) a species × terrain
 interaction. Weights (0.40 / 0.20 / 0.30 / 0.10) are **git-timestamp-locked pre-registered
@@ -44,7 +44,7 @@ test we ran.
 
 1. **OSF pre-registration on weights** — no other Tanager submission can
    demonstrate "we did not tune to our test data" with a date-locked file.
-2. **Korean Forest Service 1:5,000 forest stand map (임상도)** — 3.41 M polygons converted
+2. **Korean Forest Service 1:5,000 forest stand map** — 3.41 M polygons converted
    to per-pixel pyrophilic raster. No other entrant has this layer.
 3. **Cross-continent generalization** with a *species-aware* index, not
    a domain-specific PCA, so the index has a documented physical meaning.

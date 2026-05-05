@@ -58,7 +58,7 @@ The notebook walks through:
 1. Setup (3 min)
 2. View pre-computed examples (no compute)
 3. Sanity-check pytest (1 min)
-4. (Optional) Full pipeline — download EMIT + forest stand map (임상도) + DEM + dNBR perimeters and rebuild HSI v1 (60–90 min, ~60 GB downloads)
+4. (Optional) Full pipeline — download EMIT + forest stand map + DEM + dNBR perimeters and rebuild HSI v1 (60–90 min, ~60 GB downloads)
 5. Inspect every output figure inline
 
 ---

@@ -1,4 +1,4 @@
-"""Multi-temporal pre-fire signal visualization at Sancheong (산청).
+"""Multi-temporal pre-fire signal visualization at Sancheong.
 
 Final high-quality version. Two distinct geometries are used:
 
@@ -195,7 +195,7 @@ def render_main_figure(fr_o, lat_o, lon_o, raw_union, display_outline, dpi=200):
     ax.set_xlim(*plot_xlim); ax.set_ylim(*plot_ylim)
     ax.set_xlabel("Longitude (°E)", fontsize=12)
     ax.set_ylabel("Latitude (°N)", fontsize=12)
-    ax.set_title("Sancheong (산청) — EMIT firerisk on 2026-02-10\n"
+    ax.set_title("Sancheong — EMIT firerisk on 2026-02-10\n"
                   "(T − 1.5 months before the 2026-03-21 ignition)",
                   fontsize=13, pad=10)
     ax.grid(True, linestyle=":", alpha=0.4, zorder=2)
@@ -307,7 +307,7 @@ def render_animation(fr_o, lat_o, lon_o, display_outline, dpi=140):
                               linewidth=2.4, zorder=4)
         ax.set_xlim(cx - z, cx + z); ax.set_ylim(cy - z, cy + z)
         ax.set_xlabel("Longitude (°E)"); ax.set_ylabel("Latitude (°N)")
-        ax.set_title(f"Sancheong (산청) — EMIT firerisk on 2026-02-10\n"
+        ax.set_title(f"Sancheong — EMIT firerisk on 2026-02-10\n"
                       f"zoom: ±{z:.2f}° around future burn area",
                       fontsize=11)
         ax.grid(True, linestyle=":", alpha=0.4)

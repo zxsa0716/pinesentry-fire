@@ -14,11 +14,11 @@ Legend: ✅ done / 🟡 substituted / ⏸ abandoned (with reason) / 🚧 in prog
 
 | Item | Status | Notes |
 |---|---|---|
-| 의성 baseline EMIT (T-13mo, cc=21%) | ✅ done | `data/emit/uiseong/EMIT_L2A_RFL_001_20240216T044207_2404703_007.nc` |
-| 의성 baseline 2 (T-414d, cc=28%) | ⏸ abandoned | one EMIT scene already drives AUC = 0.747; second scene unnecessary |
-| 산청 most-recent (T-3mo, cc=37%) | ✅ done | `EMIT_L2A_RFL_001_20241219T032003_2435402_004.nc` |
-| 산청 1년 lag, dry baseline | ✅ done | 2026-02-10 + 2026-03-24 acquisitions used in §4.14 |
-| 강릉, 울진 EMIT | ⏸ abandoned (per v4.1) | NO-GO upfront, S2 13b fallback used |
+| Uiseong baseline EMIT (T-13mo, cc=21%) | ✅ done | `data/emit/uiseong/EMIT_L2A_RFL_001_20240216T044207_2404703_007.nc` |
+| Uiseong baseline 2 (T-414d, cc=28%) | ⏸ abandoned | one EMIT scene already drives AUC = 0.747; second scene unnecessary |
+| Sancheong most-recent (T-3mo, cc=37%) | ✅ done | `EMIT_L2A_RFL_001_20241219T032003_2435402_004.nc` |
+| Sancheong 1 yr lag, dry baseline | ✅ done | 2026-02-10 + 2026-03-24 acquisitions used in §4.14 |
+| Gangneung, Uljin EMIT | ⏸ abandoned (per v4.1) | NO-GO upfront, S2 13b fallback used |
 
 ## §2. HSI definition (Physiological prior)
 
@@ -66,22 +66,22 @@ explicitly.
 | LA Palisades 2025-01 Tanager | ✅ done | 8 scenes via STAC, 7.4 GB |
 | Bridge Fire (LA, 2024-09) backup | ⏸ abandoned | Palisades is enough for cross-continent; no time for Bridge |
 | Davis Fire (NV, 2024-09) backup | ⏸ abandoned | same as Bridge |
-| Korean 의성 + 산청 EMIT pre-fire | ✅ done | both Hero sites covered |
+| Korean Uiseong + Sancheong EMIT pre-fire | ✅ done | both Hero sites covered |
 
 ## §6. ONE question — dual validation
 
-> "Tanager-derived hydraulic-stress traits jointly explain (a) 광릉 KoFlux NEE residuals **and** (b) 의성·산청 2025 ignition susceptibility?"
+> "Tanager-derived hydraulic-stress traits jointly explain (a) Gwangneung KoFlux NEE residuals **and** (b) Uiseong·Sancheong 2025 ignition susceptibility?"
 
 | Item | Status | Notes |
 |---|---|---|
-| (a) 광릉 KoFlux NEE residual validation | 🚧 in progress | 2004–2008 GDK CSV in hand; substituting "Tanager-era" with this legacy dataset to satisfy the dual-validation framing |
-| (b) 의성·산청 ignition susceptibility | ✅ done | 5-site cross-validation, AUC 0.65–0.75 |
+| (a) Gwangneung KoFlux NEE residual validation | 🚧 in progress | 2004–2008 GDK CSV in hand; substituting "Tanager-era" with this legacy dataset to satisfy the dual-validation framing |
+| (b) Uiseong·Sancheong ignition susceptibility | ✅ done | 5-site cross-validation, AUC 0.65–0.75 |
 
 ## §7. Hero figure
 
 | Item | Status | Notes |
 |---|---|---|
-| Dual Hero map (의성 + 산청) | ✅ done | `data/hsi/v1/HERO_GRAND.png` 9-panel |
+| Dual Hero map (Uiseong + Sancheong) | ✅ done | `data/hsi/v1/HERO_GRAND.png` 9-panel |
 | Lift chart primary | ✅ done | row-2 of HERO_GRAND |
 | ROC + PR supplementary | ✅ done | row-1 col-3 + `data/hsi/v1/calibration*.png` |
 
@@ -100,10 +100,10 @@ explicitly.
 
 | Item | Status | Notes |
 |---|---|---|
-| EMIT 의성 ≥ 1 pre-fire scene | ✅ done | 2 clear |
-| EMIT 산청 ≥ 1 pre-fire scene | ✅ done | 5 clear |
+| EMIT Uiseong ≥ 1 pre-fire scene | ✅ done | 2 clear |
+| EMIT Sancheong ≥ 1 pre-fire scene | ✅ done | 5 clear |
 | Planet Palisades Tanager | ✅ done | 8 scenes |
-| Tanager 한국 = 0 (wishlist) | ✅ done | wishlist/korea_30_scenes.geojson |
+| Tanager Korean = 0 (wishlist) | ✅ done | wishlist/korea_30_scenes.geojson |
 | KoFlux GDK | ✅ done | 2004–2008 legacy data in hand (Tanager-era 2024+ unavailable, abandoned per user) |
 
 ## Data inventory — items abandoned with rationale

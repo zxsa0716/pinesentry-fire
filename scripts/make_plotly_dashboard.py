@@ -40,7 +40,7 @@ def main():
     cal = load("examples/tables/Brier_isotonic.json") or {}
 
     sites = ["uiseong", "sancheong", "gangneung", "uljin", "palisades"]
-    site_titles = ["의성 Uiseong", "산청 Sancheong", "강릉 Gangneung", "울진 Uljin", "Palisades (US)"]
+    site_titles = ["Uiseong", "Sancheong", "Gangneung", "Uljin", "Palisades (US)"]
     site_colors = {"uiseong": "#a50026", "sancheong": "#d73027",
                    "gangneung": "#fc8d59", "uljin": "#fd8d3c", "palisades": "#fdae61"}
 

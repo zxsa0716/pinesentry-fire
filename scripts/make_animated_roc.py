@@ -16,10 +16,10 @@ import rioxarray as rxr
 OUT = Path("examples/figures/17_animated_5site_roc.gif")
 
 SITES = [
-    ("uiseong",   "data/hsi/v1/uiseong_hsi_v1.tif",   "data/fire_perimeter/synth_uiseong_dnbr.gpkg",   "EMIT 285b · 의성 2025-03",   "#a50026"),
-    ("sancheong", "data/hsi/v1/sancheong_hsi_v1.tif", "data/fire_perimeter/synth_sancheong_dnbr.gpkg", "EMIT 285b · 산청 2025-03",   "#d73027"),
-    ("gangneung", "data/hsi/v1/gangneung_hsi_v1.tif", "data/fire_perimeter/synth_gangneung_dnbr.gpkg", "S2 13b · 강릉 2023-04",     "#fc8d59"),
-    ("uljin",     "data/hsi/v1/uljin_hsi_v1.tif",     "data/fire_perimeter/synth_uljin_dnbr.gpkg",     "S2 13b · 울진 2022-03",     "#fdae61"),
+    ("uiseong",   "data/hsi/v1/uiseong_hsi_v1.tif",   "data/fire_perimeter/synth_uiseong_dnbr.gpkg",   "EMIT 285b · Uiseong 2025-03",   "#a50026"),
+    ("sancheong", "data/hsi/v1/sancheong_hsi_v1.tif", "data/fire_perimeter/synth_sancheong_dnbr.gpkg", "EMIT 285b · Sancheong 2025-03",   "#d73027"),
+    ("gangneung", "data/hsi/v1/gangneung_hsi_v1.tif", "data/fire_perimeter/synth_gangneung_dnbr.gpkg", "S2 13b · Gangneung 2023-04",     "#fc8d59"),
+    ("uljin",     "data/hsi/v1/uljin_hsi_v1.tif",     "data/fire_perimeter/synth_uljin_dnbr.gpkg",     "S2 13b · Uljin 2022-03",     "#fdae61"),
     ("palisades", "data/hsi/v1/palisades_hsi_v1.tif", "data/fire_perimeter/nifc_palisades_2025.geojson","S2 13b · LA Palisades 2025-01 (US)", "#984ea3"),
 ]
 

@@ -3,7 +3,7 @@
 Strategy:
   - Search peninsula-wide (124-130E, 33-39N) for EMIT L2A scenes
   - Filter to scenes whose footprint contains at least one of our 8 ROIs
-    (의성, 산청, 강릉, 울진, 광릉, 지리산, 설악, 제주)
+    (Uiseong, Sancheong, Gangneung, Uljin, Gwangneung, Jirisan, Seorak, Jeju)
   - Download up to 5 winter scenes per ROI
 
 For v1 transferability across Korean peninsula.

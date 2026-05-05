@@ -42,45 +42,45 @@ OUT.parent.mkdir(parents=True, exist_ok=True)
 # Low = mesic broadleaf.
 PYROPHILIC = {
     # Pyrophilic conifers
-    "소나무": 1.00,
-    "잣나무": 0.85,
-    "낙엽송": 0.55,
-    "리기다소나무": 0.95,
-    "곰솔": 0.95,
-    "잔나무": 0.70,
-    "전나무": 0.65,
-    "편백나무": 0.60,
-    "삼나무": 0.55,
-    "비자나무": 0.50,
+    "Pinus densiflora (Korean red pine)": 1.00,
+    "Pinus koraiensis": 0.85,
+    "Larix": 0.55,
+    "Pinus rigidaPinus densiflora (Korean red pine)": 0.95,
+    "Pinus thunbergii": 0.95,
+    "Abies sp.": 0.70,
+    "Picea sp.": 0.65,
+    "Cupressus나무": 0.60,
+    "Cryptomeria": 0.55,
+    "Torreya나무": 0.50,
     "은행나무": 0.30,
     "기타침엽수": 0.65,
     # Drought-tolerant oaks (intermediate)
-    "신갈나무": 0.50,
-    "굴참나무": 0.55,
-    "상수리나무": 0.50,
+    "Quercus mongolica나무": 0.50,
+    "Quercus variabilis나무": 0.55,
+    "Quercus acutissima나무": 0.50,
     "갈참나무": 0.45,
     "졸참나무": 0.45,
     "기타 참나무류": 0.50,
     "기타참나무류": 0.50,
     # Mesic broadleaves (low pyrophilic)
     "오리나무": 0.20,
-    "자작나무": 0.25,
-    "박달나무": 0.30,
-    "밤나무": 0.30,
-    "물푸레나무": 0.25,
-    "서어나무": 0.25,
-    "느티나무": 0.20,
-    "벚나무": 0.25,
+    "Betula나무": 0.25,
+    "Betula schmidtii나무": 0.30,
+    "Castanea나무": 0.30,
+    "Fraxinus나무": 0.25,
+    "Carpinus나무": 0.25,
+    "Zelkova나무": 0.20,
+    "Prunus나무": 0.25,
     "포플러": 0.20,
     "백합나무": 0.30,
-    "아까시나무": 0.40,
+    "Robinia pseudoacacia나무": 0.40,
     "고로쇠나무": 0.30,
     "기타활엽수": 0.40,
     # Mixed
-    "침활혼효림": 0.60,
-    "죽림": 0.30,
+    "침활mixed forest": 0.60,
+    "bamboo": 0.30,
     # Non-forest
-    "비산림": 0.0,
+    "non-forest": 0.0,
     "미립목지": 0.0,
     "관목덤불": 0.20,
     "주거지": 0.0,
@@ -91,7 +91,7 @@ PYROPHILIC = {
     "기타": 0.10,
     "제지": 0.0,
 }
-PINE_NAMES = {"소나무", "잣나무", "리기다소나무", "곰솔", "잔나무", "전나무", "편백나무", "삼나무"}
+PINE_NAMES = {"Pinus densiflora (Korean red pine)", "Pinus koraiensis", "Pinus rigidaPinus densiflora (Korean red pine)", "Pinus thunbergii", "Abies sp.", "Picea sp.", "Cupressus나무", "Cryptomeria"}
 
 
 def slope_aspect(dem: np.ndarray, res_m: float) -> tuple[np.ndarray, np.ndarray]:

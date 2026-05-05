@@ -21,12 +21,25 @@
 
 <div align="center">
 
-### 🎬 The pre-fire signal — *six weeks before ignition*
+### 🎬 The whole study in 30 seconds
 
-EMIT detects pyrophilic stress at 산청 Sancheong **on 2026-02-10** — six weeks before the 2026-03-21 fire.
+A grand tour through every key result — 5 sites, 9 statistical tests,
+6 method variants, the 6-week pre-fire signal, and the 30-scene Q7 wishlist.
+
+<img src="examples/figures/00_grand_tour_animation.gif" width="90%" alt="PineSentry-Fire grand tour: 5 sites, methods, statistics, pre-fire signal, wishlist"/>
+
+</div>
+
+---
+
+<div align="center">
+
+### 📍 The headline finding — *six weeks before ignition*
+
+EMIT detects pyrophilic stress at Sancheong **on 2026-02-10** — six weeks before the 2026-03-21 fire.
 Mean firerisk_v0 inside the future burn polygon: **0.857** vs **0.711** outside (Δ = +0.146, n = 13,323, p ≈ 0).
 
-<img src="examples/figures/16_sancheong_temporal_animation.gif" width="80%" alt="Sancheong pre-fire signal animation"/>
+<img src="examples/figures/16_sancheong_pre_fire_signal.png" width="85%" alt="Sancheong pre-fire signal at T-1.5 mo"/>
 
 </div>
 
@@ -88,10 +101,10 @@ Mean firerisk_v0 inside the future burn polygon: **0.857** vs **0.711** outside 
 
 | Site | Sensor | n burn | n unburn | AUC (95 % CI) | Lift @ top-decile |
 |---|---|---:|---:|---|---:|
-| 의성 **Uiseong** 2025-03 | EMIT 285b | 25,804 | 319,923 | **0.747** [0.741, 0.752] | 2.30× |
-| 산청 **Sancheong** 2025-03 | EMIT 285b | 252 | 9,945 | **0.647** [0.617, 0.680] | 1.78× |
-| 강릉 Gangneung 2023-04 | S2 13b | 13,944 | 2,483,500 | 0.549 [0.538, 0.558] | 1.80× |
-| 울진 Uljin 2022-03 | S2 13b | 495,890 | 3,291,745 | 0.545 [0.538, 0.552] | 0.75× |
+| Uiseong **Uiseong** 2025-03 | EMIT 285b | 25,804 | 319,923 | **0.747** [0.741, 0.752] | 2.30× |
+| Sancheong **Sancheong** 2025-03 | EMIT 285b | 252 | 9,945 | **0.647** [0.617, 0.680] | 1.78× |
+| Gangneung 2023-04 | S2 13b | 13,944 | 2,483,500 | 0.549 [0.538, 0.558] | 1.80× |
+| Uljin 2022-03 | S2 13b | 495,890 | 3,291,745 | 0.545 [0.538, 0.552] | 0.75× |
 | 🇺🇸 **LA Palisades** 2025-01 | S2 13b | 672,894 | 1,628,657 | **0.678** [0.672, 0.685] | 1.42× |
 
 > Pure spectral baselines (NDVI / NDMI / NDII) **flip direction** between sites and cannot be deployed
@@ -150,7 +163,7 @@ Mean firerisk_v0 inside the future burn polygon: **0.857** vs **0.711** outside 
 ## 🔬 Method — one paragraph + diagram
 
 ```
-HSI v1(i) = 0.40 · pyrophilic(i)                  ← species (소나무 = 1.0, oak = 0.5, broadleaf = 0.2)
+HSI v1(i) = 0.40 · pyrophilic(i)                  ← species (Pinus densiflora (Korean red pine) = 1.0, oak = 0.5, broadleaf = 0.2)
           + 0.20 · south_facing(i)                ← cos(aspect − 180°) from COP-DEM 30 m
           + 0.30 · firerisk_v0(i)                 ← 0.5(1−NDII) + 0.3(NDVI⁻¹) + 0.2(red-edge senescence) from EMIT 285b
           + 0.10 · pyrophilic × south_facing      ← interaction
@@ -184,7 +197,7 @@ Each component is rescaled to [0, 1] via the 5–95 percentile range within scen
 
 **1. Git-timestamp-locked pre-registration** — weights `(0.40 / 0.20 / 0.30 / 0.10)` are committed at public Git hash `c181cc2` on 2026-04-29, *before* any cross-validation result. Verifiable via `git log c181cc2 -1`.
 
-**2. Korean Forest Service 1:5,000 forest stand map (임상도)** — 3.41 M nationwide polygons → per-pixel pyrophilic factor. Removing this layer drops Uiseong AUC by **0.108** (largest A1 contribution).
+**2. Korean Forest Service 1:5,000 forest stand map** — 3.41 M nationwide polygons → per-pixel pyrophilic factor. Removing this layer drops Uiseong AUC by **0.108** (largest A1 contribution).
 
 **3. Cross-continent generalization** — Korean conifer-tuned weights work on US chaparral (Palisades AUC 0.678) at the framework level, with honest disclosure that the per-pixel signal is partial.
 
@@ -193,7 +206,7 @@ Each component is rescaled to [0, 1] via the 5–95 percentile range within scen
 
 **4. Honest negative results documented** — RT inversion under-performs, DL over-fits spatially, NEE has opposite sign at deciduous GDK. Reviewers cannot find weaknesses we have already disclosed. See [REVIEWER_FAQ.md](docs/REVIEWER_FAQ.md).
 
-**5. Tanager 30-scene Korean wishlist** — directly answers the competition's Q7. Each scene scored by predicted HSI v1: 울진 송이림 (0.721) · 광릉 가을 단풍 (0.681) · 의성 일반산림 (0.672). See [`wishlist/`](wishlist/).
+**5. Tanager 30-scene Korean wishlist** — directly answers the competition's Q7. Each scene scored by predicted HSI v1: Uljin matsutake forest (0.721) · Gwangneung autumn autumn senescence (0.681) · Uiseong general forest (0.672). See [`wishlist/`](wishlist/).
 
 </td>
 </tr>
@@ -294,14 +307,14 @@ pinesentry-fire/
 1. **Pine inversion** — empirical hydraulic-stress proxies (EWT/NDII/NDVI) score winter pines as "safe" yet pines burn first because of low P50 + resin/wax — captured only when species pyrophilic factor + south-facing slope are added.
 2. **Site-specific direction flip in spectral baselines** — NDVI raw works for Uiseong, NDMI inverted works for Sancheong. No single spectral direction generalizes. HSI v1 generalizes with one direction.
 3. **5-nm SWIR matters** — EMIT (285 b) gets AUC 0.65–0.75 on Korean sites; S2 (13 b broadband) gets 0.54–0.55. The +0.04–0.20 gap is the case for Tanager 5 nm sampling.
-4. **Korean Forest Service 1:5,000 forest stand map (임상도) is the unsung hero** — 161 K polygons across 8 ROIs convert species + age + density into a per-pixel P50 raster directly usable for HSM computation.
+4. **Korean Forest Service 1:5,000 forest stand map is the unsung hero** — 161 K polygons across 8 ROIs convert species + age + density into a per-pixel P50 raster directly usable for HSM computation.
 5. **Pre-registration is verifiable** — weights are physiologically motivated, NOT data-fit on any held-out site. Per-site tuning *loses* 6.2 AUC points on cross-site transfer (direct empirical defense).
 
 ---
 
 ## 🙏 Acknowledgements
 
-This submission uses NASA EMIT L2A reflectance (URS), Tanager-1 imagery © Planet Labs PBC (CC-BY-4.0 via the [Tanager Open Data Catalog](https://www.planet.com/data/stac/tanager-core-imagery/)), ESA Sentinel-2 + Copernicus DEM 30 m + WorldCover 10 m, Korean Forest Service 1:5,000 forest stand map + 산불통계 (data.go.kr), AsiaFlux KoFlux GDK 2004–2008, NIFC + MTBS US burn perimeters, and the GEDI L4A / MOD13Q1 / MOD14A1 / SMAP L4 NASA archives.
+This submission uses NASA EMIT L2A reflectance (URS), Tanager-1 imagery © Planet Labs PBC (CC-BY-4.0 via the [Tanager Open Data Catalog](https://www.planet.com/data/stac/tanager-core-imagery/)), ESA Sentinel-2 + Copernicus DEM 30 m + WorldCover 10 m, Korean Forest Service 1:5,000 forest stand map + wildfire statistics (data.go.kr), AsiaFlux KoFlux GDK 2004–2008, NIFC + MTBS US burn perimeters, and the GEDI L4A / MOD13Q1 / MOD14A1 / SMAP L4 NASA archives.
 
 ---
 

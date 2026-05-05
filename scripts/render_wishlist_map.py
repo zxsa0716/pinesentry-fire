@@ -54,12 +54,12 @@ def main():
     ax.grid(True, linestyle=":", alpha=0.3)
 
     legend_groups = [
-        ("광릉 KoFlux super-site (8)", "#1a9850"),
-        ("백두대간 transect (6)", "#fd8d3c"),
-        ("동해안 fire-prone (6)", "#a50026"),
-        ("송이림 Pinus densiflora (4)", "#984ea3"),
+        ("Gwangneung KoFlux super-site (8)", "#1a9850"),
+        ("Baekdudaegan transect (6)", "#fd8d3c"),
+        ("East Coast fire-prone (6)", "#a50026"),
+        ("matsutake forest Pinus densiflora (4)", "#984ea3"),
         ("DMZ untouched (3)", "#74add1"),
-        ("한라산 + 제주 (3)", "#fee08b"),
+        ("Hallasan + Jeju (3)", "#fee08b"),
     ]
     handles = [mpatches.Patch(color=c, label=l) for l, c in legend_groups]
     ax.legend(handles=handles, loc="upper left", fontsize=8, framealpha=0.95)

@@ -51,7 +51,7 @@ before it ignites?</strong></p>
 
 <h2 id="method">2. Method (one paragraph)</h2>
 <p>Per-pixel <strong>Hydraulic Stress Index (HSI v1)</strong> as a fixed convex combination
-of (i) species pyrophilic factor from Korean Forest Service 1:5,000 forest stand map (임상도)
+of (i) species pyrophilic factor from Korean Forest Service 1:5,000 forest stand map
 (3.41 M polygons), (ii) south-facing slope from COP-DEM 30 m,
 (iii) empirical SWIR firerisk_v0 from EMIT 285-band reflectance,
 (iv) species × terrain interaction. Weights
@@ -172,7 +172,7 @@ full DOFA + LoRA pretraining for the August deadline.
 <li><strong>OSF pre-registration on weights</strong> — date-locked at <code>c181cc2</code>
 (2026-04-29). Verifiable via <code>git log c181cc2 -1</code>. No other Tanager
 submission can demonstrate "we did not tune to test data" with a date-stamped file.</li>
-<li><strong>Korean Forest Service 1:5,000 forest stand map (임상도)</strong> — 3.41 M polygons converted
+<li><strong>Korean Forest Service 1:5,000 forest stand map</strong> — 3.41 M polygons converted
 to per-pixel pyrophilic raster. Removing this layer drops Uiseong AUC by 0.108
 (largest A1 component contribution). No other entrant has this layer.</li>
 <li><strong>Cross-continent generalization</strong> — Korean conifer-tuned weights work
@@ -190,13 +190,13 @@ data would maximize information gain.</li>
 <h2 id="wishlist">11. Tanager 30-scene wishlist priority (top 7 with HSI scores)</h2>
 <p>From <code>wishlist/korea_30_scenes_priority.csv</code>:</p>
 <ol>
-<li>울진 송이림 — predicted HSI 0.721 (Tricholoma matsutake pine forests)</li>
-<li>광릉 가을 단풍 — predicted HSI 0.681 (autumn senescence transition)</li>
-<li>의성 일반산림 — predicted HSI 0.672 (re-image 2025-03 fire scar)</li>
-<li>한라 활엽수림 — predicted HSI 0.485</li>
-<li>한라 침엽수림 — predicted HSI 0.382</li>
-<li>광릉 KoFlux GDK super-site — predicted HSI 0.367</li>
-<li>산청 천왕봉 침엽수림 — predicted HSI 0.348</li>
+<li>Uljin matsutake forest — predicted HSI 0.721 (Tricholoma matsutake pine forests)</li>
+<li>Gwangneung autumn autumn senescence — predicted HSI 0.681 (autumn senescence transition)</li>
+<li>Uiseong general forest — predicted HSI 0.672 (re-image 2025-03 fire scar)</li>
+<li>Halla broadleaf forest — predicted HSI 0.485</li>
+<li>Halla coniferous forest — predicted HSI 0.382</li>
+<li>Gwangneung KoFlux GDK super-site — predicted HSI 0.367</li>
+<li>Sancheong Cheonwangbong peak coniferous forest — predicted HSI 0.348</li>
 </ol>
 <p>If granted Tanager scenes, top-3 acquisitions would let us run v2 PROSPECT
 inversion + species-discriminant analysis at 5 nm SWIR — closing the 0.10 AUC

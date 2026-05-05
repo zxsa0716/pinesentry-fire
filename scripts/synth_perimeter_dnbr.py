@@ -1,6 +1,6 @@
 """Auto-synthesize fire perimeters from Sentinel-2 dNBR.
 
-Backup for the data.go.kr 산불 피해지 polygon when the official
+Backup for the data.go.kr wildfire 피해지 polygon when the official
 shapefile is not yet released for 2025 fires (Uiseong, Sancheong).
 
 Method:

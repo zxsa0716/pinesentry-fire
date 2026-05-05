@@ -26,10 +26,10 @@ Initial submission-ready release for the Planet Tanager Open Data Competition 20
 
 | Site | Sensor | AUC | Lift@10% |
 |---|---|---:|---:|
-| 의성 Uiseong 2025-03 | EMIT 285b | 0.7467 | 2.30× |
-| 산청 Sancheong 2025-03 | EMIT 285b | 0.6471 | 1.75× |
-| 강릉 Gangneung 2023-04 | S2 13b (fallback) | 0.5487 | 1.97× |
-| 울진 Uljin 2022-03 | S2 13b (fallback) | 0.5446 | 0.75× |
+| Uiseong 2025-03 | EMIT 285b | 0.7467 | 2.30× |
+| Sancheong 2025-03 | EMIT 285b | 0.6471 | 1.75× |
+| Gangneung 2023-04 | S2 13b (fallback) | 0.5487 | 1.97× |
+| Uljin 2022-03 | S2 13b (fallback) | 0.5446 | 0.75× |
 
 ### Added
 

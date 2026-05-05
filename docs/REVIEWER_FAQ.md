@@ -98,16 +98,16 @@ add to v1 (Tanager-era US Park Fire data exists; we did not include
 it in the v1 evaluation to keep the git-timestamp-locked pre-registration tight on
 Korean fires).
 
-## Q7. "Korean Forest Service 1:5,000 forest stand map (임상도) — is it really worth
+## Q7. "Korean Forest Service 1:5,000 forest stand map — is it really worth
 that 0.10 AUC bump?"
 
 **Answer**: A1 leave-one-out (`TABLE.md` Table 7): removing the
 pyrophilic component drops Uiseong AUC by 0.108 — the *single largest*
-component contribution. The forest stand map (임상도) layer (3.41 M nationwide polygons,
+component contribution. The forest stand map layer (3.41 M nationwide polygons,
 161K in our 8 ROIs) gives per-pixel species + age + density that no
 satellite-derived land-cover product matches. ESA WorldCover 10 m gets
 us "Tree" / "Shrub" but not "Pinus densiflora" vs "Quercus mongolica".
-The forest stand map (임상도) is the difference between a 0.64 and a 0.75 AUC system,
+The forest stand map is the difference between a 0.64 and a 0.75 AUC system,
 and it was unsung in prior literature.
 
 ## Q8. "What about deep learning? DOFA, transformers, foundation models?"
@@ -126,11 +126,11 @@ priors is *empirically* the more cross-spatial generalizable design
 for this problem, regardless of what a foundation model could do
 with hundreds of fire scenes.
 
-## Q9. "The 광릉 KoFlux NEE correlation is opposite the conifer fire
+## Q9. "The Gwangneung KoFlux NEE correlation is opposite the conifer fire
 hypothesis. Doesn't that falsify the framework?"
 
 **Answer**: No — it clarifies it. GDK is a *deciduous oak* forest
-(활엽수림 우점), not a conifer forest. At GDK, summer NEE is
+(broadleaf forest dominant), not a conifer forest. At GDK, summer NEE is
 light-limited, so high-VPD / high-light conditions correlate with
 *more* C uptake, not less. The pooled n=3,770 correlation
 (r = -0.117, p = 5×10⁻¹³) confirms there *is* a robust hydraulic
@@ -145,11 +145,11 @@ scenes?"
 
 **Answer**: From `wishlist/korea_30_scenes_priority.csv` (top of the
 ranked list by predicted HSI v1):
-1. 울진 송이림 (HSI 0.721) — *Tricholoma matsutake* pine forests
-2. 광릉 가을 단풍 (HSI 0.681) — autumn senescence transition
-3. 의성 일반산림 (HSI 0.672) — re-imaging the 2025-03 fire scar
-4. 한라 활엽수림 + 침엽수림 (HSI 0.382-0.485) — Jeju subtropical
-5. 산청 천왕봉 침엽수림 (HSI 0.348) — high-elevation Pinus
+1. Uljin matsutake forest (HSI 0.721) — *Tricholoma matsutake* pine forests
+2. Gwangneung autumn autumn senescence (HSI 0.681) — autumn senescence transition
+3. Uiseong general forest (HSI 0.672) — re-imaging the 2025-03 fire scar
+4. Halla broadleaf forest + coniferous forest (HSI 0.382-0.485) — Jeju subtropical
+5. Sancheong Cheonwangbong peak coniferous forest (HSI 0.348) — high-elevation Pinus
 
 A win = 30 Tanager scenes targeted at the top-ranked sites would let
 us run v2 PROSPECT inversion, v2.5 PROSAIL canopy, and v3 species-

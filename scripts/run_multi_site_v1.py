@@ -1,4 +1,4 @@
-"""Multi-site v1 driver: 의성 + 산청 cross-application + leave-one-out.
+"""Multi-site v1 driver: Uiseong + Sancheong cross-application + leave-one-out.
 
 For each Korean fire site that has an EMIT baseline scene + imsangdo
 clip + dNBR perimeter:

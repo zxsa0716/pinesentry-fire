@@ -26,10 +26,10 @@ def main():
     lift_hi = [s[k]["lift_q975"] for k in sites]
 
     label_map = {
-        "uiseong": "의성 Uiseong\n(EMIT 285b, KR)",
-        "sancheong": "산청 Sancheong\n(EMIT 285b, KR)",
-        "gangneung": "강릉 Gangneung\n(S2 13b, KR)",
-        "uljin": "울진 Uljin\n(S2 13b, KR)",
+        "uiseong": "Uiseong\n(EMIT 285b, KR)",
+        "sancheong": "Sancheong\n(EMIT 285b, KR)",
+        "gangneung": "Gangneung\n(S2 13b, KR)",
+        "uljin": "Uljin\n(S2 13b, KR)",
         "palisades": "Palisades\n(S2 13b, US)",
     }
     color_map = {

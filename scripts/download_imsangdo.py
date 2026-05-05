@@ -1,4 +1,4 @@
-"""Download 산림청 임상도 1:25,000 + 산불 GIS for Korean validation.
+"""Download Korean Forest Service forest stand map 1:25,000 + wildfire GIS for Korean validation.
 
 Requires data.go.kr 인증서 로그인 (set DATA_GO_KR_KEY in env).
 """
@@ -22,7 +22,7 @@ ROIS = {
     "gwangneung": "127.10,37.70,127.20,37.80",
     "jirisan":    "127.60,35.20,127.90,35.50",
     "seorak":     "128.30,38.00,128.55,38.20",
-    "jeju":       "126.50,33.20,126.80,33.40",  # 한라산
+    "jeju":       "126.50,33.20,126.80,33.40",  # Hallasan
 }
 
 

@@ -10,9 +10,9 @@ This is a v0 pragmatic pipeline:
   4. EWT (mm) ≈ 0.30 + 0.20 * NDII             (empirical, Yebra 2013-ish)
      LMA (g/m²) ≈ 60 + 100 * NDVI              (placeholder, NDVI-LMA proxy)
   5. Ortho via the EMIT GLT lookup table on the location group.
-  6. P50 species map: rasterize 의성 임상도 polygons → KOFTR_GROU_CD →
-     species P50 (소나무 11→-3.0, 잣 12→-2.8, 신갈 32→-2.5, 굴참 33→-2.4,
-     상수리 31→-2.5, 기타참 34→-2.5, 기타 →-2.7)
+  6. P50 species map: rasterize Uiseong forest stand map polygons → KOFTR_GROU_CD →
+     species P50 (Pinus densiflora (Korean red pine) 11→-3.0, 잣 12→-2.8, Quercus mongolica 32→-2.5, Quercus variabilis 33→-2.4,
+     Quercus acutissima 31→-2.5, 기타참 34→-2.5, 기타 →-2.7)
   7. HSI = 0.5*(1-HSM_norm) + 0.3*(1-EWT_norm) + 0.2*LMA_norm
      where HSM = psi_min - p50, psi_min = -0.3/EWT - 1.5
   8. Save:
@@ -50,68 +50,68 @@ OUT_DIR.mkdir(parents=True, exist_ok=True)
 # Species P50 (MPa) from TRY DB / lit consensus, keyed by both KOFTR code and Korean name.
 # Imsangdo clip currently exposes KOFTR_NM (한글명) only — code column dropped.
 P50_BY_KOFTR_CODE = {
-    "11": -3.0,  # 소나무
-    "12": -2.8,  # 잣나무
-    "13": -2.4,  # 낙엽송
-    "14": -3.5,  # 리기다소나무
-    "15": -3.0,  # 곰솔
-    "16": -3.0,  # 잔나무
-    "17": -3.2,  # 편백나무
-    "18": -2.8,  # 삼나무
-    "31": -2.5,  # 상수리
-    "32": -2.5,  # 신갈
-    "33": -2.4,  # 굴참
+    "11": -3.0,  # Pinus densiflora (Korean red pine)
+    "12": -2.8,  # Pinus koraiensis
+    "13": -2.4,  # Larix
+    "14": -3.5,  # Pinus rigidaPinus densiflora (Korean red pine)
+    "15": -3.0,  # Pinus thunbergii
+    "16": -3.0,  # Abies sp.
+    "17": -3.2,  # Cupressus나무
+    "18": -2.8,  # Cryptomeria
+    "31": -2.5,  # Quercus acutissima
+    "32": -2.5,  # Quercus mongolica
+    "33": -2.4,  # Quercus variabilis
     "34": -2.5,  # 기타참나무
     "35": -1.5,  # 오리나무 (riparian)
-    "37": -1.8,  # 자작나무
-    "39": -2.2,  # 밤나무
+    "37": -1.8,  # Betula나무
+    "39": -2.2,  # Castanea나무
     "44": -2.0,  # 백합
-    "47": -2.0,  # 느티
-    "49": -2.0,  # 아까시
+    "47": -2.0,  # Zelkova
+    "49": -2.0,  # Robinia pseudoacacia
     "10": -2.7,  # 기타침엽수
     "30": -2.3,  # 기타활엽수
 }
 P50_BY_KOFTR_NM = {
     # Coniferous
-    "소나무": -3.0,
-    "잣나무": -2.8,
-    "낙엽송": -2.4,
-    "리기다소나무": -3.5,
-    "곰솔": -3.0,
-    "잔나무": -3.0,
-    "전나무": -3.0,
-    "편백나무": -3.2,
-    "삼나무": -2.8,
-    "비자나무": -2.5,
+    "Pinus densiflora (Korean red pine)": -3.0,
+    "Pinus koraiensis": -2.8,
+    "Larix": -2.4,
+    "Pinus rigidaPinus densiflora (Korean red pine)": -3.5,
+    "Pinus thunbergii": -3.0,
+    "Abies sp.": -3.0,
+    "Picea sp.": -3.0,
+    "Cupressus나무": -3.2,
+    "Cryptomeria": -2.8,
+    "Torreya나무": -2.5,
     "은행나무": -2.0,
     "기타침엽수": -2.7,
     # Broadleaf — Quercus group (drought-resistant)
-    "신갈나무": -2.5,
-    "굴참나무": -2.4,
-    "상수리나무": -2.5,
+    "Quercus mongolica나무": -2.5,
+    "Quercus variabilis나무": -2.4,
+    "Quercus acutissima나무": -2.5,
     "갈참나무": -2.5,
     "졸참나무": -2.5,
     "기타 참나무류": -2.5,
     "기타참나무류": -2.5,
     # Other broadleaf
     "오리나무": -1.5,
-    "자작나무": -1.8,
-    "박달나무": -2.0,
-    "밤나무": -2.2,
-    "물푸레나무": -2.0,
-    "서어나무": -2.0,
-    "느티나무": -2.0,
-    "벚나무": -1.8,
+    "Betula나무": -1.8,
+    "Betula schmidtii나무": -2.0,
+    "Castanea나무": -2.2,
+    "Fraxinus나무": -2.0,
+    "Carpinus나무": -2.0,
+    "Zelkova나무": -2.0,
+    "Prunus나무": -1.8,
     "포플러": -1.5,
     "백합나무": -2.0,
-    "아까시나무": -2.0,
+    "Robinia pseudoacacia나무": -2.0,
     "고로쇠나무": -1.8,
     "기타활엽수": -2.3,
     # Mixed / bamboo
-    "침활혼효림": -2.5,
-    "죽림": -2.0,
+    "침활mixed forest": -2.5,
+    "bamboo": -2.0,
     # Non-forest (excluded)
-    "비산림": float("nan"),
+    "non-forest": float("nan"),
     "미립목지": float("nan"),
     "관목덤불": float("nan"),
     "주거지": float("nan"),

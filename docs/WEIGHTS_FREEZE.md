@@ -36,15 +36,15 @@ within the site before the weighted sum.
 
 | Species | Korean | factor |
 |---|---|---:|
-| *Pinus densiflora* | 소나무 | 1.00 |
-| *P. thunbergii* / *P. rigida* | 곰솔 / 리기다 | 0.95 |
-| *P. koraiensis* | 잣나무 | 0.85 |
-| *Abies* / *Picea* spp. | 잔나무 / 전나무 | 0.65–0.70 |
-| *Cupressus* / *Cryptomeria* / *Larix* | 편백 / 삼나무 / 낙엽송 | 0.50–0.60 |
-| Oak (*Quercus* spp.) | 신갈 / 굴참 / 상수리 | 0.45–0.55 |
-| *Robinia pseudoacacia* (invasive) | 아까시 | 0.40 |
-| Mesic broadleaf | 자작 / 박달 / 느티 / 벚 | 0.20–0.30 |
-| Non-forest | 비산림 | 0.00 |
+| *Pinus densiflora* | Pinus densiflora (Korean red pine) | 1.00 |
+| *P. thunbergii* / *P. rigida* | Pinus thunbergii / Pinus rigida | 0.95 |
+| *P. koraiensis* | Pinus koraiensis | 0.85 |
+| *Abies* / *Picea* spp. | Abies / Picea spp. | 0.65–0.70 |
+| *Cupressus* / *Cryptomeria* / *Larix* | Cupressus / Cryptomeria / Larix | 0.50–0.60 |
+| Oak (*Quercus* spp.) | Quercus species (oaks) | 0.45–0.55 |
+| *Robinia pseudoacacia* (invasive) | Robinia pseudoacacia | 0.40 |
+| Mesic broadleaf | Betula / mesic broadleaf | 0.20–0.30 |
+| Non-forest | non-forest | 0.00 |
 
 ## 3. Pre-registered metrics and thresholds
 
@@ -56,12 +56,12 @@ within the site before the weighted sum.
 
 ## 4. Pre-registered datasets
 
-- 의성: `EMIT_L2A_RFL_001_20240216T044207_2404703_007` (T−13 mo, cc=21 %, covers fire)
-- 산청: `EMIT_L2A_RFL_001_20241219T032003_2435402_004` (T−3 mo, cc<5 %)
+- Uiseong: `EMIT_L2A_RFL_001_20240216T044207_2404703_007` (T−13 mo, cc=21 %, covers fire)
+- Sancheong: `EMIT_L2A_RFL_001_20241219T032003_2435402_004` (T−3 mo, cc<5 %)
 - dNBR: Sentinel-2 NBR pre/post (S2A/B/C, lowest cc per window)
-  - 의성: 2025-03-14 → 2025-04-26
-  - 산청: 2025-01-21 → 2025-03-22
-- forest stand map (임상도): `TB_FGDI_FS_IM5000.gdb` (Korean Forest Service (산림청), 2021 현행화) clipped to 8 ROIs
+  - Uiseong: 2025-03-14 → 2025-04-26
+  - Sancheong: 2025-01-21 → 2025-03-22
+- forest stand map: `TB_FGDI_FS_IM5000.gdb` (Korean Forest Service, 2021 updated) clipped to 8 ROIs
 
 ## 5. What will NOT be done post-hoc
 
@@ -82,8 +82,8 @@ within the site before the weighted sum.
 
 | Site | n_burn | n_unburn | AUC | Lift@10% | MW p |
 |---|---:|---:|---:|---:|---|
-| 의성 Uiseong | 25,804 | 319,923 | 0.7467 | 2.30× | ≈ 0 |
-| 산청 Sancheong | 252 | 9,945 | 0.6471 | 1.75× | 6.9 × 10⁻¹⁶ |
+| Uiseong | 25,804 | 319,923 | 0.7467 | 2.30× | ≈ 0 |
+| Sancheong | 252 | 9,945 | 0.6471 | 1.75× | 6.9 × 10⁻¹⁶ |
 
 Both meet the pre-registered AUC ≥ 0.65 / lift ≥ 1.5× / p < 0.001 thresholds.
 HSI v0 (single-layer empirical) achieved 0.697 / 0.605 — the v1 weighted

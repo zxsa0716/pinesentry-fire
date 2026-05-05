@@ -19,6 +19,7 @@ examples/
 
 | File | Panels | Description |
 |---|---|---|
+| `00_grand_tour_animation.gif` | 16 frames | **Whole-study tour**: title → 5 sites → ROC envelope → methods → ablation → permutation null → Boyce → calibration → pre-fire signal → trait inversion → wishlist → closing. |
 | `01_HERO_GRAND_9panel.png` | 9 | Top: Uiseong + Sancheong HSI maps, 5-site ROC overlay. Mid: AUC vs S2 baseline bar, 2× lift charts. Bottom: 8-ROI peninsula HSI atlas. |
 | `02_HERO_methods_6panel.png` | 6 | (a) method ladder, (b) cross-site weight transfer (OSF defense), (c) GEE OR + Moran I, (d) permutation null, (e) Boyce ρ, (f) per-species AUC. |
 | `03_HERO_roc_envelope_5site.png` | 5 | 5-site ROC with 95% bootstrap envelope (n=200). Uncertainty as a *shape*. |

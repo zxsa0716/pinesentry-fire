@@ -1,7 +1,7 @@
 """KoFlux GDK NEE residual validation (dual-validation Part A from v4.1 §6).
 
 The original v4.1 design called for testing whether Tanager-derived
-hydraulic-stress traits predict NEE residuals at the 광릉 (Gwangneung
+hydraulic-stress traits predict NEE residuals at the Gwangneung (Gwangneung
 Deciduous Korea, GDK) KoFlux super-site. Tanager-era GDK data is
 unavailable (per user — assume permanently). We substitute with the
 LEGACY KoFlux GDK CSVs that are in hand: 2004, 2005, 2006, 2007, 2008.

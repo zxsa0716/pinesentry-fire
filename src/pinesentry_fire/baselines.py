@@ -63,8 +63,8 @@ def fwi_simple(temp_c: xr.DataArray, rh_pct: xr.DataArray, wind_kmh: xr.DataArra
 
 
 def korean_dwi(temp_c: xr.DataArray, rh_pct: xr.DataArray, wind_ms: xr.DataArray, days_since_rain: xr.DataArray) -> xr.DataArray:
-    """Korean 산림청 Daily Weather Index (Won et al. 2019 한국임학회지).
+    """Korean Korean Forest Service Daily Weather Index (Won et al. 2019 Koreanforest stand학회site).
 
-    Operational index used by 산림청 산불대응센터.
+    Operational index used by Korean Forest Service wildfire eungsendata.
     """
     return 0.5 * temp_c + 0.3 * (100 - rh_pct) + 0.1 * wind_ms + 0.1 * days_since_rain.clip(0, 30)

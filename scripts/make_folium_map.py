@@ -16,13 +16,13 @@ OUT = Path("reports/REPORT_MAP.html")
 
 SITES = [
     ("uiseong",   (36.45, 128.70),  "data/fire_perimeter/synth_uiseong_dnbr.gpkg",
-        "EMIT 285b · AUC 0.747 · 의성 2025-03"),
+        "EMIT 285b · AUC 0.747 · Uiseong 2025-03"),
     ("sancheong", (35.36, 127.86),  "data/fire_perimeter/synth_sancheong_dnbr.gpkg",
-        "EMIT 285b · AUC 0.647 · 산청 2025-03"),
+        "EMIT 285b · AUC 0.647 · Sancheong 2025-03"),
     ("gangneung", (37.78, 128.85),  "data/fire_perimeter/synth_gangneung_dnbr.gpkg",
-        "S2 13b · AUC 0.549 · 강릉 2023-04"),
+        "S2 13b · AUC 0.549 · Gangneung 2023-04"),
     ("uljin",     (37.05, 129.40),  "data/fire_perimeter/synth_uljin_dnbr.gpkg",
-        "S2 13b · AUC 0.545 · 울진 2022-03"),
+        "S2 13b · AUC 0.545 · Uljin 2022-03"),
     ("palisades", (34.07, -118.55), "data/fire_perimeter/nifc_palisades_2025.geojson",
         "S2 13b · AUC 0.678 · LA Palisades 2025-01 (cross-continent)"),
     ("park_fire", (40.08, -121.78), "data/fire_perimeter/mtbs_park_2024.gpkg",

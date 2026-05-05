@@ -8,7 +8,7 @@
 ## Why this matters — at a glance
 
 **The Korean spring fire problem.** Korean spring wildfires are dominated by
-*Pinus densiflora* (소나무, red pine), which is uniquely flammable because of
+*Pinus densiflora* (Pinus densiflora (Korean red pine), red pine), which is uniquely flammable because of
 volatile resin, waxy cuticles, low hydraulic safety margin (P50 ≈ −2.5 to
 −3.5 MPa), and a tendency to occupy south-facing slopes that desiccate first.
 
@@ -22,7 +22,7 @@ water* is not the right feature — **species identity + terrain dryness** is.
 components with weights pre-registered before any cross-validation:
 
 ```
-HSI v1 = 0.40 × pyrophilic     (species, from Korean Forest Service 임상도 stand map)
+HSI v1 = 0.40 × pyrophilic     (species, from Korean Forest Service forest stand map stand map)
        + 0.20 × south_facing   (COP-DEM 30 m aspect → cos(aspect − 180°))
        + 0.30 × firerisk_v0    (EMIT 285-band NDII / NDVI / red-edge senescence)
        + 0.10 × pyro × south   (species × terrain interaction)
@@ -40,10 +40,10 @@ wishlist scene is scored quantitatively rather than nominated by intuition.
 
 | Site | Sensor | AUC (95 % CI) | Lift @ top-decile |
 |---|---|---|---:|
-| 의성 Uiseong 2025-03 | EMIT 285b | **0.747** [0.741, 0.752] | 2.30× |
-| 산청 Sancheong 2025-03 | EMIT 285b | **0.647** [0.617, 0.680] | 1.78× |
-| 강릉 Gangneung 2023-04 | Sentinel-2 13b | 0.549 [0.538, 0.558] | 1.80× |
-| 울진 Uljin 2022-03 | Sentinel-2 13b | 0.545 [0.538, 0.552] | 0.75× |
+| Uiseong 2025-03 | EMIT 285b | **0.747** [0.741, 0.752] | 2.30× |
+| Sancheong 2025-03 | EMIT 285b | **0.647** [0.617, 0.680] | 1.78× |
+| Gangneung 2023-04 | Sentinel-2 13b | 0.549 [0.538, 0.558] | 1.80× |
+| Uljin 2022-03 | Sentinel-2 13b | 0.545 [0.538, 0.552] | 0.75× |
 | 🇺🇸 Palisades (LA) 2025-01 | Sentinel-2 13b | **0.678** [0.672, 0.685] | 1.42× |
 
 **Pre-fire lead time.** EMIT detects the pyrophilic stress signal at Sancheong
@@ -100,7 +100,7 @@ slope-aspect dryness into the spectral risk score.
 |---|---|---|---|
 | EMIT L2A reflectance | NASA / JPL | Uiseong 2024-02-16, Sancheong 2026-03-24, 6 KR atlas ROIs | 285 bands, ~7.4 nm SWIR, ISOFIT atmosphere |
 | Sentinel-2 L2A | ESA / Copernicus | Gangneung, Uljin (KR), Palisades (US) | 13 broadband fallback |
-| Korean Forest Service 1:5,000 forest stand map (임상도) | KFS / NSDI | 8 ROIs, 161 K polygons clipped | KOFTR_NM Korean species names |
+| Korean Forest Service 1:5,000 forest stand map | KFS / NSDI | 8 ROIs, 161 K polygons clipped | KOFTR_NM Korean species names |
 | COP-DEM 30 m | ESA | All sites | Slope/aspect → south-facing |
 | ESA WorldCover 10 m | ESA | Palisades (US chaparral pyrophilic) | Tree=0.65, Shrub=0.50 |
 | dNBR perimeters | Sentinel-2 derived | 4 Korean fires | Key & Benson 2006 threshold > 0.27 |
@@ -130,8 +130,8 @@ Each component is rescaled to [0, 1] via the 5–95 percentile range
 within each scene to make the index sensor-agnostic.
 
 - **pyrophilic(i)**: Korean Forest Service 1:5,000 stand polygons
-  rasterized at the EMIT grid. Lookup: 소나무 (P. densiflora) = 1.0,
-  잣나무 (P. koraiensis) = 0.9, 곰솔 (P. thunbergii) = 1.0,
+  rasterized at the EMIT grid. Lookup: Pinus densiflora = 1.0,
+  Pinus koraiensis = 0.9, Pinus thunbergii = 1.0,
   oak (Quercus spp.) = 0.5, mesic broadleaf = 0.2, non-forest = 0.0.
   US analogue from ESA WorldCover: Tree = 0.65 (evergreen
   generalized), Shrub = 0.50 (chaparral), Grass = 0.30, Built = 0.05.
@@ -170,18 +170,18 @@ LAI (m²/m²). Outputs are clipped to the training-physical bounds
 
 | Site | Sensor | n_burn | n_unburn | AUC | 95 % CI | Lift@10 % | MW p |
 |---|---|---:|---:|---:|---|---:|---|
-| 의성 Uiseong 2025-03 | EMIT 285b | 25,804 | 319,923 | **0.7467** | [0.741, 0.752] | 2.30× | ≈ 0 |
-| 산청 Sancheong 2025-03 | EMIT 285b | 252 | 9,945 | **0.6471** | [0.617, 0.680] | 1.78× | 6.9 × 10⁻¹⁶ |
-| 강릉 Gangneung 2023-04 | S2 13b | 13,944 | 2,483,500 | **0.5487** | [0.538, 0.558] | 1.80× | small |
-| 울진 Uljin 2022-03 | S2 13b | 495,890 | 3,291,745 | **0.5446** | [0.538, 0.552] | 0.75× | small |
+| Uiseong 2025-03 | EMIT 285b | 25,804 | 319,923 | **0.7467** | [0.741, 0.752] | 2.30× | ≈ 0 |
+| Sancheong 2025-03 | EMIT 285b | 252 | 9,945 | **0.6471** | [0.617, 0.680] | 1.78× | 6.9 × 10⁻¹⁶ |
+| Gangneung 2023-04 | S2 13b | 13,944 | 2,483,500 | **0.5487** | [0.538, 0.558] | 1.80× | small |
+| Uljin 2022-03 | S2 13b | 495,890 | 3,291,745 | **0.5446** | [0.538, 0.552] | 0.75× | small |
 | Palisades 2025-01 (US) | S2 13b | 672,894 | 1,628,657 | **0.6781** | [0.672, 0.685] | 1.42× | ≈ 0 |
 
 ### 4.2 — Spectral-baseline comparison (EMIT scenes only)
 
 | Site | NDVI | NDMI | NDII | **HSI v1** |
 |---|---:|---:|---:|---:|
-| 의성 (raw direction wins) | 0.846 | 0.809 | 0.809 | 0.747 |
-| 산청 (NDMI inverted wins) | 0.535 | 0.634 | 0.634 | 0.647 |
+| Uiseong (raw direction wins) | 0.846 | 0.809 | 0.809 | 0.747 |
+| Sancheong (NDMI inverted wins) | 0.535 | 0.634 | 0.634 | 0.647 |
 | Direction stable across sites | NO | NO | NO | **YES** |
 
 NDVI wins single-site Uiseong, but the direction must FLIP for Sancheong
@@ -326,12 +326,12 @@ which is why absolute AUCs differ from §4.1.)
 
 | Site | KFS class (FRTP_NM) | n total | n burn | AUC |
 |---|---|---:|---:|---:|
-| Uiseong | 침엽수림 (conifer) | 127,615 | 19,225 | 0.543 |
-| Uiseong | 활엽수림 (broadleaf) | 78,921 | 2,219 | 0.587 |
-| Uiseong | 혼효림 (mixed) | 33,371 | 3,861 | 0.579 |
-| Uiseong | 죽림/조림지 (bamboo/plantation) | 12,477 | 215 | 0.719 |
-| Sancheong | 활엽수림 (broadleaf) | 6,308 | 149 | 0.677 |
-| Sancheong | 침엽수림 (conifer) | 2,358 | 28 | 0.674 |
+| Uiseong | coniferous forest (conifer) | 127,615 | 19,225 | 0.543 |
+| Uiseong | broadleaf forest (broadleaf) | 78,921 | 2,219 | 0.587 |
+| Uiseong | mixed forest (mixed) | 33,371 | 3,861 | 0.579 |
+| Uiseong | bamboo/plantation (bamboo/plantation) | 12,477 | 215 | 0.719 |
+| Sancheong | broadleaf forest (broadleaf) | 6,308 | 149 | 0.677 |
+| Sancheong | coniferous forest (conifer) | 2,358 | 28 | 0.674 |
 
 The conifer-cohort AUC = 0.54 at Uiseong is lower than the all-class
 AUC = 0.747 because all conifers receive pyrophilic = 1.0 — within-cohort
@@ -558,7 +558,7 @@ DOI before the 8/31 submission.
 ## 7 — Acknowledgements
 
 NASA EMIT mission (PI: David Schimel, JPL); Korea Forest Service
-National Spatial Data Infrastructure for the 1:5,000 forest stand map (임상도); ESA
+National Spatial Data Infrastructure for the 1:5,000 forest stand map; ESA
 Copernicus / Sentinel-2; Hirzel et al. 2006 (Boyce); Diggle 2002 / Wang
 2014 (GEE); Féret et al. 2017 (PROSPECT-D); Verhoef 1984 / Jacquemoud
 1990 (PROSAIL). Submitted to the Planet Tanager Open Data Competition

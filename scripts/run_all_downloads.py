@@ -24,7 +24,7 @@ STEPS = [
     ("NEON CFC + AOP",              "download_neon.py"),
     ("GEDI L4A AGB",                "download_gedi.py"),
     ("Hyperion Gwangneung 2010",    "download_hyperion.py"),
-    ("산림청 임상도 WFS",          "download_imsangdo.py"),
+    ("Korean Forest Service forest stand map WFS",          "download_imsangdo.py"),
     # Final integrity check
     ("Integrity check",             "integrity_check.py"),
 ]

@@ -9,18 +9,18 @@ Generated 2026-04-30, commit corresponds to tag v1.5.*
 
 | Site | Sensor | n_burn | n_unburn | AUC | Bootstrap 95 % CI | Lift@10 % | MW p |
 |---|---|---:|---:|---:|---|---:|---|
-| 의성 Uiseong 2025-03 | EMIT 285 b | 25,804 | 319,923 | **0.7467** | [0.741, 0.752] | 2.30 × | ≈ 0 |
-| 산청 Sancheong 2025-03 | EMIT 285 b | 252 | 9,945 | **0.6471** | [0.617, 0.680] | 1.78 × | 6.9 × 10⁻¹⁶ |
-| 강릉 Gangneung 2023-04 | S2 13 b | 13,944 | 2,483,500 | 0.5487 | [0.538, 0.558] | 1.80 × | small |
-| 울진 Uljin 2022-03 | S2 13 b | 495,890 | 3,291,745 | 0.5446 | [0.538, 0.552] | 0.75 × | small |
+| Uiseong 2025-03 | EMIT 285 b | 25,804 | 319,923 | **0.7467** | [0.741, 0.752] | 2.30 × | ≈ 0 |
+| Sancheong 2025-03 | EMIT 285 b | 252 | 9,945 | **0.6471** | [0.617, 0.680] | 1.78 × | 6.9 × 10⁻¹⁶ |
+| Gangneung 2023-04 | S2 13 b | 13,944 | 2,483,500 | 0.5487 | [0.538, 0.558] | 1.80 × | small |
+| Uljin 2022-03 | S2 13 b | 495,890 | 3,291,745 | 0.5446 | [0.538, 0.552] | 0.75 × | small |
 | US Palisades 2025-01 | S2 13 b | 672,894 | 1,628,657 | **0.6781** | [0.672, 0.685] | 1.42 × | ≈ 0 |
 
 ## Table 2 — Spectral baselines vs HSI v1 (EMIT scenes only)
 
 | Site | NDVI | NDMI | NDII | **HSI v1** |
 |---|---:|---:|---:|---:|
-| 의성 (raw direction wins) | 0.846 | 0.809 | 0.809 | 0.747 |
-| 산청 (NDMI inverted wins) | 0.535 | 0.634 | 0.634 | 0.647 |
+| Uiseong (raw direction wins) | 0.846 | 0.809 | 0.809 | 0.747 |
+| Sancheong (NDMI inverted wins) | 0.535 | 0.634 | 0.634 | 0.647 |
 | Direction stable across sites | NO | NO | NO | **YES** |
 
 ## Table 3 — Permutation null (N = 1000 label shuffles, v4.1 explicit spec)
@@ -95,10 +95,10 @@ The result is genuinely insensitive to weight choice.
 
 | Species cohort | n total | n burn | AUC |
 |---|---:|---:|---:|
-| 침엽수림 (conifer) | 127,615 | 19,225 | 0.543 |
-| 활엽수림 (broadleaf) | 78,921 | 2,219 | 0.587 |
-| 혼효림 (mixed) | 33,371 | 3,861 | 0.579 |
-| 죽림/조림지 (bamboo / plantation) | 12,477 | 215 | 0.719 |
+| coniferous forest (conifer) | 127,615 | 19,225 | 0.543 |
+| broadleaf forest (broadleaf) | 78,921 | 2,219 | 0.587 |
+| mixed forest (mixed) | 33,371 | 3,861 | 0.579 |
+| bamboo/plantation (bamboo / plantation) | 12,477 | 215 | 0.719 |
 | **All classes combined** | 252,384 | 25,520 | **0.747** |
 
 ## Table 11 — Trait inversion variants on Uiseong
@@ -225,7 +225,7 @@ HSI by 0.064 AUC.
 
 | v4.1 element | Status |
 |---|---|
-| EMIT 의성 + 산청 dual Hero | ✅ done |
+| EMIT Uiseong + Sancheong dual Hero | ✅ done |
 | HSM physiological prior (Martin-StPaul 2017) | ✅ done |
 | OSF pre-registration locked | ✅ done |
 | Spatial-block CV | ✅ done |
@@ -258,7 +258,7 @@ incompatibility), DOFA + LoRA full pretraining (deferred to v2.0).
 | EMIT L2A reflectance (Korea peninsula 8 ROIs + Sancheong multi-temporal 3 acquisitions) | 21 | 21.7 GB |
 | Tanager Open Data via public STAC (Palisades) | 9 | 7.4 GB |
 | Sentinel-2 L2A (Korea peninsula + Palisades) | 67 | 4.0 GB |
-| Korean Forest Service 1:5,000 forest stand map (임상도) (8 ROIs / 161 K polygons) | 8 | 738 MB |
+| Korean Forest Service 1:5,000 forest stand map (8 ROIs / 161 K polygons) | 8 | 738 MB |
 | COP-DEM 30 m (12 ROIs) | 38 | 690 MB |
 | GEDI L4A AGB (Korea + BART + NIWO) | 150 | 37.4 GB |
 | MOD13Q1 NDVI 16-day | 240 | 5.8 GB |
@@ -266,7 +266,7 @@ incompatibility), DOFA + LoRA full pretraining (deferred to v2.0).
 | MTBS US burn DB + NIFC Palisades 2025 | 8 | 555 MB |
 | ESA WorldCover 10 m (12 ROIs) | 12 | 320 MB |
 | dNBR perimeters (4 KR + 1 US) | 9 | 116 MB |
-| MODIS Active Fire MOD14A1 + AsiaFlux GDK + NEON + Korean Forest Service (산림청) 통계 | 80+ | 60 MB |
+| MODIS Active Fire MOD14A1 + AsiaFlux GDK + NEON + Korean Forest Service statistics | 80+ | 60 MB |
 | TRY DB public-only + species priors | 4 | 712 KB |
 | Atlas (8 ROI HSI v1 maps + montage) | 17 | 280 MB |
 | HSI v0 / v1 / v1.5 / v2 / v2.5 outputs + features + sensitivity + Hero figures | 50+ | 410 MB |

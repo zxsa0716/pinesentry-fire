@@ -55,15 +55,16 @@ def main():
     api = HfApi(token=token)
 
     # === Server-side cleanup BEFORE upload ===
-    # When you create a Streamlit Space on the HuggingFace UI it auto-seeds
-    # a Dockerfile copied from `streamlit/streamlit-template-space`. That
-    # Dockerfile takes priority over the YAML `sdk: streamlit` config and
-    # will run the default spiral demo, ignoring our `streamlit_app/app.py`.
-    # We delete it so HF falls back to the SDK auto-builder + our YAML.
+    # Remove any accidentally-uploaded local `.env` (it can contain secrets —
+    # never push it to a public Space).
     #
-    # We also remove any accidentally-uploaded local `.env` (it can contain
-    # secrets — never push it to a public Space).
-    server_side_cleanup_paths = ["Dockerfile", ".env", ".envrc"]
+    # NOTE: do NOT delete the Dockerfile here. HF deprecated the built-in
+    # `sdk: streamlit` builder on 2025-04-30 — a Streamlit Space is now a
+    # plain `sdk: docker` Space, and deleting the Dockerfile drops the Space
+    # onto the unmaintained legacy SDK path, where it eventually fails to
+    # wake with "Scheduling failure: unable to schedule". Our own Dockerfile
+    # (repo root) runs `streamlit_app/app.py`, not the template demo.
+    server_side_cleanup_paths = [".env", ".envrc"]
     for p in server_side_cleanup_paths:
         try:
             api.delete_file(path_in_repo=p, repo_id=HF_REPO_ID,
@@ -94,8 +95,6 @@ def main():
         # Secrets / local-only configs (NEVER push these to a public Space)
         ".env", ".envrc", "**/.env", "**/.envrc",
         "_netrc", ".netrc", "**/_netrc", "**/.netrc",
-        # Auto-seeded HF templates we replace via YAML
-        "Dockerfile",
     ]
 
     print()

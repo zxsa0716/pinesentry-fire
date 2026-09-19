@@ -1,5 +1,7 @@
-# PineSentry-Fire — minimal deps for the Streamlit demo (HuggingFace Spaces)
+# PineSentry-Fire — deps for the Streamlit demo image (see Dockerfile).
 # Full pipeline reproduction needs requirements-pipeline.txt instead.
-
-streamlit>=1.30
-numpy>=1.24
+#
+# streamlit_app/app.py imports nothing outside the stdlib + streamlit, so this
+# is the whole demo dependency set. Pinned exactly, like every other artefact
+# in this repo, so the Space is reproducible from the commit alone.
+streamlit==1.64.0

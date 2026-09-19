@@ -1,0 +1,12 @@
+# Keep the Space image small — everything the demo reads lives in examples/.
+.git
+.github
+.private
+.pytest_cache
+data
+env
+notebooks
+wishlist
+**/__pycache__
+**/*.pyc
+*.egg-info

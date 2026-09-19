@@ -17,7 +17,8 @@ interact without cloning anything.
 
 You already have:
 - A GitHub account (`zxsa0716`) with the repo public
-- A HuggingFace Space created at `Hee-do/pinesentry-fire` (Streamlit SDK)
+- A HuggingFace Space created at `Hee-do/pinesentry-fire` (Docker SDK,
+  running Streamlit — see section 5)
 
 You still need:
 - A **HuggingFace write-access token** (one-time setup)
@@ -112,11 +113,12 @@ of `README.md`:
 title: PineSentry-Fire
 emoji: 🌲
 colorFrom: red
-colorTo: orange
-sdk: streamlit
-sdk_version: 1.30.0
-app_file: streamlit_app/app.py
+colorTo: yellow
+sdk: docker
+app_port: 8501
 pinned: false
+tags:
+  - streamlit
 license: cc-by-4.0
 short_description: Pre-fire Hydraulic Stress Index for Korean pine forests
 ---
@@ -124,15 +126,45 @@ short_description: Pre-fire Hydraulic Stress Index for Korean pine forests
 
 GitHub renders the block as plain text (it doesn't break GitHub's display)
 but HF treats it as configuration. **Do not edit the YAML block** — the
-deployment depends on the exact `app_file` path.
+deployment depends on `sdk: docker` and on `app_port` matching the port
+the `Dockerfile` serves on.
+
+### Why `sdk: docker` and not `sdk: streamlit`
+
+HuggingFace **deprecated the built-in Streamlit SDK on 2025-04-30**. A
+Streamlit Space is now an ordinary Docker Space: you pick the Docker SDK
+and supply a `Dockerfile` that runs Streamlit yourself. See
+[Streamlit Spaces](https://huggingface.co/docs/hub/spaces-sdks-streamlit).
+
+Spaces left on the legacy `sdk: streamlit` path still build, but they sit
+on an unmaintained builder and eventually fail to wake from sleep with
+
+```
+Scheduling failure: unable to schedule
+```
+
+which is a terminal state — the Space stays in `RUNTIME_ERROR` until
+someone pushes a commit or does a factory rebuild. That is exactly what
+happened to this Space between 2026-07 and 2026-09. Streamlit Spaces were
+hit far harder than Gradio ones during this window
+([hub-docs#2760](https://github.com/huggingface/hub-docs/issues/2760)).
+
+Two consequences for this repo:
+
+- `Dockerfile` at the repo root is **load-bearing**. Do not delete it.
+  `scripts/deploy_to_hf.py` used to delete it server-side; it no longer does.
+- Only **port 8501** is accepted for Streamlit on Spaces. `app_port`, the
+  `EXPOSE` line, and the `--server.port` flag must all say 8501.
 
 ---
 
-## 6 — Why `requirements.txt` is small (only `streamlit`, `numpy`)
+## 6 — Why `requirements.txt` is small (only `streamlit`)
 
 The Streamlit app only reads PNG / JSON files in `examples/` — it doesn't
-re-run any of the modeling pipeline. So we keep `requirements.txt`
-minimal to make the Space build fast.
+re-run any of the modeling pipeline, and it imports nothing outside the
+standard library plus `streamlit`. So we keep `requirements.txt` minimal
+to make the Space build fast. Under `sdk: docker` the `Dockerfile` is what
+installs it, so the pin there (`streamlit==1.64.0`) is the real one.
 
 The full pipeline deps (rasterio, geopandas, prosail, torch, etc.) are
 in `requirements-pipeline.txt` — used only when reproducing the analysis

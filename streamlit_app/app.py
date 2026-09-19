@@ -10,6 +10,7 @@ without re-running the pipeline.
 """
 from __future__ import annotations
 
+import inspect
 import json
 from pathlib import Path
 
@@ -21,9 +22,35 @@ EX_TAB = REPO / "examples" / "tables"
 EX_MAP = REPO / "examples" / "maps"
 
 
+def stretch_kwargs(fn) -> dict:
+    """Kwargs that make `fn` render at full container width.
+
+    Streamlit renamed this twice — ``use_column_width`` (<=1.43), then
+    ``use_container_width`` (1.44+), then ``width="stretch"`` (1.49+, with
+    the older two removed/deprecated). HF Spaces pins the version from the
+    README front-matter, so probe the signature instead of pinning here.
+    """
+    try:
+        params = inspect.signature(fn).parameters
+    except (TypeError, ValueError):
+        return {}
+    width = params.get("width")
+    if width is not None and isinstance(width.default, str):
+        return {"width": "stretch"}
+    if "use_container_width" in params:
+        return {"use_container_width": True}
+    if "use_column_width" in params:
+        return {"use_column_width": True}
+    return {}
+
+
+IMG_FULL = stretch_kwargs(st.image)
+DF_FULL = stretch_kwargs(st.dataframe)
+
+
 def safe_image(path: Path, **kw):
     if path.exists():
-        st.image(str(path), **kw)
+        st.image(str(path), **{**IMG_FULL, **kw})
     else:
         st.caption(f"_(missing: {path.relative_to(REPO)})_")
 
@@ -137,22 +164,22 @@ weights** and a 9-test statistical battery.
 """)
     with col2:
         st.markdown("**Headline figure**")
-        safe_image(EX_FIG / "01_HERO_GRAND_9panel.png", use_column_width=True)
+        safe_image(EX_FIG / "01_HERO_GRAND_9panel.png")
 
 # ── Hero
 with tab_hero:
     st.header("Hero figures")
     st.markdown("**9-panel Grand Hero**")
-    safe_image(EX_FIG / "01_HERO_GRAND_9panel.png", use_column_width=True)
+    safe_image(EX_FIG / "01_HERO_GRAND_9panel.png")
     st.markdown("---")
     st.markdown("**6-panel methods comparison**")
-    safe_image(EX_FIG / "02_HERO_methods_6panel.png", use_column_width=True)
+    safe_image(EX_FIG / "02_HERO_methods_6panel.png")
     st.markdown("---")
     st.markdown("**5-site bootstrap ROC envelope (95 % bands)**")
-    safe_image(EX_FIG / "03_HERO_roc_envelope_5site.png", use_column_width=True)
+    safe_image(EX_FIG / "03_HERO_roc_envelope_5site.png")
     st.markdown("---")
     st.markdown("**Original v1.0 dual-site Hero**")
-    safe_image(EX_FIG / "04_HERO_final_dual.png", use_column_width=True)
+    safe_image(EX_FIG / "04_HERO_final_dual.png")
 
 # ── 5-site
 with tab_5site:
@@ -169,23 +196,23 @@ with tab_5site:
             "95% CI hi": round(d.get("auc_q975", 0), 4),
             "Lift@10%": round(d.get("lift_mean", 0), 2),
         })
-    st.dataframe(rows, use_container_width=True)
+    st.dataframe(rows, **DF_FULL)
 
     st.markdown("---")
     st.markdown("**Bootstrap CIs visualized**")
-    safe_image(EX_FIG / "05_bootstrap_95CI.png", use_column_width=True)
+    safe_image(EX_FIG / "05_bootstrap_95CI.png")
 
     st.markdown("---")
     col_u, col_s, col_p = st.columns(3)
     with col_u:
         st.markdown("**Uiseong eval (EMIT)**")
-        safe_image(EX_FIG / "13_uiseong_eval.png", use_column_width=True)
+        safe_image(EX_FIG / "13_uiseong_eval.png")
     with col_s:
         st.markdown("**Sancheong eval (EMIT)**")
-        safe_image(EX_FIG / "14_sancheong_eval.png", use_column_width=True)
+        safe_image(EX_FIG / "14_sancheong_eval.png")
     with col_p:
         st.markdown("**Palisades eval (S2)**")
-        safe_image(EX_FIG / "15_palisades_eval.png", use_column_width=True)
+        safe_image(EX_FIG / "15_palisades_eval.png")
 
 # ── Methodology
 with tab_method:
@@ -210,7 +237,7 @@ within each scene to make the index sensor-agnostic.
 """)
     st.markdown("---")
     st.markdown("**Per-band AUC scan across 285 EMIT bands**")
-    safe_image(EX_FIG / "09_decisive_bands_285b.png", use_column_width=True)
+    safe_image(EX_FIG / "09_decisive_bands_285b.png")
 
 # ── Statistical battery
 with tab_stats:
@@ -218,19 +245,19 @@ with tab_stats:
     col_a, col_b = st.columns(2)
     with col_a:
         st.markdown("**Permutation null (N = 1000) — all 5 sites p < 1/1000**")
-        safe_image(EX_FIG / "06_permutation_null_N1000.png", use_column_width=True)
+        safe_image(EX_FIG / "06_permutation_null_N1000.png")
     with col_b:
         st.markdown("**Boyce continuous index — EMIT sites textbook monotonic**")
-        safe_image(EX_FIG / "07_boyce_index.png", use_column_width=True)
+        safe_image(EX_FIG / "07_boyce_index.png")
 
     st.markdown("---")
     col_c, col_d = st.columns(2)
     with col_c:
         st.markdown("**A1–A4 leave-one-out ablation**")
-        safe_image(EX_FIG / "08_A1_A4_ablations.png", use_column_width=True)
+        safe_image(EX_FIG / "08_A1_A4_ablations.png")
     with col_d:
         st.markdown("**A6 weight ±20% sensitivity**")
-        safe_image(EX_FIG / "12_sensitivity_pm20pct.png", use_column_width=True)
+        safe_image(EX_FIG / "12_sensitivity_pm20pct.png")
 
     st.markdown("---")
     st.markdown("**GEE spatial-logit (R-INLA equivalent)**")
@@ -245,15 +272,15 @@ with tab_stats:
          "Significant": "✅" if d.get("p", 1) < 0.05 else "❌"}
         for s, d in glmm.items()
     ]
-    st.dataframe(rows_g, use_container_width=True)
+    st.dataframe(rows_g, **DF_FULL)
 
     st.markdown("---")
     st.markdown("**Calibration: Brier scores raw vs isotonic**")
-    safe_image(EX_FIG / "10_calibration_isotonic.png", use_column_width=True)
+    safe_image(EX_FIG / "10_calibration_isotonic.png")
 
     st.markdown("---")
     st.markdown("**Precision-recall**")
-    safe_image(EX_FIG / "11_PR_curves.png", use_column_width=True)
+    safe_image(EX_FIG / "11_PR_curves.png")
 
 # ── Trait inversion
 with tab_inv:
@@ -266,7 +293,7 @@ with tab_inv:
         {"Variant": "v2.7 scipy DiffPROSAIL (finite-diff)", "Method": "L-BFGS-B", "AUC (Uiseong)": 0.500},
         {"Variant": "v2.8 PyTorch DiffPROSAIL (autograd)", "Method": "Adam, 80 steps", "AUC (Uiseong)": 0.683},
     ]
-    st.dataframe(rows_inv, use_container_width=True)
+    st.dataframe(rows_inv, **DF_FULL)
     st.markdown("""
 **Honest finding**: pure leaf / canopy radiative-transfer inversion under-
 performs the empirical NDII proxy on conifer fire risk. Volatile resin /
@@ -312,12 +339,12 @@ vs 0.711 outside (Δ = +0.146, MW p ≈ 0, n_burn = 13,323 pixels).
 """)
     gif_path = EX_FIG / "16_sancheong_temporal_animation.gif"
     if gif_path.exists():
-        st.image(str(gif_path), caption="Sancheong firerisk_v0 — T−15mo / T−1.5mo / T+3d", use_column_width=True)
+        st.image(str(gif_path), caption="Sancheong firerisk_v0 — T−15mo / T−1.5mo / T+3d", **IMG_FULL)
 
 # ── Wishlist
 with tab_wishlist:
     st.header("Q7 — 30-scene Korean Tanager wishlist (HSI v1 prioritized)")
-    safe_image(EX_MAP / "korea_30_scene_wishlist.png", use_column_width=True)
+    safe_image(EX_MAP / "korea_30_scene_wishlist.png")
     st.markdown("---")
     st.markdown("**Top 7 ranked by predicted HSI v1**")
     pri = safe_json(EX_TAB / "wishlist_30_scenes_priority.json") or []
@@ -329,7 +356,7 @@ with tab_wishlist:
          "atlas ROI": r.get("atlas_roi", "")}
         for i, r in enumerate(pri[:7])
     ]
-    st.dataframe(rows_w, use_container_width=True)
+    st.dataframe(rows_w, **DF_FULL)
 
 # ── Reproducibility
 with tab_repro:
